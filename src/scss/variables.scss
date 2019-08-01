@@ -1,0 +1,138 @@
+$gold: #E8B558;
+$silver: #EAEAEA;
+$jet: #343132;
+$white: white;
+$fats: #E96C66;
+$proteins: #9cc14d;
+$carbs: #e5a877;
+$warning: #f70000;
+$coolFont: coolFont;
+$cancel: #e85858;
+$transparent: transparent;
+$activeButton: #e8b558;
+
+$background_color_14: #e2e2e2;
+$background_color_15: #e0e0e0;
+$background_color_16: rgba(255, 255, 255, 0.55);
+$background_color_17: #dcdcdc;
+$background_color_4: #fdfdfd;
+$background_color_5: rgba(234, 234, 234, 0.65);
+$background_color_9: #a59fa1;
+$background_color_11: rgba(0,0,0,0.2);
+
+@font-face {
+    font-family: "coolFont";
+    src: url("./fonts/Kanit-Thin.ttf") format('truetype');
+    font-weight: 100;
+}
+@font-face {
+    font-family: "coolFont";
+    src: url("./fonts/Kanit-Light.ttf") format('truetype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "coolFont";
+    src: url("./fonts/Kanit-Regular.ttf") format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "coolFont";
+    src: url("./fonts/Kanit-ThinItalic.ttf") format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "coolFont";
+    src: url("./fonts/Kanit-LightItalic.ttf") format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@mixin animation($name, $duration, $fillMode: forwards, $direction: normal) {
+    animation-name: $name;
+    animation-fill-mode: $fillMode;
+    animation-duration: $duration;
+    animation-direction: $direction;
+}
+
+@mixin boxShadow($p1: 0px, $p2: 0px, $p3: 10px, $amount: 0.2, $withTransition: true) {
+    transition: all 0.5s;
+    box-shadow: $p1 $p2 $p3 rgba(0, 0, 0, $amount);
+    -webkit-box-shadow: $p1 $p2 $p3 rgba(0, 0, 0, $amount);
+
+    @if($withTransition == true) {
+        &:hover {
+            box-shadow: $p1 $p2 $p3 rgba(0, 0, 0, $amount + 0.1);
+            -webkit-box-shadow: $p1 $p2 $p3 rgba(0, 0, 0, $amount + 0.1);
+        }
+
+        &:focus {
+            box-shadow: $p1 $p2 $p3 rgba(0, 0, 0, $amount + 0.1);
+            -webkit-box-shadow: $p1 $p2 $p3 rgba(0, 0, 0, $amount + 0.1);
+        }
+    }
+}
+
+@mixin insetBoxShadow($amount, $withTransition: true) {
+    transition: all 0.5s;
+    box-shadow: inset 0px 0px 3px rgba(0, 0, 0, $amount);
+    -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, $amount);
+
+    @if($withTransition == true) {
+        &:hover {
+            box-shadow: inset 0px 0px 3px rgba(0, 0, 0, $amount + 0.1);
+            -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, $amount + 0.1);
+        }
+
+        &:focus {
+            box-shadow: inset 0px 0px 3px rgba(0, 0, 0, $amount + 0.1);
+            -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, $amount + 0.1);
+        }
+    }
+}
+
+
+@keyframes topIn {
+    from {
+        top: -60px;
+    }
+
+    to {
+        top: 0;
+    }
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes shake {
+    0% {
+        color: inherit;
+        transform: rotate(0deg);
+    }
+
+    33% {
+        color: $warning;
+        transform: rotate(5deg);
+    }
+
+    66% {
+        color: $warning;
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        color: inherit;
+        transform: rotate(0deg);
+    }
+}

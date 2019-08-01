@@ -1,0 +1,325 @@
+html {
+    font-size:18px;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    max-width: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    max-width: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    background: url("../images/repeat.jpg") repeat white;
+
+    * {
+        &:not(.fa) {
+            font-family: $coolFont;
+            font-weight: 100;
+        }
+    }
+}
+
+.hidden{
+    display: none;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#body {
+    min-width: 280px;
+    overflow-y: auto;
+    max-width: 100%;
+    overflow-x: hidden;
+    z-index: 1;
+    transition: all 500ms;
+    display:flex;
+    flex-direction: column;
+    &.opened{
+        padding-top:61px;
+    }
+}
+
+#header {
+    position: absolute;
+    z-index: 10;
+    left:0;
+    right:0;
+    white-space: nowrap;
+    height: 60px;
+    top: -60px;
+    @include animation(topIn, 500ms);
+    text-align:center;
+    > div:first-of-type{
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-content: center;
+        background-color:$gold;
+        transition: all 500ms;
+        height:100%;
+        @include boxShadow(0, 0, 2px, 0.45, false);
+        &.opened{
+            margin-top:-61px;
+        }
+        > h1{
+            color:$jet;
+            margin:0;
+            width:100%;
+        }
+    }
+
+    > #btnHolder {
+        position:relative;
+        overflow:hidden;
+        width:100%;
+        height: 61px;
+        background-color:$jet;
+        @include boxShadow(0, 0, 2px, 0.45, false);
+        > div {
+            position:absolute;
+            top: 0;
+            background-color:$silver;
+            color:$jet;
+            transition: all 0.5s;
+            width: 55%;
+            height: 100%;
+            transform: skew(30deg);
+            display:flex;
+            flex-direction: row;
+            align-items:center;
+            justify-content:center;
+            overflow:hidden;
+            h2 {
+                margin:0;
+                transform: skew(-30deg);
+            }
+
+            &.btnActive {
+                background-color: $background_color_4 !important;
+            }
+    
+            &.btnHovered {
+                background-color: $background_color_4 !important;
+            }
+        }
+        > div:first-of-type{
+            left: -5.1%;
+        }
+        > div:last-of-type {
+            right: -5.1%;
+        }
+    }
+}
+
+#pushContent{
+    padding-top: 15px;
+}
+
+//font awesome styles
+.fa-exclamation-triangle {
+    color: darken($warning, 5%);
+    font-size: 1rem;
+}
+
+
+//component styles
+.card{
+    &::before{
+        content:attr(data-title);
+        color: white;
+        background-color: $gold;
+        display: flex;
+        margin-left: -6px;
+        margin-right: -6px;
+        justify-content: center;
+        align-items: center;
+        height:2.222rem;
+        font-size: 1.333rem;
+        font-weight: normal;
+        z-index: 5;
+        @include boxShadow(0, 0, 4px, 0.4);
+        top: -5px;//hide box shadow of card
+        position: relative;
+    }
+    .margin-top-fix{
+        margin-top:-5px;//fixes inner height after top shadow fix
+    }
+    @include boxShadow(0, 0, 4px, 0.4);
+    margin: 0 12px;
+    background-color: rgba(255,255,255,0.55);
+}
+
+.displayText {
+    position: relative;
+
+    &::before {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: -0.5556rem;
+        background-color: $gold;
+        color: $white;
+        font-size: 0.5556rem;
+        line-height: 0.6111rem;
+        width: 100%;
+        border-radius: 10px 10px 0px 0px;
+        text-align: center;
+        font-weight: 300;
+    }
+
+    &::before {
+        content: attr(data-title);
+    }
+
+    p {
+        margin: 0;
+        height: 100%;
+        background-color: $white;
+        @include insetBoxShadow(0.25, false);
+        border-radius: 0px 0px 5px 5px;
+        font-size: 1.333rem;
+        text-align: center;
+    }
+}
+
+.hoverableGoldButton{
+    width: 100%;
+    height: 1.778rem;
+    position:relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &:not(.withoutSeparator){
+        height:1.833rem;
+        &::after{
+            content:'';
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(52, 49, 50, 0.75), rgba(0, 0, 0, 0));
+            height:1px;
+            position:absolute;
+            left:0;
+            right:0;
+            top:0
+        }
+    }
+
+    &::before{
+        content: attr(data-text);
+        display: block;
+        font-size:1rem;
+        z-index: 1;
+    }
+    
+    > div{
+        z-index: 0;
+        position:absolute;
+        background-color: $gold;
+        top:0;
+        bottom:0;
+        transition: all 200ms;
+        transition: box-shadow 200ms;
+        transition-delay:50ms;
+        @include boxShadow(0, 1px, 2px, 0.45, false);
+    }
+
+    &.active{
+        > div{
+            width:50%;
+            @include boxShadow(0, 1px, 2px, 0, false);
+            &:first-of-type{
+                transform: skew(0deg);
+                left:0;
+            }
+    
+            &:last-of-type{
+                transform: skew(0deg);
+                right:0;
+            }
+        }
+    }
+
+    &:not(.active){
+        &::before{
+            color: $jet;
+        }
+
+        > div{
+            width:2.222rem;
+
+            &:first-of-type{
+                transform: skew(45deg);
+                left:-1.389rem;
+            }
+    
+            &:last-of-type{
+                transform: skew(-45deg);
+                right:-1.389rem;
+            }
+        }
+    }
+}
+
+@keyframes slideDownHangingSign{
+    0%{
+        top:-1.667rem;
+    }
+
+    100%{
+        top:0.6667rem;
+    }
+}
+
+.hangingSign{
+    height:2.778rem;
+    overflow:hidden;
+    > .wrapper{
+        position: relative;
+        width:8.889rem;
+        margin:0 auto;
+        top:-1.667rem;
+        @include animation(slideDownHangingSign, 1s, forwards);
+        animation-delay: 1s;
+        &::before, &::after{
+            content:'';
+            width: 0.2778rem;
+            height:0.8889rem;
+            position:absolute;
+            top:-0.8889rem;
+            background-color:$gold;
+        }
+    
+        &::before{
+            left:0
+        }
+    
+        &::after{
+            right:0;
+        }
+    
+        > p{
+            background-color:white;
+            color: $jet;
+            width:100%;
+            text-align: center;
+            border-radius:0 0 11px 11px;
+            font-size:1rem;
+            @include boxShadow(0, 0, 4px, 0.25);
+            margin: 0;
+        }
+    }
+}

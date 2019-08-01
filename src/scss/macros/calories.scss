@@ -1,0 +1,47 @@
+#caloriesCounter{
+    .macrosContainer{
+        display: flex;
+        flex-direction: column;
+        > div{
+            display:flex;
+            flex-direction: row;
+            margin:10px 0;
+            > div{
+                margin:0 5px;
+                align-self:flex-end;
+            }
+            > .progressBar{
+                position: relative;
+                flex-grow:1;
+                background-color: white;
+                border-radius: 0 10px 10px 10px;
+                height:1.111rem;
+                @include boxShadow(0, 0, 4px, 0.4);
+                z-index: 1;
+                &::before{
+                    content:attr(data-title);
+                    background-color:$gold;
+                    color:white;
+                    font-size:0.5556rem;
+                    line-height: 0.6667rem;
+                    text-align: center;
+                    position: absolute;
+                    top:-0.6111rem;
+                    left:0;
+                    min-width: 3.333rem;
+                    border-radius: 10px 10px 0 0;
+                    z-index: -1;
+                }
+            }
+
+            >.displayText{
+                min-width:4.444rem;
+                max-width:6.944rem;
+                p{
+                    line-height:1.556rem;
+                    font-size:1rem;
+                }
+            }
+        }
+    }
+}
