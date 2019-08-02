@@ -1,5 +1,6 @@
 html {
     font-size:18px;
+    font-weight:100;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -131,7 +132,7 @@ body {
 //font awesome styles
 .fa-exclamation-triangle {
     color: darken($warning, 5%);
-    font-size: 1rem;
+    font-size: 0.6667rem;
 }
 
 
@@ -204,7 +205,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
+    transition: all 300ms;
+    transition-delay: 100ms;
     &:not(.withoutSeparator){
         height:1.833rem;
         &::after{
@@ -229,6 +231,7 @@ body {
         z-index: 0;
         position:absolute;
         background-color: $gold;
+        margin-top:1px;
         top:0;
         bottom:0;
         transition: all 200ms;
@@ -238,6 +241,7 @@ body {
     }
 
     &.active{
+        background-color:$gold;
         > div{
             width:50%;
             @include boxShadow(0, 1px, 2px, 0, false);

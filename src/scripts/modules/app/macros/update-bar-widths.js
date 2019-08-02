@@ -11,9 +11,17 @@ export default function(){
     $("#totalProteins").html(global.totalMacros.proteins);
     $("#currentCalories").html(Math.round(global.currentMacros.calculateCalories()));
     $("#totalCalories").html(Math.round(global.totalMacros.calculateCalories()));
-    $("#barFats").width(calculatePercentage(global.currentMacros.fats, global.totalMacros.fats) + "%");
-    $("#barCarbs").width(calculatePercentage(global.currentMacros.carbs, global.totalMacros.carbs) + "%");
-    $("#barProteins").width(calculatePercentage(global.currentMacros.proteins, global.totalMacros.proteins) + "%");
+
+    let barFatsWidth = calculatePercentage(global.currentMacros.fats, global.totalMacros.fats);
+    let barCarbsWidth = calculatePercentage(global.currentMacros.carbs, global.totalMacros.carbs);
+    let barProteinsWidth = calculatePercentage(global.currentMacros.proteins, global.totalMacros.proteins);
+    $("#barFats").width(`${barFatsWidth}%`);
+    $("#barCarbs").width(`${barCarbsWidth}%`);
+    $("#barProteins").width(`${barProteinsWidth}%`);
+    $("#barFats > div").data("progress", barFatsWidth);
+    $("#barCarbs > div").data("progress", barCarbsWidth);
+    $("#barProteins > div").data("progress", barProteinsWidth);
+
     if (round(global.totalMacros.fats) < round(global.currentMacros.fats)) {
         $("#warningFats").removeClass("hidden");
     } else {
