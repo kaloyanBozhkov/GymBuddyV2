@@ -46,18 +46,28 @@
 
     <div id="foodTracker" class="card no-header">
         <div class="whiteRibbonHeader">
-            <div>
-                <input type="text" id="foodName" placeholder="Type food name here" value="" class="text-center block camelCaseInput" />
-                <div></div>
-            </div>
-            <div id="loadServing">
-                <i class="fas fa-book"></i>
-                <p>IMPORT</p>
+            <div class="wrapper">
+                <div>
+                    <input type="text" id="foodName" placeholder="Type food name here" value="" class="text-center block camelCaseInput" />
+                    <div></div>
+                </div>
+                <div id="loadServing">
+                    <i class="fas fa-book"></i>
+                    <p>IMPORT</p>
+                </div>
             </div>
         </div>
+        <div class="hangingSign">
+            <div class="wrapper">
+                 <p><span id="servingCalories">0</span></p>
+            </div>
+         </div>
         <div class="foodTracker__container">
             <div>
                 <div id="singleFoodServingSize" class="displayText" data-title="SERVING SIZE">
+                    <input type="text" value="0" class="text-center block" />
+                </div>
+                <div id="servingSize" class="displayText" data-title="SERVINGS">
                     <input type="text" value="0" class="text-center block" />
                 </div>
             </div>
@@ -74,42 +84,32 @@
                 </div>
             </div>
         </div>
+        <div class="foodTracker__totalMacros">
+           <div class="wrapper" data-title="- Total Macros -">
+            <div class="fats"><span>0</span></div>
+            <div class="carbs"><span>0</span></div>
+            <div class="proteins"><span>0</span></div>
+           </div>
+        </div>
         <div id="addServing" class="hoverableGoldButton noselect" data-text="Add Servings">
             <div></div>
             <div></div>
         </div>
-
-        
-        <!--
-        <div style="white-space:nowrap;" class="width-full margin-top-10 ">
-            <div id="singleFoodServingSize" class="macroBlock block width-full text-center">
-                <p class="text-center block">Grams:</p>
-                <input type="text" value="0" class="text-center block" />
-            </div><div id="singleFoodFats" class="macroBlock inline-block text-center">
-                <p>Fats:</p>
-                <input type="text" value="0" class="text-center fatsRed" />
-            </div><div id="singleFoodCarbs" class="macroBlock inline-block text-center">
-                <p>Carbs:</p>
-                <input type="text" value="0" class="text-center carbsOrange" />
-            </div><div id="singleFoodProteins" class="macroBlock inline-block text-center">
-                <p>Proteins:</p>
-                <input type="text" value="0" class="text-center proteinsGreen" />
-            </div>
-        </div>
-        <div id="buttonArea" class="noselect margin-top-20">
-            <p id="addServing" class="buttonStyled coolBorder text-center block margin-top-10">Add Serving</p>
-            <p id="loadServing" class="buttonStyled coolBorder text-center block margin-top-10">Import From Favorites</p>
-        </div>-->
     </div>
-    <div id="dailyHistory" class="box-shadow silver-bg jet-fg generalSheetFormating margin-top-30">
-        <div class="width-full text-center">
-            <p class="inline-block formatP">Today's Entries</p>
-        </div>
-        <div id="entriesContainer" class="width-full">
 
 
+
+
+
+    <div id="entriesContainer" class="card" data-title="Today's Entries">
+        <div class="formatedRow">
+            <p>Text</p>
+            <p>20:55</p>
+            <i class="fas fa-angle-up"></i>
         </div>
     </div>
+
+
     <div class="jet-fg margin-top-30">
         <div class="width-full text-center position-relative">
             <h3 class="inline-block formatP">History & Stats</h3>

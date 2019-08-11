@@ -127,6 +127,9 @@ body {
 
 #pushContent{
     padding-top: 15px;
+    > div:not(:last-of-type){
+        margin-bottom: 18px;
+    }
 }
 
 //font awesome styles
@@ -167,11 +170,58 @@ body {
 }
 
 .whiteRibbonHeader{
-    background-color:white;
-    position: relative;
-    height:2.556rem;
+    z-index: 1;
     margin: 0 -0.2778rem;
-    @include boxShadow(0, 0, 4px, 0.4);
+    position: relative;
+    > .wrapper{    
+        position: relative;
+        height:2.556rem;
+        z-index: 1;
+        &::before,&::after{
+            content:'';
+            position: absolute;
+            background-color: white;
+            display: block;
+            z-index: -1;
+        }
+
+        &::before{
+            top: 8%;
+            left: -1%;
+            width: 102%;
+            height: 84%;
+        }
+
+        &::after{
+            top:0;
+            left:0;    
+            right:0;
+            bottom:0;
+            @include boxShadow(0, 0, 4px, 0.4);
+        }
+
+
+    }
+    &::before,&::after{
+        background-color:white;
+        content:'';
+        display: block;
+        position: absolute;
+        top: 5%;
+        left: -1%;
+        width: 102%;
+        height: 90%;
+        z-index: -1;
+        @include boxShadow(0, 0, 4px, 0.4);
+    }
+
+    &::before{
+        transform: skew(35deg);
+    }
+
+    &::after{
+        transform: skew(-35deg);
+    }
 }
 
 
@@ -341,4 +391,9 @@ body {
             margin: 0;
         }
     }
+}
+
+//row with golden counter on left
+.formatedRow{
+    
 }

@@ -53,6 +53,6 @@ export default function(entriesContainer = "#entriesContainer", singleDayServing
             $(entriesContainer).append(replaceArrays(singleServingEntryDiv, valuesToReplace, valuesToReplaceWith));
         }
     } else {
-        $(entriesContainer).append("<div class='parent both-full'><div class='child'><p class='text-center width-full font-size-18'>" + msg + ".</p></div></div>");
+        $(entriesContainer).append(`<p>${msg}.</p>`);
     }
 }
