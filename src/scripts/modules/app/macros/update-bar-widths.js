@@ -15,9 +15,9 @@ export default function(){
     let barFatsWidth = calculatePercentage(global.currentMacros.fats, global.totalMacros.fats);
     let barCarbsWidth = calculatePercentage(global.currentMacros.carbs, global.totalMacros.carbs);
     let barProteinsWidth = calculatePercentage(global.currentMacros.proteins, global.totalMacros.proteins);
-    $("#barFats").width(`${barFatsWidth}%`);
-    $("#barCarbs").width(`${barCarbsWidth}%`);
-    $("#barProteins").width(`${barProteinsWidth}%`);
+    $("#barFats > div").width(`${barFatsWidth}%`);
+    $("#barCarbs > div").width(`${barCarbsWidth}%`);
+    $("#barProteins > div").width(`${barProteinsWidth}%`);
     $("#barFats > div").data("progress", barFatsWidth);
     $("#barCarbs > div").data("progress", barCarbsWidth);
     $("#barProteins > div").data("progress", barProteinsWidth);
