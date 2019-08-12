@@ -8,9 +8,8 @@ import closeAlert from '../../common/close-alert';
 import { round } from '../../../common/utilities';
 
 export default () => {
-    $(document).on("click", ".singleServingLoadedEntry > div:first-of-type, .singleServingLoadedEntry > div:nth-of-type(2)", function () {
-        $(this).parent().toggleClass("open");
-        $(this).parent().children(".innerContents").toggleClass("open");
+    $(document).on("click", ".entriesContainer__entry", function () {
+        $(this).toggleClass("active");
     });
 
     $(document).on("click", ".saveEntry", function () {

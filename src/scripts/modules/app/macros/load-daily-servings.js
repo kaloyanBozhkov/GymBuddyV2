@@ -53,6 +53,16 @@ export default function(entriesContainer = "#entriesContainer", singleDayServing
             $(entriesContainer).append(replaceArrays(singleServingEntryDiv, valuesToReplace, valuesToReplaceWith));
         }
     } else {
-        $(entriesContainer).append(`<p>${msg}.</p>`);
+        //$(entriesContainer).append(`<p>${msg}.</p>`);
+        $(entriesContainer).append(`<div class="entriesContainer__entry">
+            <div class='formatedRow'>
+                <p>Pizza</p>
+                <p>20:55</p>
+                <i class="fas fa-angle-up"></i>
+            </div>
+            <div class="entriesContainer__entry__details">
+                <p>stuff</p>
+            </div>
+        </div>`);
     }
 }

@@ -1,0 +1,35 @@
+#entriesContainer{
+    min-height: 5.556rem;
+    > p {
+        margin:0;
+        font-size:0.8333rem;
+        padding: 20px;
+    }
+
+    > .entriesContainer__entry{
+        > .formatedRow{
+
+
+            > p{
+                font-size:1rem;
+
+                &:first-of-type{
+                    flex-grow:1;
+                }
+            }
+        }
+    
+        > .entriesContainer__entry__details{
+            background-color:white;
+            transition: all 400ms;
+            overflow:hidden;
+        }
+
+        &:not(.active){
+            > .entriesContainer__entry__details{
+                height:0;
+            }
+        }
+    }
+
+}
