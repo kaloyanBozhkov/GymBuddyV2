@@ -1,0 +1,42 @@
+#dailyEntries{
+    min-height: 5.556rem;
+    > p {
+        margin:0;
+        font-size:0.8333rem;
+        padding: 20px;
+    }
+    > .dailyEntries__container{
+        > .dailyEntries__entry{
+            > .formatedRow{
+                > p{
+                    font-size:1rem;
+                    &:first-of-type{
+                        flex-grow:1;
+                        white-space: nowrap;
+                        overflow: auto;
+                    }
+                    &:last-of-type{
+                        width:50px;    
+                        padding-left: 5px;
+                    }
+                }
+                > svg{
+                    width:50px;
+                    font-size:1rem;
+                }
+            }
+        
+            > .dailyEntries__entry__details{
+                background-color:white;
+                transition: all 400ms;
+                overflow:hidden;
+            }
+    
+            &:not(.active){
+                > .dailyEntries__entry__details{
+                    height:0;
+                }
+            }
+        }
+    }
+}
