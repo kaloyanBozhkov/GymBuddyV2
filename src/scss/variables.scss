@@ -95,7 +95,15 @@ $background_color_11: rgba(0,0,0,0.2);
     }
 }
 
-
+@mixin fatCarbProteinUnderLine(){//to use on pseudo element 
+    content:'';
+    height:2px;
+    background: linear-gradient(to right, $fats 33%,$carbs 33%,$carbs 66%,$carbs 66%,$proteins 66%);
+    display: block;
+    border-radius: 3px;
+    left:0;
+    right:0;
+}
 @keyframes topIn {
     from {
         top: -60px;

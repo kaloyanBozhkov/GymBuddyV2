@@ -209,14 +209,8 @@
                 top:-1.45rem;
             }
             &::after{
-                content:'';
-                height:2px;
-                background: linear-gradient(to right, $fats 33%,$carbs 33%,$carbs 66%,$carbs 66%,$proteins 66%);
-                display: block;
-                border-radius: 3px;
-                left:0;
-                right:0;
                 top:0;
+                @include fatCarbProteinUnderLine();
             }
         }
     }

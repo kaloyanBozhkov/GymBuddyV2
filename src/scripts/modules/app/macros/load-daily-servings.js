@@ -55,7 +55,25 @@ export default function(entriesContainer = ".dailyEntries__container", singleDay
                 <i class="fas fa-angle-up"></i>
             </div>
             <div class="dailyEntries__entry__details">
-                <p>stuff</p>
+                <p>You had 1 serving of 100g:</p>
+                <div class="dailyEntries__entry__details__content">
+                    <div class="dailyEntries__entry__details__content__tracker">
+                        <p>840</p>
+                        <div>
+                            <p class='fats'>12</p>
+                            <p class='carbs'>22</p>
+                            <p class='proteins'>6</p>
+                        </div>
+                    </div>
+                    <div class="dailyEntries__entry__details__content__actions">
+                        <div class='saveEntry' data-values=''>
+                            <i class='fa fa-heart'></i>
+                        </div>
+                        <div class='removeEntry' data-item-id=''>
+                            <i class="fa fa-trash-alt"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>`);
     }
