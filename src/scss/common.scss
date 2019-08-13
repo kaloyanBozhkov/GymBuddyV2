@@ -161,6 +161,7 @@ p {
             z-index: 5;
             @include boxShadow(0, 0, 4px, 0.4);
             top: -5px;//hide box shadow of card
+            margin-bottom: -5px;
             position: relative;
         }
     }

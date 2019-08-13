@@ -6,7 +6,6 @@ export default function(entriesContainer = ".dailyEntries__container", singleDay
     if (!isEmpty(singleDayServing) && singleDayServing.getServings().length > 0) {
         for (let j = singleDayServing.getServings().length - 1; j >= 0; j--) {
             let item = singleDayServing.getServings()[j];
-            let hideLast = (j == 0 ? "" : "hidden");
             let calories = round(singleDayServing.calculateCalories.call(item) * parseFloat(item.servingQuantity)); //serving inside servings array of SingleDayServing may not have calculateCalories inherited from BaseMacro if it is loaded through JSON. SingleDayServing WILL have it, since on load it is re-set.
             let proteins = round(parseFloat(item.proteins) * parseFloat(item.servingQuantity));
             let carbs = round(parseFloat(item.carbs) * parseFloat(item.servingQuantity));
@@ -18,63 +17,38 @@ export default function(entriesContainer = ".dailyEntries__container", singleDay
                 carbs: round(carbs / item.servingQuantity),
                 grams: item.servingSize
             }
-            let singleServingEntryDiv = `<div class="singleServingLoadedEntry">
-            <div><p>${item.itemName}</p></div><div><p><span>${getTime(0, item.time).displayTime}</span><span class="fa fa-angle-up"></span></p></div>
-            <div class="innerContents">
-            <div>
-                <p>You had ${item.servingQuantity} servings of ${item.servingSize}g</p>
-                <div>
-                    <p>Calories: ${calories}</p>
-                    <ul>
-                        <li><p>Fats: <span>${fats}g</span></p></li>
-                        <li><p>Carbs: <span>${carbs}g</span></p></li>
-                        <li><p>Protein: <span>${proteins}g</span></p></li>
-		            </ul>
-                </div><div><div class='saveEntry' data-values='${JSON.stringify(tmpObj)}'>
-                        <span class='fa fa-heart'></span>
-                    </div>
-                    `+ (entriesContainer == ".dailyEntries__container" ? `
-                    <div class='removeEntry' data-item-id='${entriesContainer == ".dailyEntries__container" ? j : ""}'>
-                        <span class="fa fa-trash-alt"></span>
-                    </div>` : "") + `
+            let singleServingEntryDiv = `<div class="dailyEntries__entry">
+                <div class='formatedRow'>
+                    <p>${item.itemName}</p>
+                    <p>${getTime(0, item.time).displayTime}</p>
+                    <i class="fas fa-angle-up"></i>
                 </div>
-            </div>
-            <div></div>
-            </div>
-            <div></div>
-            <div class="${hideLast}"></div>
+                <div class="dailyEntries__entry__details">
+                    <p>You had ${item.servingQuantity} serving${item.servingQuantity > 1 ? "s" : ""} of ${item.servingSize}g:</p>
+                    <div class="dailyEntries__entry__details__content">
+                        <div class="dailyEntries__entry__details__content__tracker">
+                            <p>${calories}</p>
+                            <div>
+                                <p class='fats'>${fats}</p>
+                                <p class='carbs'>${carbs}</p>
+                                <p class='proteins'>${proteins}</p>
+                            </div>
+                        </div>
+                        <div class="dailyEntries__entry__details__content__actions">
+                            <div class='saveEntry' data-values='${JSON.stringify(tmpObj)}'>
+                                <i class='fa fa-heart'></i>
+                            </div>
+                            `+ (entriesContainer == ".dailyEntries__container" ? `
+                            <div class='removeEntry' data-item-id='${entriesContainer == ".dailyEntries__container" ? j : ""}'>
+                                <i class="fa fa-trash-alt"></i>
+                            </div>` : "") + `
+                        </div>
+                    </div>
+                </div>
             </div>`;
             $(entriesContainer).append(singleServingEntryDiv);
         }
     } else {
-        //$(entriesContainer).append(`<p>${msg}.</p>`);
-        $(entriesContainer).append(`<div class="dailyEntries__entry">
-            <div class='formatedRow'>
-                <p>Pizza</p>
-                <p>20:55</p>
-                <i class="fas fa-angle-up"></i>
-            </div>
-            <div class="dailyEntries__entry__details">
-                <p>You had 1 serving of 100g:</p>
-                <div class="dailyEntries__entry__details__content">
-                    <div class="dailyEntries__entry__details__content__tracker">
-                        <p>840</p>
-                        <div>
-                            <p class='fats'>12</p>
-                            <p class='carbs'>22</p>
-                            <p class='proteins'>6</p>
-                        </div>
-                    </div>
-                    <div class="dailyEntries__entry__details__content__actions">
-                        <div class='saveEntry' data-values=''>
-                            <i class='fa fa-heart'></i>
-                        </div>
-                        <div class='removeEntry' data-item-id=''>
-                            <i class="fa fa-trash-alt"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`);
+        $(entriesContainer).append(`<p>${msg}.</p>`);
     }
 }

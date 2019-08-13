@@ -3,16 +3,16 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    > p {
-        margin:0;
-        font-size:0.8333rem;
-        padding: 20px;
-    }
     > .dailyEntries__container{
         flex-grow:1;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
+        > p {
+            margin:0;
+            font-size:0.8333rem;
+            padding: 20px;
+        }
         > .dailyEntries__entry{
             margin: 10px 0;
             > .formatedRow{
