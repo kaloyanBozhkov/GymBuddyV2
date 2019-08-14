@@ -1,7 +1,6 @@
 <div id="pushContent">
     <!--CALORIES SECTION-->
     <div id="caloriesCounter" class="card" data-title="Today's Calories">
-        <div class="margin-top-fix"></div>
         <div class="hangingSign">
            <div class="wrapper">
                 <p><span id="currentCalories"></span>/<span id="totalCalories"></span></p>
@@ -105,16 +104,24 @@
     </div>
 <!-- END TODAY'S ENTRIES -->
 
-    <div class="jet-fg margin-top-30">
-        <div class="width-full text-center position-relative">
-            <h3 class="inline-block formatP">History & Stats</h3>
-        </div>
+<!-- START PREVIOUS ENTRIES -->
+    <div id="previousEntries" class="card" data-title="Previous Entries">
+        <div id="menuHistoryServings" class="hangingSign">
+            <div class="wrapper">
+                <div class="menu-left">
+                    <i class="fas fa-angle-left"></i>
+                </div>
+                <p id="dayEntriesShownFor"></p>
+                <div class="menu-right">
+                    <i class="fas fa-angle-right"></i>
+                </div>
+            </div>
+         </div>
     </div>
-
-
+<!-- END PREVIOUS ENTRIES -->
     <div class="box-shadow silver-bg jet-fg generalSheetFormating margin-top-10">
         <div id="menuHistoryServings" class="position-relative w-100 text-center">
-            <p class="inline-block margin-0 font-size-22 nowrap"><span id="dayEntriesShownFor"></span></p>
+            <p class="inline-block margin-0 font-size-22 nowrap"></p>
             <div class="position-absolute menu-left">
                 <span class="fas fa-angle-left"></span>
             </div>

@@ -166,9 +166,6 @@ p {
         }
     }
    
-    .margin-top-fix{
-        margin-top:-5px;//fixes inner height after top shadow fix
-    }
     @include boxShadow(0, 0, 4px, 0.4);
     margin: 0 12px;
     background-color: rgba(255,255,255,0.55);
@@ -277,7 +274,7 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: all 300ms;
+    transition: background-color 300ms;
     transition-delay: 100ms;
     &:not(.withoutSeparator){
         height:1.833rem;
@@ -386,16 +383,15 @@ p {
         &::after{
             right:0;
         }
-    
+        background-color:white;
+        color: $jet;
+        border-radius:0 0 11px 11px;
+        @include boxShadow(0, 0, 4px, 0.25);
+        margin: 0 auto;
         > p{
-            background-color:white;
-            color: $jet;
             width:100%;
             text-align: center;
-            border-radius:0 0 11px 11px;
             font-size:1rem;
-            @include boxShadow(0, 0, 4px, 0.25);
-            margin: 0;
         }
     }
 }

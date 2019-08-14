@@ -1,0 +1,17 @@
+#previousEntries{
+    > #menuHistoryServings.hangingSign{
+        > .wrapper{
+            display: flex;
+            flex-direction: row;
+            .menu-left,.menu-right{
+                width: 1.222rem;
+                text-align: center;
+                font-size: 0.8889rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}
