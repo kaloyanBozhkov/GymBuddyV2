@@ -1,7 +1,7 @@
 import global from '../../global-variables';
 import { round, isEmpty } from '../../common/utilities';
 import getTime from '../../common/get-current-time';
-export default function(entriesContainer = ".dailyEntries__container", singleDayServing = global.singleDayServing, msg = "No servings have been added for today yet") {
+export default (entriesContainer = ".dailyEntries__container", singleDayServing = global.singleDayServing, msg = "No servings have been added for today yet") => {
     $(entriesContainer).empty();
     if (!isEmpty(singleDayServing) && singleDayServing.getServings().length > 0) {
         for (let j = singleDayServing.getServings().length - 1; j >= 0; j--) {

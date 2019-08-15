@@ -1,42 +1,44 @@
-import global from '../../global-variables';
 import loadDailyServings from './load-daily-servings';
-import {round, calculatePercentage} from '../../common/utilities';
+import {calculatePercentage} from '../../common/utilities';
 
-export default function(){
-    $("#currentFats").html(round(global.currentMacros.fats));
-    $("#currentCarbs").html(round(global.currentMacros.carbs));
-    $("#currentProteins").html(round(global.currentMacros.proteins));
-    $("#totalFats").html(round(global.totalMacros.fats));
-    $("#totalCarbs").html(round(global.totalMacros.carbs));
-    $("#totalProteins").html(global.totalMacros.proteins);
-    $("#currentCalories").html(Math.round(global.currentMacros.calculateCalories()));
-    $("#totalCalories").html(Math.round(global.totalMacros.calculateCalories()));
+export default (container, currentObj, totalObj) => {
+    $(`${container} #currentFats`).html(currentObj.fats);
+    $(`${container} #currentCarbs`).html(currentObj.carbs);
+    $(`${container} #currentProteins`).html(currentObj.proteins);
+    $(`${container} #totalFats`).html(totalObj.fats);
+    $(`${container} #totalCarbs`).html(totalObj.carbs);
+    $(`${container} #totalProteins`).html(totalObj.proteins);
+    $(`${container} #currentCalories`).html(currentObj.calculateCalories());
+    $(`${container} #totalCalories`).html(totalObj.calculateCalories());
 
-    let barFatsWidth = calculatePercentage(global.currentMacros.fats, global.totalMacros.fats);
-    let barCarbsWidth = calculatePercentage(global.currentMacros.carbs, global.totalMacros.carbs);
-    let barProteinsWidth = calculatePercentage(global.currentMacros.proteins, global.totalMacros.proteins);
-    $("#barFats > div").width(`${barFatsWidth}%`);
-    $("#barCarbs > div").width(`${barCarbsWidth}%`);
-    $("#barProteins > div").width(`${barProteinsWidth}%`);
-    $("#barFats > div").data("progress", barFatsWidth);
-    $("#barCarbs > div").data("progress", barCarbsWidth);
-    $("#barProteins > div").data("progress", barProteinsWidth);
+    let barFatsWidth = calculatePercentage(currentObj.fats, totalObj.fats);
+    let barCarbsWidth = calculatePercentage(currentObj.carbs, totalObj.carbs);
+    let barProteinsWidth = calculatePercentage(currentObj.proteins, totalObj.proteins);
 
-    if (round(global.totalMacros.fats) < round(global.currentMacros.fats)) {
-        $("#warningFats").removeClass("hidden");
-    } else {
-        $("#warningFats").addClass("hidden");
-    }
-    if (round(global.totalMacros.carbs) < round(global.currentMacros.carbs)) {
-        $("#warningCarbs").removeClass("hidden");
-    } else {
-        $("#warningCarbs").addClass("hidden");
-    }
-    if (round(global.totalMacros.proteins) < round(global.currentMacros.proteins)) {
-        $("#warningProteins").removeClass("hidden");
-    } else {
-        $("#warningProteins").addClass("hidden");
-    }
+    $(`${container} #barFats > div`).width(`${barFatsWidth}%`);
+    $(`${container} #barCarbs > div`).width(`${barCarbsWidth}%`);
+    $(`${container} #barProteins > div`).width(`${barProteinsWidth}%`);
+    $(`${container} #barFats > div`).data("progress", barFatsWidth);
+    $(`${container} #barCarbs > div`).data("progress", barCarbsWidth);
+    $(`${container} #barProteins > div`).data("progress", barProteinsWidth);
+
+    if (totalObj.fats < currentObj.fats)
+        $(`${container} #warningFats`).removeClass("hidden");
+    else 
+        $(`${container} #warningFats`).addClass("hidden");
+    
+    if (totalObj.carbs < currentObj.carbs)
+        $(`${container} #warningCarbs`).removeClass("hidden");
+    else
+        $(`${container} #warningCarbs`).addClass("hidden");
+    
+    if (totalObj.proteins < currentObj.proteins)
+        $(`${container} #warningProteins`).removeClass("hidden");
+    else
+        $(`${container} #warningProteins`).addClass("hidden");
+    
+
+
     loadDailyServings();
 }
 

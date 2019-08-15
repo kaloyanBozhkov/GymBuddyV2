@@ -2,7 +2,7 @@ import global from '../../global-variables';
 import getTime from '../../common/get-current-time';
 import save from '../../common/save';
 import updateBarWidths from '../macros/update-bar-widths';
-import updateOldBarWidths from '../macros/update-old-bar-widths';
+import getPastHistorySerings from '../macros/get-past-history-servings';
 import loadWeeklyStatsGraph from '../macros/load-weekly-stats-graph';
 import checkHistoryWorkouts from '../workouts/check-history-workouts';
 import loadWorkoutsForToday from '../workouts/load-workouts-for-today';
@@ -14,13 +14,14 @@ export default function(what) {//initializes one part of the app vs the other
         pushTopAnimation("#pushContent", what);
         let d = getTime(-1);
         if (what == "macros") {
-            updateBarWidths();
+            //Calories
+            updateBarWidths(".caloriesCounter__container", global.currentMacros, global.totalMacros);
             console.log("Finished updateBarWidths");
-            //History Servings
-            $("#caloriesCounterHistory").removeClass("hidden");
+            //Past Entries
             $("#dayEntriesShownFor").html(d.displayDate).data("date", d.date);
-            updateOldBarWidths(d.keyFromDate);
+            updateBarWidths(".previousEntries__container",...getPastHistorySerings(d.keyFromDate));
             console.log("Finished updateOldBarWidths");
+            //Weekly Stats
             loadWeeklyStatsGraph();
             console.log("Finished loadWeeklyStatsGraph");
         } else {//workouts

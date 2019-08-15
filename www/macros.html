@@ -6,6 +6,7 @@
                 <p><span id="currentCalories"></span>/<span id="totalCalories"></span></p>
            </div>
         </div>
+        <!-- CALORIES/MACROS TRACKER CONTAINER -->
         <div class="caloriesCounter__container">
             <div>
                 <div class="progressBar" data-title="FATS">
@@ -35,6 +36,7 @@
                 </div>
             </div>
         </div>
+        <!-- END CALORIES/MACROS TRACKER CONTAINER -->
         
         <div id="setGoals" class="hoverableGoldButton noselect" data-text="Set Goals">
             <div></div>
@@ -105,7 +107,7 @@
 <!-- END TODAY'S ENTRIES -->
 
 <!-- START PREVIOUS ENTRIES -->
-    <div id="previousEntries" class="card" data-title="Previous Entries">
+    <div id="pastEntries" class="card" data-title="Past Entries">
         <div id="menuHistoryServings" class="hangingSign">
             <div class="wrapper">
                 <div class="menu-left">
@@ -117,6 +119,44 @@
                 </div>
             </div>
          </div>
+         <div class="whiteRibbonHeader">
+            <div class="wrapper">
+              <p><span class="pastEntries__reachedCalories"></span>/<span class="pastEntries__totalCalories"></span></p>
+            </div>
+        </div>
+        <!-- CALORIES/MACROS TRACKER CONTAINER -->
+        <div class="pastEntries__container">
+            <div>
+                <div class="progressBar" data-title="FATS">
+                    <div id="barFats" data-progress="0"><div></div></div>
+                    <i id="warningFats" class="fas fa-exclamation-triangle hidden"></i>
+                </div>
+                <div class="displayText" data-title="GRAMS">
+                    <p><span id="currentFats"></span>/<span id="totalFats"></span></p>
+                </div>
+            </div>
+            <div>
+                <div class="progressBar" data-title="CARBS">
+                    <div id="barCarbs" data-progress="0"><div></div></div>
+                    <i id="warningCarbs" class="fas fa-exclamation-triangle hidden"></i>
+                </div>
+                <div class="displayText" data-title="GRAMS">
+                    <p><span id="currentCarbs"></span>/<span id="totalCarbs"></span></p>
+                </div>
+            </div>
+            <div>
+                <div class="progressBar" data-title="PROTEINS">
+                    <div id="barProteins" data-progress="0"><div></div></div>
+                    <i id="warningProteins" class="fas fa-exclamation-triangle hidden"></i>
+                </div>
+                <div class="displayText" data-title="GRAMS">
+                    <p><span id="currentProteins"></span>/<span id="totalProteins"></span></p>
+                </div>
+            </div>
+        </div>
+        <!-- END CALORIES/MACROS TRACKER CONTAINER -->
+
+
     </div>
 <!-- END PREVIOUS ENTRIES -->
     <div class="box-shadow silver-bg jet-fg generalSheetFormating margin-top-10">

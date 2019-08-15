@@ -1,4 +1,5 @@
-#previousEntries{
+@import 'macros/common/macros-container.scss';
+#pastEntries{
     > #menuHistoryServings.hangingSign{
         > .wrapper{
             display: flex;
@@ -13,5 +14,9 @@
                 align-items: center;
             }
         }
+    }
+    
+    > .pastEntries__container{
+        @include macrosContainerStyling();
     }
 }

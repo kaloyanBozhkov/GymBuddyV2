@@ -1,5 +1,7 @@
 import getCurrentTime from '../../../common/get-current-time';
-import updateOldBarWidths from '../update-old-bar-widths';
+import updateBarWidths from '../update-bar-widths';
+import getPastHistorySerings from '../get-past-history-servings';
+
 export default () => {
     $(document).on("click", "#menuHistoryServings .menu-left", function () {
         var date = getCurrentTime(0, $("#dayEntriesShownFor").data("date"));
@@ -9,7 +11,7 @@ export default () => {
             if (date.date < currentDate.date)
                 $("#menuHistoryServings .menu-right").removeClass("hidden");
         }
-        updateOldBarWidths(date);
+        updateBarWidths(".previousEntries__container",...getPastHistorySerings(date));
     });
 
     $(document).on("click", "#menuHistoryServings .menu-right", function () {
@@ -19,7 +21,7 @@ export default () => {
             var currentDate = getCurrentTime(-1); //yesterday date not current
             if (date.date >= currentDate.date)
                 $(this).addClass("hidden");
-            updateOldBarWidths(date);
+        updateBarWidths(".previousEntries__container",...getPastHistorySerings(date));
         }
     });
 }
