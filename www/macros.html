@@ -1,11 +1,13 @@
 <div id="pushContent">
     <!--CALORIES SECTION-->
     <div id="caloriesCounter" class="card" data-title="Today's Calories">
+        <!-- HANGING SIGN -->
         <div class="hangingSign">
            <div class="wrapper">
                 <p><span id="currentCalories"></span>/<span id="totalCalories"></span></p>
            </div>
         </div>
+        <!-- END HANGING SIGN -->
         <!-- CALORIES/MACROS TRACKER CONTAINER -->
         <div class="caloriesCounter__container">
             <div>
@@ -38,14 +40,17 @@
         </div>
         <!-- END CALORIES/MACROS TRACKER CONTAINER -->
         
+        <!-- BUTTON -->
         <div id="setGoals" class="hoverableGoldButton noselect" data-text="Set Goals">
             <div></div>
             <div></div>
         </div>
+        <!-- END BUTTON -->
     </div>
     <!--END CALORIES SECTION-->
 <!-- START ADD SERVING -->
     <div id="foodTracker" class="card no-header">
+         <!-- WHITE RIBBON -->
         <div class="whiteRibbonHeader">
             <div class="wrapper">
                 <div>
@@ -58,11 +63,14 @@
                 </div>
             </div>
         </div>
+        <!-- END WHITE RIBBON -->
+        <!-- HANGING SIGN -->
         <div class="hangingSign">
             <div class="wrapper">
                  <p><span id="servingCalories">0</span></p>
             </div>
          </div>
+         <!-- END HANGING SIGN -->
         <div class="foodTracker__container">
             <div>
                 <div id="singleFoodServingSize" class="displayText" data-title="SERVING SIZE">
@@ -92,10 +100,12 @@
             <div class="proteins"><span>0</span></div>
            </div>
         </div>
+        <!-- BUTTON -->
         <div id="addServing" class="hoverableGoldButton noselect" data-text="Add Servings">
             <div></div>
             <div></div>
         </div>
+        <!-- END BUTTON -->
     </div>
     <!-- END ADD SERVING -->
 <!-- START TODAY'S ENTRIES -->
@@ -108,7 +118,8 @@
 
 <!-- START PREVIOUS ENTRIES -->
     <div id="pastEntries" class="card" data-title="Past Entries">
-        <div id="menuHistoryServings" class="hangingSign">
+        <!-- WHITE RIBBON -->
+        <div id="menuHistoryServings" class="whiteRibbonHeader">
             <div class="wrapper">
                 <div class="menu-left">
                     <i class="fas fa-angle-left"></i>
@@ -118,12 +129,16 @@
                     <i class="fas fa-angle-right"></i>
                 </div>
             </div>
-         </div>
-         <div class="whiteRibbonHeader">
+        </div>
+        <!-- END WHITE RIBBON -->
+        <!-- HANGING SIGN -->
+        <div class="hangingSign">
             <div class="wrapper">
-              <p><span class="pastEntries__reachedCalories"></span>/<span class="pastEntries__totalCalories"></span></p>
+                <p><span id="currentCalories"></span>/<span id="totalCalories"></span></p>
             </div>
         </div>
+        <!-- END HANGING SIGN -->
+
         <!-- CALORIES/MACROS TRACKER CONTAINER -->
         <div class="pastEntries__container">
             <div>
@@ -156,9 +171,20 @@
         </div>
         <!-- END CALORIES/MACROS TRACKER CONTAINER -->
 
+        <div class="">
 
+        </div>
+
+        <!-- BUTTON -->
+        <div id="showPastEntriesForDay" class="hoverableGoldButton noselect" data-text="Show Entries">
+            <div></div>
+            <div></div>
+        </div>
+        <!-- END BUTTON -->
     </div>
 <!-- END PREVIOUS ENTRIES -->
+
+
     <div class="box-shadow silver-bg jet-fg generalSheetFormating margin-top-10">
         <div id="menuHistoryServings" class="position-relative w-100 text-center">
             <p class="inline-block margin-0 font-size-22 nowrap"></p>

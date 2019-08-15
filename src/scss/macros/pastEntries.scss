@@ -1,22 +1,39 @@
 @import 'macros/common/macros-container.scss';
 #pastEntries{
-    > #menuHistoryServings.hangingSign{
+    > .hangingSign{
+        margin-top: -5px;
+    }
+
+    >  #menuHistoryServings.whiteRibbonHeader{
+        width: 10.28rem;
+        height: 1.667rem;
+        margin: 0 auto;
+        margin-top: 15px;
         > .wrapper{
+            height:1.667rem;
             display: flex;
             flex-direction: row;
-            .menu-left,.menu-right{
-                width: 1.222rem;
+            justify-content: space-between;
+            > p{
+                height: 100%;
                 text-align: center;
-                font-size: 0.8889rem;
+                flex-grow:1;
+            }
+            > .menu-left,.menu-right{
+                width:1.222rem;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                font-size: 0.8889rem;
             }
+        }
+
+        &::before,&::after{
+            height:80%;
+            top:10%;
         }
     }
     
-    > .pastEntries__container{
-        @include macrosContainerStyling();
-    }
+    @include macrosContainerStyling("pastEntries");
 }

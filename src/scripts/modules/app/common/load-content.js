@@ -15,12 +15,12 @@ export default function(what) {//initializes one part of the app vs the other
         let d = getTime(-1);
         if (what == "macros") {
             //Calories
-            updateBarWidths(".caloriesCounter__container", global.currentMacros, global.totalMacros);
-            console.log("Finished updateBarWidths");
+            updateBarWidths("#caloriesCounter", global.currentMacros, global.totalMacros);
+            console.log("Finished caloriesCounter updateBarWidths");
             //Past Entries
             $("#dayEntriesShownFor").html(d.displayDate).data("date", d.date);
-            updateBarWidths(".previousEntries__container",...getPastHistorySerings(d.keyFromDate));
-            console.log("Finished updateOldBarWidths");
+            updateBarWidths("#pastEntries",...getPastHistorySerings(d.keyFromDate));
+            console.log("Finishe past entries updateBarWidths");
             //Weekly Stats
             loadWeeklyStatsGraph();
             console.log("Finished loadWeeklyStatsGraph");
