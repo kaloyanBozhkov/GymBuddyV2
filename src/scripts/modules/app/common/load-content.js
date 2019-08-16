@@ -2,6 +2,7 @@ import global from '../../global-variables';
 import getTime from '../../common/get-current-time';
 import save from '../../common/save';
 import updateBarWidths from '../macros/update-bar-widths';
+import loadDailyServings from '../macros/load-daily-servings';
 import getPastHistorySerings from '../macros/get-past-history-servings';
 import loadWeeklyStatsGraph from '../macros/load-weekly-stats-graph';
 import checkHistoryWorkouts from '../workouts/check-history-workouts';
@@ -16,11 +17,12 @@ export default function(what) {//initializes one part of the app vs the other
         if (what == "macros") {
             //Calories
             updateBarWidths("#caloriesCounter", global.currentMacros, global.totalMacros);
-            console.log("Finished caloriesCounter updateBarWidths");
+            loadDailyServings(".dailyEntries");
             //Past Entries
             $("#dayEntriesShownFor").html(d.displayDate).data("date", d.date);
-            updateBarWidths("#pastEntries",...getPastHistorySerings(d.keyFromDate));
-            console.log("Finishe past entries updateBarWidths");
+            let pastHistorySerings = getPastHistorySerings(d.keyFromDate);
+            updateBarWidths("#pastEntries", pastHistorySerings.currentServings, pastHistorySerings.totalMacros);
+            loadDailyServings(".pastEntries", pastHistorySerings.currentServings, d.keyFromDate);
             //Weekly Stats
             loadWeeklyStatsGraph();
             console.log("Finished loadWeeklyStatsGraph");

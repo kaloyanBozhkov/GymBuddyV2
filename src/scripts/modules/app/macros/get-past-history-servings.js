@@ -1,12 +1,15 @@
 import global from '../../global-variables';
-import BaseMacros from '../../macros/base-macros';
+import SingleDayServing from '../../macros/single-day-serving';
+import DateMacros from '../../macros/date-macros';
 
 export default servingId => {
-    let currentObj = new BaseMacros(0, 0, 0);
-    let totalObj = new BaseMacros(0, 0, 0);
+    let currentServings = new SingleDayServing();
+    let totalMacros = new DateMacros(0, 0, 0);
     if (typeof global.historyServings != "undefined" && global.historyServings.hasOwnProperty(servingId)) {
-        currentObj = global.historyServings[servingId];
-        totalObj = global.historyTotalMacros[global.historyServings[servingId].totalMacrosId];
+        let dailyServing = global.historyServings[servingId];
+        currentServings = new SingleDayServing(dailyServing.time, dailyServing.fats, dailyServing.carbs, dailyServing.proteins);
+        let pastTotalMacros = global.historyTotalMacros[global.historyServings[servingId].totalMacrosId];
+        totalMacros = new DateMacros(pastTotalMacros.fats,pastTotalMacros.carbs,pastTotalMacros.proteins,pastTotalMacros.time);
     }
-    return [currentObj, totalObj];
+    return {currentServings, totalMacros};
 }

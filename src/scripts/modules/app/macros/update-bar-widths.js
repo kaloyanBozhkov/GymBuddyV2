@@ -1,19 +1,19 @@
 import loadDailyServings from './load-daily-servings';
 import {calculatePercentage} from '../../common/utilities';
 
-export default (container, currentObj, totalObj) => {
-    $(`${container} #currentFats`).html(currentObj.fats);
-    $(`${container} #currentCarbs`).html(currentObj.carbs);
-    $(`${container} #currentProteins`).html(currentObj.proteins);
-    $(`${container} #totalFats`).html(totalObj.fats);
-    $(`${container} #totalCarbs`).html(totalObj.carbs);
-    $(`${container} #totalProteins`).html(totalObj.proteins);
-    $(`${container} #currentCalories`).html(currentObj.calculateCalories());
-    $(`${container} #totalCalories`).html(totalObj.calculateCalories());
+export default (container, currentServ, totalMacros) => {
+    $(`${container} #currentFats`).html(currentServ.fats);
+    $(`${container} #currentCarbs`).html(currentServ.carbs);
+    $(`${container} #currentProteins`).html(currentServ.proteins);
+    $(`${container} #totalFats`).html(totalMacros.fats);
+    $(`${container} #totalCarbs`).html(totalMacros.carbs);
+    $(`${container} #totalProteins`).html(totalMacros.proteins);
+    $(`${container} #currentCalories`).html(currentServ.calculateCalories());
+    $(`${container} #totalCalories`).html(totalMacros.calculateCalories());
 
-    let barFatsWidth = calculatePercentage(currentObj.fats, totalObj.fats);
-    let barCarbsWidth = calculatePercentage(currentObj.carbs, totalObj.carbs);
-    let barProteinsWidth = calculatePercentage(currentObj.proteins, totalObj.proteins);
+    let barFatsWidth = calculatePercentage(currentServ.fats, totalMacros.fats);
+    let barCarbsWidth = calculatePercentage(currentServ.carbs, totalMacros.carbs);
+    let barProteinsWidth = calculatePercentage(currentServ.proteins, totalMacros.proteins);
 
     $(`${container} #barFats > div`).width(`${barFatsWidth}%`);
     $(`${container} #barCarbs > div`).width(`${barCarbsWidth}%`);
@@ -22,23 +22,21 @@ export default (container, currentObj, totalObj) => {
     $(`${container} #barCarbs > div`).data("progress", barCarbsWidth);
     $(`${container} #barProteins > div`).data("progress", barProteinsWidth);
 
-    if (totalObj.fats < currentObj.fats)
+    if (totalMacros.fats < currentServ.fats)
         $(`${container} #warningFats`).removeClass("hidden");
     else 
         $(`${container} #warningFats`).addClass("hidden");
     
-    if (totalObj.carbs < currentObj.carbs)
+    if (totalMacros.carbs < currentServ.carbs)
         $(`${container} #warningCarbs`).removeClass("hidden");
     else
         $(`${container} #warningCarbs`).addClass("hidden");
     
-    if (totalObj.proteins < currentObj.proteins)
+    if (totalMacros.proteins < currentServ.proteins)
         $(`${container} #warningProteins`).removeClass("hidden");
     else
         $(`${container} #warningProteins`).addClass("hidden");
-    
-
-
-    loadDailyServings();
+        
+    console.log(`Finished ${container} updateBarWidths`);
 }
 
