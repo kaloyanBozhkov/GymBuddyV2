@@ -1,5 +1,5 @@
 @mixin macrosContainerStyling($name){
-    .#{$name}__container{
+    .#{$name}__mainContainer{
         display: flex;
         flex-direction: column;
         > div{

@@ -36,6 +36,26 @@
         }
     }
     
+    > .pastEntries__container{
+        position:relative;
+        overflow: hidden;
+        transition: all 400ms;
+        
+        &:not(.active){
+            max-height: 0;
+        }
+        &.active{
+            max-height: 500px;
+        }
+
+        &::before{
+            top:0;
+            @include fancyHrLine();
+        }
+
+    }
+
+
     @include macrosContainerStyling("pastEntries");
     @include entriesContainer("pastEntries");
 }

@@ -52,6 +52,5 @@ export default (container = ".dailyEntries", singleDayServing = global.singleDay
     } else {
         $(`${container}__container`).append(`<p>No servings have been added for ${msgDate ? msgDate : "today yet"}.</p>`);
     }
-    
     console.log(`Finished ${container} loadDailyServings`);
 }

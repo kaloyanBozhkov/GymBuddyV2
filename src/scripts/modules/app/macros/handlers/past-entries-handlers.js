@@ -11,7 +11,7 @@ export default () => {
             if (date.date < currentDate.date)
                 $("#menuHistoryServings .menu-right").removeClass("hidden");
         }
-        updateBarWidths(".previousEntries__container",...getPastHistorySerings(date));
+        updateBarWidths(".pastEntries__container",...getPastHistorySerings(date));
     });
 
     $(document).on("click", "#menuHistoryServings .menu-right", function () {
@@ -21,7 +21,7 @@ export default () => {
             var currentDate = getCurrentTime(-1); //yesterday date not current
             if (date.date >= currentDate.date)
                 $(this).addClass("hidden");
-        updateBarWidths(".previousEntries__container",...getPastHistorySerings(date));
+        updateBarWidths(".pastEntries__container",...getPastHistorySerings(date));
         }
     });
 }
