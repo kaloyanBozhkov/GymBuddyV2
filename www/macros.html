@@ -184,46 +184,119 @@
     </div>
 <!-- END PREVIOUS ENTRIES -->
 
+<!-- START CALORIC DISTRIBUTION -->
 
-    <div class="box-shadow silver-bg jet-fg generalSheetFormating margin-top-10">
-        <div id="menuHistoryServings" class="position-relative w-100 text-center">
-            <p class="inline-block margin-0 font-size-22 nowrap"></p>
-            <div class="position-absolute menu-left">
-                <span class="fas fa-angle-left"></span>
+<div id="caloricDistribution" class="card" data-title="Caloric Distribution">
+    <div class="caloricDistribution__mainContainer">
+        <div class="caloricDistribution__mainContainer__header">
+            <!-- WHITE RIBBON -->
+            <div class="whiteRibbonHeader">
+                <div class="wrapper">
+                    <div class="menu-left">
+                        <i class="fas fa-angle-left"></i>
+                    </div>
+                    <p class="caloricDistribution__mainContainer__displayWeekLabel"></p>
+                    <div class="menu-right">
+                        <i class="fas fa-angle-right"></i>
+                    </div>
+                </div>
             </div>
-            <div class="position-absolute hidden menu-right">
-                <span class="fas fa-angle-right"></span>
+            <!-- END WHITE RIBBON -->
+            <!-- HANGING SIGN -->
+            <div class="hangingSign">
+                <div class="wrapper">
+                    <p data-title="WEEKLY TOTAL"></p>
+                </div>
             </div>
+            <!-- END HANGING SIGN -->
         </div>
-        <div id="caloriesCounterHistory">
+        <div class="caloricDistribution__mainContainer__mainContainer">
+            <!-- START GRAPH -->
+                <div class="graphContainer">
+                    <div class="graphContainer__totalCalories"> 
+                        <ul>
+                        
+                        </ul>
+                    </div>
 
+                    <div class="graphContainer__content">
+                        
+                    </div>
 
-            <p class="width-full text-center">Calories: <span id="currentCaloriesHistory"></span>/<span id="totalCaloriesHistory"></span></p>
-            <p>Fats: <span id="currentFatsHistory"></span>/<span id="totalFatsHistory"></span>g</p>
-            <div class="showBar position-relative overflow-xy-hidden coolBorder">
-                <div id="barFatsHistory" class="position-absolute barLoad block"></div>
-            </div>
-            <p>Carbs: <span id="currentCarbsHistory"></span>/<span id="totalCarbsHistory"></span>g</p>
-            <div class="showBar position-relative overflow-xy-hidden coolBorder">
-                <div id="barCarbsHistory" class="position-absolute barLoad block"></div>
-            </div>
-            <p>Proteins: <span id="currentProteinsHistory"></span>/<span id="totalProteinsHistory"></span>g</p>
-            <div class="showBar position-relative overflow-xy-hidden coolBorder">
-                <div id="barProteinsHistory" class="position-absolute barLoad block"></div>
-            </div>
+                    <div class="graphContainer__weekDays">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
+            <!-- END GRAPH -->
         </div>
     </div>
-    <div id="pastDailyHistory" class="box-shadow silver-bg jet-fg generalSheetFormating margin-top-30">
-        <div class="width-full text-center">
-            <p class="inline-block formatP">Entries</p>
+    <div class="caloricDistribution__detailsContainer">
+        <div class="caloricDistribution__detailsContainer__header">
+            <div>
+                <!-- BACK BUTTON -->
+                <div class="menu-back" class="goldenPlateButton">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <!-- END BACK BUTTON -->
+            </div>
+            <div>
+                <!-- WHITE RIBBON -->
+                <div class="whiteRibbonHeader">
+                    <div class="wrapper">
+                        <p class="caloricDistribution__detailsContainer__header__dateLabel"></p>
+                    </div>
+                </div>
+                <!-- END WHITE RIBBON -->
+                <!-- HANGING SIGN -->
+                <div class="hangingSign">
+                    <div class="wrapper">
+                        <p><span id="currentCalories"></span>/<span id="totalCalories"></span></p>
+                    </div>
+                </div>
+                <!-- END HANGING SIGN -->
+            </div>
         </div>
-        <div id="pastEntriesContainer" class="width-full">
-
-
+        <!-- CALORIES/MACROS TRACKER CONTAINER -->
+        <div class="caloricDistribution__detailsContainer__mainContainer">
+            <div>
+                <div class="progressBar" data-title="FATS">
+                    <div id="barFats" data-progress="0"><div></div></div>
+                    <i id="warningFats" class="fas fa-exclamation-triangle hidden"></i>
+                </div>
+                <div class="displayText" data-title="GRAMS">
+                    <p><span id="currentFats"></span>/<span id="totalFats"></span></p>
+                </div>
+            </div>
+            <div>
+                <div class="progressBar" data-title="CARBS">
+                    <div id="barCarbs" data-progress="0"><div></div></div>
+                    <i id="warningCarbs" class="fas fa-exclamation-triangle hidden"></i>
+                </div>
+                <div class="displayText" data-title="GRAMS">
+                    <p><span id="currentCarbs"></span>/<span id="totalCarbs"></span></p>
+                </div>
+            </div>
+            <div>
+                <div class="progressBar" data-title="PROTEINS">
+                    <div id="barProteins" data-progress="0"><div></div></div>
+                    <i id="warningProteins" class="fas fa-exclamation-triangle hidden"></i>
+                </div>
+                <div class="displayText" data-title="GRAMS">
+                    <p><span id="currentProteins"></span>/<span id="totalProteins"></span></p>
+                </div>
+            </div>
         </div>
+        <!-- END CALORIES/MACROS TRACKER CONTAINER -->
     </div>
+</div>
 
-    <div id="past7DaysStats" class="box-shadow silver-bg jet-fg generalSheetFormating margin-top-30 margin-bottom-10">
+<!-- END CALORIC DISTRIBUTION -->
+
+ <!-- 
+
+       <div id="past7DaysStats" class="box-shadow silver-bg jet-fg generalSheetFormating margin-top-30 margin-bottom-10">
         <div class="width-full text-center">
             <p class="inline-block formatP">Caloric distribution - 7 Days</p>
             <div id="graphOldValuesDisplayer">
@@ -479,3 +552,5 @@
     </div>
 
 </div>
+
+ -->
