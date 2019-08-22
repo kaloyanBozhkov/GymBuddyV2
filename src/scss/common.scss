@@ -227,7 +227,38 @@ p {
     &::after{
         transform: skew(-35deg);
     }
+
+    &.whiteRibbonHeader--withArrowsAndText{
+        width: 10.28rem;
+        height: 1.667rem;
+        margin: 0 auto;
+        > .wrapper{
+            height:1.667rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            > p{
+                height: 100%;
+                text-align: center;
+                flex-grow:1;
+            }
+            > .menu-left,.menu-right{
+                width:1.222rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-size: 0.8889rem;
+            }
+        }
+
+        &::before,&::after{
+            height:80%;
+            top:10%;
+        }
+    }
 }
+
 
 
 .displayText {

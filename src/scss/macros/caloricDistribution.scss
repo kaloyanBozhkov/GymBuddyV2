@@ -1,0 +1,72 @@
+#caloricDistribution{
+    .caloricDistribution__mainContainer{
+        padding:15px 5px;
+        .caloricDistribution__mainContainer__header{
+
+            .whiteRibbonHeader{
+                margin-bottom: -4px;
+            }
+
+            .hangingSign{
+                p{
+                    font-size: 0.8333rem;
+                    line-height: 0.8333rem;
+                    &::before{
+                        content: attr(data-title);
+                        display: block;
+                        color: $gold;
+                        font-weight: 900;
+                        font-size: 0.5rem;
+                        line-height: 0.6667rem;
+                    }
+                }
+            }
+        }
+
+        .caloricDistribution__mainContainer__mainContainer{
+            .graphContainer{
+               .graphContainer__totalCalories{
+                    ul{
+                        
+                    }
+               } 
+
+               .graphContainer__content{
+
+               }
+
+               .graphContainer__weekDays{
+                    ul{
+
+                    }
+               }
+            }
+        }
+    }
+
+    .caloricDistribution__detailsContainer{
+
+       .caloricDistribution__detailsContainer__header{
+            > div:first-of-type{
+
+            }
+
+            > div:last-of-type{
+                .whiteRibbonHeader{
+
+                }
+
+                .hangingSign{
+
+                }
+            }
+       }
+
+       .caloricDistribution__detailsContainer__mainContainer{
+           > div{
+
+           }
+       }
+
+    }
+}
