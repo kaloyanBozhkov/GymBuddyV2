@@ -5,19 +5,31 @@
 
             .whiteRibbonHeader{
                 margin-bottom: -4px;
+                .caloricDistribution__mainContainer__displayWeekLabel{
+                    &::before, &::after{
+                        display:inline-block;
+                    }
+                    &::before{
+                        content: attr(data-start);
+                    }
+                    &::after{
+                        content: attr(data-end);
+                    }
+                }
             }
 
             .hangingSign{
                 p{
-                    font-size: 0.8333rem;
-                    line-height: 0.8333rem;
+                    padding: 2px 0;
+                    font-size: 0.6667rem;
+                    line-height: 0.7778rem;
                     &::before{
                         content: attr(data-title);
                         display: block;
                         color: $gold;
                         font-weight: 900;
                         font-size: 0.5rem;
-                        line-height: 0.6667rem;
+                        line-height: 0.5556rem;
                     }
                 }
             }
