@@ -1,14 +1,11 @@
 #caloricDistribution{
     .caloricDistribution__mainContainer{
-        padding:15px 5px;
+        padding:15px 5px 5px 5px;
         .caloricDistribution__mainContainer__header{
 
             .whiteRibbonHeader{
                 margin-bottom: -4px;
                 .caloricDistribution__mainContainer__displayWeekLabel{
-                    &::before, &::after{
-                        display:inline-block;
-                    }
                     &::before{
                         content: attr(data-start);
                     }
@@ -37,19 +34,187 @@
 
         .caloricDistribution__mainContainer__mainContainer{
             .graphContainer{
-               .graphContainer__totalCalories{
-                    ul{
-                        
+                width:100%;
+                height: 325px;
+                position:relative;
+                ul{
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    width: 100%;
+                    height: 100%;
+                    text-align: center;
+                    display: flex;
+                    justify-content: space-evenly;
+                    li{
+                        flex-grow: 1;
                     }
+                }
+
+               .graphContainer__totalCalories{
+                   position: absolute;
+                   width: 42px;
+                   padding-bottom:42px;
+                   left:0;
+                   top:0;
+                   height:100%;
+                   z-index:0;
+                   ul{
+                    flex-direction: column;
+                        li{
+                            padding-right: 3px;
+                            border-bottom:2px solid $gold;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-end;
+                            p{
+                                display: flex;
+                                justify-content: center;
+                                flex-direction: column;
+                                align-items: center;
+                                font-size:14px;
+                                height:20px;
+                                border-radius: 5px 5px 0 0;
+                                @include insetBoxShadow(0.4, false);
+                                background-color:white;
+                                margin:0;
+                            }
+                        }
+                   }
                } 
 
                .graphContainer__content{
+                    padding-bottom:46px;// 42 + 4px for beautiful space
+                    padding-left:46px;
+                    height: 100%;
+                    z-index:1;
+                    display:flex;
+                    position:relative;
+                    &::before,&::after{
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        left:42px;
+                    }
 
-               }
+                    &::before{
+                        top:0;
+                        bottom:42px;
+                        background-color:$gold;
+                        width:2px;
+                    }
+
+                    &::after{
+                        right: 0;
+                        bottom:42px;
+                        background-color:$gold;
+                        height:2px;
+                    }
+
+                    > ul > li{
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        align-items: stretch;
+
+                        &:not(:last-of-type){
+                            margin-right:2px;
+                        }
+
+                        > div.top{//top is the top visible div (if fats is 0, top will be carbs and so on)
+                            border-radius: 5px 5px 0 0;
+                        }
+
+                        >   div{
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            color:white;
+                            font-size:14px;    
+                            line-height: 12px;
+                            box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
+                            &::before{
+                                content: attr(data-percent);
+                                font-weight:900;
+                            }
+                            &::after{
+                                content: attr(data-grams);
+                            }
+
+                            &.onlyPercent::after{
+                                display: none;
+                            }
+
+                            &.noDisplay{
+                                &::before, &::after{
+                                    display: none;
+                                }
+                            }
+                        }
+
+                        > div:first-of-type{
+                            background-color:$fats;
+                        }
+
+                        > div:not(:first-of-type):not(:last-of-type){
+                            background-color:$carbs;
+                        }
+
+                        > div:last-of-type{
+                            background-color:$proteins;
+                        }
+                    }
+                }
 
                .graphContainer__weekDays{
+                    position: absolute;
+                    width:100%;
+                    height:42px;
+                    padding-left:42px;
+                    bottom:0;
+                    left:0;
+                    z-index:0;
                     ul{
-
+                        flex-direction: row;
+                        li{
+                            padding-top:12px;
+                            position:relative;
+                            &:not(:last-of-type){
+                                margin-right:2px;
+                            }
+                            &::before{
+                                content:'';
+                                background-color:$gold;
+                                position: absolute;
+                                height:12px;
+                                top: 0;
+                                left: 0;
+                                right: 0;
+                                width: 2px;
+                                margin: 0 auto;
+                            }
+                            p{
+                                height:30px;
+                                @include insetBoxShadow(0.4, false);
+                                font-size:14px;
+                                background-color:white;
+                                border-radius: 0 0 5px 5px;
+                                border-top:2px solid $gold;    
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                &::before, &::after{
+                                    line-height: 12px;
+                                }
+                                &::after{
+                                    content: attr(data-date);
+                                }
+                                &::before{
+                                    content:attr(data-day);
+                                }
+                            }
+                        }
                     }
                }
             }
@@ -57,7 +222,7 @@
     }
 
     .caloricDistribution__detailsContainer{
-
+        display: none;
        .caloricDistribution__detailsContainer__header{
             > div:first-of-type{
 

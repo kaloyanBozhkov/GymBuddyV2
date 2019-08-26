@@ -131,7 +131,8 @@ p {
 }
 
 #pushContent{
-    padding-top: 15px;
+    padding-top: 15px;    
+    padding-bottom: 10px;
     > div:not(:last-of-type){
         margin-bottom: 18px;
     }
@@ -178,112 +179,81 @@ p {
     position: relative;
     top: -4px;
     margin-bottom: -4px;
-    // > .wrapper{    
-    position: relative;
     height:2.556rem;
-    z-index: 1;
-    &::before{
-        content:'';
-        display: block;
+    .wrapper{    
         background-color:white;
-        position: absolute;
-        bottom:0;
-        right:0;
-        top:0; 
-        left:0;
-        z-index:-1;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
         @include boxShadow(0, 0, 4px, 0.4);
     }
-
-        // &::before,&::after{
-        //     content:'';
-        //     position: absolute;
-        //     background-color: white;
-        //     display: block;
-        //     z-index: -1;
-        // }
-
-        // &::before{
-        //     top: 4%;
-        //     left: -1%;
-        //     width: 102.05%;
-        //     height: 90%;
-        // }
-
-        // &::after{
-        //     top:0;
-        //     left:0;    
-        //     right:0;
-        //     bottom:0;
-        //     @include boxShadow(0, 0, 2px, 0.4);
-        // }
-
-
-    // }
-
-
-    // &::before,&::after{
-    //     background-color:white;
-    //     content:'';
-    //     display: block;
-    //     position: absolute;
-    //     top: 5%;
-    //     left: -1%;
-    //     width: 102%;
-    //     height: 90%;
-    //     z-index: -1;
-    //     @include boxShadow(0, 0, 4px, 0.4);
-    // }
-
-    // &::before{
-    //     transform: skew(35deg);
-    // }
-
-    // &::after{
-    //     transform: skew(-35deg);
-    // }
-
     .whiteRibbon__background{
         position: absolute;
-        height:90%;
-        top:5%;
+        height:100%;
+        top:0;
+        width:1.111rem;
         z-index:-2;
 
-        #shadow{
-            flood-color: rgba(52, 49, 50, 0.4);
+        #shadow feDropShadow{
+            flood-color: rgba(52, 49, 50, 0.75);
+        }
+
+        &.whiteRibbon__background--left{
+            right:100%;
+        }
+        &.whiteRibbon__background--right{
+            left:100%;
+            svg{
+                transform: rotate(180deg);
+            }
         }
     }
-
     &.whiteRibbonHeader--withArrowsAndText{
-        width: 10.28rem;
+        width: 11.28rem;
         height: 1.667rem;
         margin: 0 auto;
-        // > .wrapper{
-            // &::before{
-            //     height:80%;
-            //     top:10%;
-            // }
-            height:1.667rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        p{
+            height: 100%;
+            flex-grow:1;
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
-            > p{
-                height: 100%;
-                text-align: center;
-                flex-grow:1;
-            }
-            > .menu-left,.menu-right{
-                width:1.222rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                font-size: 0.8889rem;
-            }
-        // }
+            align-items: center;
+            justify-content: space-around;
+        }
+        .menu-left,.menu-right{
+            width:1.222rem;
+            font-size: 0.8889rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
     }
 }
 
+@mixin textFieldStyle{
+    outline: none;
+    border: none;
+    margin: 0;
+    height: 100%;
+    width:100%;
+    background-color: $white;
+    @include insetBoxShadow(0.25, false);
+    border-radius: 0px 0px 5px 5px;
+    font-size: 1.333rem;
+    text-align: center;
+}
+
+.textFieldStyle{
+    @include textFieldStyle();
+}
 
 
 .displayText {
@@ -309,16 +279,7 @@ p {
     }
 
     p, input {
-        outline: none;
-        border: none;
-        margin: 0;
-        height: 100%;
-        width:100%;
-        background-color: $white;
-        @include insetBoxShadow(0.25, false);
-        border-radius: 0px 0px 5px 5px;
-        font-size: 1.333rem;
-        text-align: center;
+        @include textFieldStyle();
     }
 }
 
