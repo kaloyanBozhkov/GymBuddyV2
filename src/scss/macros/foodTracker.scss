@@ -2,6 +2,7 @@
     margin-left:35px;//space for whiteRibbonHeader's sides
     margin-right:35px;
     > .whiteRibbonHeader{
+        top: -4px;
         > .wrapper{
             display: flex;
             flex-direction: row;

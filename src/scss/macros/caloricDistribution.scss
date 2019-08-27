@@ -1,8 +1,8 @@
+@import 'macros/common/macros-container.scss';
 #caloricDistribution{
     .caloricDistribution__mainContainer{
         padding:15px 5px 5px 5px;
         .caloricDistribution__mainContainer__header{
-
             .whiteRibbonHeader{
                 margin-bottom: -4px;
                 .caloricDistribution__mainContainer__displayWeekLabel{
@@ -224,26 +224,39 @@
     .caloricDistribution__detailsContainer{
         display: none;
        .caloricDistribution__detailsContainer__header{
-            > div:first-of-type{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+    
 
+            > div:first-of-type{
+                padding: 15px;
+                > .menu-back{
+                    width: 32px;
+                    height: 32px;
+                    padding: 4px;
+                    border-radius: 4px;
+                    background: $gold;
+                    color: white;
+                    transform-origin:center;
+                    transition: all 400ms;
+                    cursor:pointer;
+                    @include boxShadow(0px, 0px, 6px, 0.4, true);
+                    svg{
+                        width:100%;
+                        height:100%;
+                    }
+                    &:hover{
+                        background-color: lighten($gold, 5%);
+                        transform: scale(0.9);
+                    }
+                }
             }
 
             > div:last-of-type{
-                .whiteRibbonHeader{
-
-                }
-
-                .hangingSign{
-
-                }
+                padding: 15px 0;
             }
        }
-
-       .caloricDistribution__detailsContainer__mainContainer{
-           > div{
-
-           }
-       }
-
+        @include macrosContainerStyling("caloricDistribution__detailsContainer");
     }
 }

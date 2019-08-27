@@ -175,9 +175,7 @@ p {
 
 .whiteRibbonHeader{
     z-index: 1;
-    margin: 0 -0.2778rem;
     position: relative;
-    top: -4px;
     margin-bottom: -4px;
     height:2.556rem;
     .wrapper{    
@@ -211,10 +209,22 @@ p {
             }
         }
     }
+    
+    &.whiteRibbonHeader--header{
+        margin: 0 -0.2778rem;
+    }
+
+    &.whiteRibbonHeader--centered{
+        margin: 0 auto;
+    }
+
+    &.whiteRibbonHeader--box{
+        margin: 0 1.111rem;//makes sure the whiteribbon is space-aware
+    }
+
     &.whiteRibbonHeader--withArrowsAndText{
         width: 11.28rem;
         height: 1.667rem;
-        margin: 0 auto;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
