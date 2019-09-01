@@ -8,14 +8,13 @@ export default (fileToAppend, smoothSwitch = true, replaceWhat = [], replaceWith
     if ($("#alertBg").length == 0) //show both normally
         smoothSwitch = false;
 
-    var content = `<div id='displayMessage' class='silver-bg jet-fg coolBorder'>${global.msgBox[fileToAppend]}</div>`;
+    let content = `<div id='displayMessage'>${global.msgBox[fileToAppend]}</div>`;
 
     if (replaceWhat.length > 0 && replaceWith.length > 0 && replaceWhat.length == replaceWith.length)
-        for (let i = 0; i < replaceWhat.length; i++)
-            content = content.replace(replaceWhat[i], replaceWith[i]);
+        content = replaceWhat.reduce((str, item, index) => str.replace(item, replaceWith[index]), content);
 
     if (!smoothSwitch) {
-        $("body").prepend(`<div id='alertBg' class='transition-all-0-5 both-full noselect'><div class='parent both-full'><div class='child width-full'>${content}</div></div></div>`);
+        $("body").prepend(`<div id='alertBg'>${content}</div>`);
         $("#alertBg").animate({
             "opacity": "1"
         }, 100);
@@ -23,17 +22,10 @@ export default (fileToAppend, smoothSwitch = true, replaceWhat = [], replaceWith
         $("#displayMessage").animate({
             "opacity": "0"
         }, 100, function () {
-            $("#displayMessage").remove();
-
-            $("#alertBg > div > div").prepend(content.replace("class", "style='opacity:0;' class"));
-            $("#displayMessage").animate({
-                "opacity": "1"
-            }, 100);
+            $("#alertBg").empty().prepend(content);
         });
     }
-    attributes.forEach(item => {
-        $("#alertBg").data(item["attrName"], item["attrValue"]);
-    });
+    attributes.map(item => $("#alertBg").data(item["attrName"], item["attrValue"]));
 }
 
 //handlers on general-handlers.js

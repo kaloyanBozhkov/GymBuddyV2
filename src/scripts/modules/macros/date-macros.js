@@ -11,4 +11,8 @@ export default class DateMacros extends BaseMacros{
         this.keyFromDate = timeObj.keyFromDate;
         //could have looped throuhg all timeObj keys and set this[property] = to values though, there are useless properties storage-wise
     }
+
+    static returnGrams(percentage, total, caloriePerGram){
+        return (Math.round((total * percentage / 100 / caloriePerGram) * 100) / 100);
+    }
 }

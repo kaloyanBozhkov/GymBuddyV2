@@ -1,0 +1,75 @@
+@import '../common.scss';
+@import '../variables.scss';
+
+@keyframes errorMsgIn{
+    0%{
+        opacity: 0;
+        top:10px;
+    }
+    100%{
+        opacity: 1;
+        top:0;
+    }
+}
+
+#alertBg{
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 12;
+    .errorMsg{
+        font-size:0.7778rem;
+        color: $warning;         
+        padding: 5px;
+        text-align: center;
+        &:not(.active){
+            display: none;
+        }
+
+        &.active{
+            opacity:0;
+            position:relative;
+            top:10px;
+            @include animation(errorMsgIn, 300ms);
+        }
+    }
+    > #displayMessage{
+        max-width: 400px;
+        margin: 10px;
+        background-color: $alertBackground;
+        .displayMessage__header{
+            @include cardHeader();
+            height: 1.778rem;
+            justify-content: space-evenly;
+            > div {
+                font-size:1rem;
+                width:1.778rem;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 300ms;
+                &:hover{
+                    background-color: white;
+                    color: $gold;
+                }
+            }
+            > h3 {
+                flex-grow:1;
+                line-height: 1.778rem;
+                height: 1.778rem;
+                font-size: 1.333rem;
+                margin:0;
+                padding: 0 5px;
+            }
+        }
+    }
+}

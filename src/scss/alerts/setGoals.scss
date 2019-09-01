@@ -1,0 +1,121 @@
+@import '../variables.scss';
+@import '../macros/common/total-macros-display.scss';
+@mixin stepTitle(){
+    &::before{
+        content: attr(data-title);
+        font-size:0.7778rem;
+        text-align: center;
+    }
+}
+#setMacrosContent{
+    > div:first-of-type{
+        margin: 10px auto;
+        text-align: center;
+        > div{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            max-width:15rem;
+            height: 1.667rem;
+            border: 1px solid $gold;
+            border-radius: 1.667rem;
+            overflow:hidden;
+            margin: 0 auto;
+            @include boxShadow(0, 0, 4px);
+            > p{
+                width:50%;
+                text-align: center;
+                height:100%;
+                font-size:1rem;
+                line-height:1.667rem;
+                transition: all 400ms;
+                &.active{
+                    color: white;
+                    background-color: $gold;
+                }
+                &:not(.active){
+                    color: $gold;
+                    background-color: rgba(255, 255, 255, 0.4);
+                }
+            }
+        }
+        
+        @include stepTitle();
+    }
+
+    > div:not(:first-of-type):not(.active){
+        display: none;
+    }
+    
+
+    > div:not(:first-of-type){
+        margin: 10px;
+        > .wrapper{
+            text-align: center;
+            @include stepTitle();
+        }
+    } 
+
+    #setGramsSection{
+        > div:first-of-type{
+            margin: 10px 0;    
+            > div {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                > .displayText:not(:first-of-type):not(:last-of-type){
+                    margin: 0 10px;
+                }
+            }
+        }
+        > div:last-of-type{
+            >.whiteRibbonHeader{
+                height:1.667rem;
+                max-width: 10rem;
+                margin: 0 auto;
+                p{
+                    text-align: center;
+                    font-size:1rem;
+                    line-height:1rem;
+                    &::before{
+                        content: attr(data-title);
+                        display: block;
+                        color:$gold;
+                        text-align:center;
+                        font-size: 0.5556rem;
+                        line-height: 0.6667rem;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+
+    #setPercentagesSection{
+        > div:first-of-type{
+            .displayText{
+                max-width: 5.556rem;
+                margin: 0 auto;
+            }
+        }
+        > div:nth-of-type(2){
+            margin: 5px 0;
+            > div{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                
+                > .displayText:not(:first-of-type):not(:last-of-type){
+                    margin: 0 10px;
+                }
+            }
+        }
+        > div:last-of-type{
+            @include totalMacrosDisplay(setPercentagesSection);
+            .setPercentagesSection__totalMacros > .wrapper{
+                margin-top: 1.2rem;
+                margin-bottom:0;
+            }
+        }
+    }
+}

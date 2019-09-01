@@ -94,32 +94,34 @@
         <div class="foodTracker__container">
             <div>
                 <div id="singleFoodServingSize" class="displayText" data-title="SERVING SIZE">
-                    <input type="text" value="0" class="text-center block" />
+                    <input type="text" value="0" class="validateNumeric" />
                 </div>
                 <div id="servingSize" class="displayText" data-title="SERVINGS">
-                    <input type="text" value="0" class="text-center block" />
+                    <input type="text" value="0" class="validateNumeric" />
                 </div>
             </div>
             <div class="verticalSeparator"></div>
             <div>
                 <div id="singleFoodFats" class="displayText" data-title="FATS">
-                    <input type="text" value="0" class="text-center block" />
+                    <input type="text" value="0" class="validateNumeric" />
                 </div>
                 <div id="singleFoodCarbs" class="displayText" data-title="CARBS">
-                    <input type="text" value="0" class="text-center block" />
+                    <input type="text" value="0" class="validateNumeric" />
                 </div>
                 <div id="singleFoodProteins" class="displayText" data-title="PROTEIN">
-                    <input type="text" value="0" class="text-center block" />
+                    <input type="text" value="0" class="validateNumeric" />
                 </div>
             </div>
         </div>
-        <div class="foodTracker__totalMacros">
+        <!-- TOTAL MACROS DISPLAY -->
+        <div class="foodTracker__totalMacros totalMacrosDisplay">
            <div class="wrapper" data-title="- Total Macros -">
             <div class="fats"><span>0</span></div>
             <div class="carbs"><span>0</span></div>
             <div class="proteins"><span>0</span></div>
            </div>
         </div>
+        <!-- END TOTAL MACROS DISPLAY -->
         <!-- BUTTON -->
         <div id="addServing" class="hoverableGoldButton noselect" data-text="Add Servings">
             <div></div>

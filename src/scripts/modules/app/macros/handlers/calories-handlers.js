@@ -1,5 +1,4 @@
-import Macro from '../../../macros/date-macros';
-import { returnGrams } from '../../../common/utilities';
+import Macros from '../../../macros/date-macros';
 import global from '../../../global-variables';
 import save from '../../../common/save';
 import alertMsg from '../../common/alert-msg';
@@ -8,45 +7,57 @@ import closeAlert from '../../common/close-alert';
 
 export default () => {
     //Set New Goal For Calories
-    $(document).on("click", "#setGoals .buttonStyled", function () {
-        alertMsg("setGoalsWhich");
+    $(document).on("click", "#setGoals", function () {
+        alertMsg("setGoals");
     });
 
-    $(document).on("click", "#continueGoalSet", function () {
-        alertMsg("setGoals" + $(this).data("which"));
-    });
-
-    $(document).on("click", "#gramsPrecentagesSwitch p", function () {
-        $("#continueGoalSet").data("which", $(this).html());
-        $("#gramsPrecentagesSwitch p.active").removeClass("active");
-        $(this).addClass("active");
-    });
-
-    $(document).on("click", "#setMacrosGrams", function () {
-        $(".errorMsg").slideUp();
-        if ($("#fatsCount").val().trim().length > 0 && $("#carbsCount").val().trim().length > 0 && $("#proteinsCount").val().trim().length > 0) {
-            global.totalMacros = new Macro($("#fatsCount").val().trim(), $("#carbsCount").val().trim(), $("#proteinsCount").val().trim());
-            save.totalMacros();
-            save.historyTotalMacros();
-            updateBarWidths();
-            closeAlert();
-        } else {
-            $(".errorMsg").slideDown(300);
+    $(document).on("click", "#setGrams, #setPercentages", function () {
+        if(!$(this).hasClass("active")){
+            $(this).siblings(".active").removeClass("active");
+            $(this).addClass("active");
+            $(`#setMacrosContent > div.active`).toggleClass("active");
+            $(`#setMacrosContent #${$(this).attr("id")}Section`).toggleClass("active");
         }
     });
 
-    $(document).on("click", "#setMacrosPercentages", function () {
+    $(document).on("click", "#setMacros", function () {
         $(".errorMsg").slideUp();
-        if ($("#fatsCount").val().trim().length > 0 && $("#carbsCount").val().trim().length > 0 && $("#proteinsCount").val().trim().length > 0 && $("#caloriesCount").val().trim().length > 0 && (parseFloat($("#fatsCount").val().trim()) + parseFloat($("#carbsCount").val().trim()) + parseFloat($("#proteinsCount").val().trim()) == 100)) {
-            //set new goals
-            var calories = $("#caloriesCount").val().trim();
-            global.totalMacros = new Macro(returnGrams($("#fatsCount").val().trim(), calories, 9), returnGrams($("#carbsCount").val().trim(), calories, 4), returnGrams($("#proteinsCount").val().trim(), calories, 4));
+        let set = false;
+
+        if($("#setGrams").hasClass("active")){
+            //set calories with grams
+            let fats = $("#fatsCount").val().trim();
+            let carbs =  $("#carbsCount").val().trim();
+            let protein = $("#proteinsCount").val().trim();
+            if (fats > 0 && carbs > 0 && protein > 0) {
+                global.totalMacros = new Macros(fats, carbs, protein);
+                set = true;
+            } else {
+                $(".errorMsg__grams").slideDown(300);
+            }
+        }else{
+            //set calories with percentages
+            let fats = $("#setPercentagesSection .displayText[data-title='FATS'] > input").val().trim().replace("%","");
+            let carbs = $("#setPercentagesSection .displayText[data-title='CARBS'] > input").val().trim().replace("%","");
+            let protein = $("#setPercentagesSection .displayText[data-title='PROTEIN'] > input").val().trim().replace("%","");
+            let calories = $("#setPercentagesSection .displayText[data-title='TOTAL CALORIES'] > input").val().trim();
+            if (fats > 0 && carbs > 0 && protein > 0 && calories > 0 && parseFloat(fats+carbs+protein) == 100) {
+                //set new goals
+                let carbsGrams = Macros.returnGrams($("#carbsCount").val().trim(), calories, 4);
+                let fatsGrams = Macros.returnGrams($("#fatsCount").val().trim(), calories, 9);
+                let proteinGrams =  Macros.returnGrams($("#proteinsCount").val().trim(), calories, 4);
+                global.totalMacros = new Macros(fatsGrams, carbsGrams, proteinGrams);
+                set = true;
+            } else {
+                $(".errorMsg__percentages").slideDown(300);
+            }
+        }
+
+        if(set){
             save.totalMacros();
             save.historyTotalMacros();
             updateBarWidths();
             closeAlert();
-        } else {
-            $(".errorMsg").slideDown(300);
         }
     });
 }

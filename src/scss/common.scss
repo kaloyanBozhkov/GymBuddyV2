@@ -97,7 +97,6 @@ p {
         > div {
             position:absolute;
             top: 0;
-            background-color:$silver;
             color:$jet;
             transition: all 0.5s;
             width: 55%;
@@ -113,12 +112,11 @@ p {
                 transform: skew(-30deg);
             }
 
-            &.btnActive {
-                background-color: $background_color_4 !important;
+            &:not(.btnActive):not(.btnHovered){
+                background-color:$silver;
             }
-    
-            &.btnHovered {
-                background-color: $background_color_4 !important;
+            &.btnActive, &.btnHovered {
+                background-color: $btnActiveWhite;
             }
         }
         > div:first-of-type{
@@ -144,27 +142,30 @@ p {
     font-size: 0.6667rem;
 }
 
+@mixin cardHeader(){
+    color: white;
+    background-color: $gold;
+    display: flex;
+    margin-left: -0.3333rem;
+    margin-right: -0.3333rem;
+    justify-content: center;
+    align-items: center;
+    height:2.222rem;
+    font-size: 1.333rem;
+    font-weight: normal;
+    z-index: 5;
+    @include boxShadow(0, 0, 4px, 0.4);
+    top: -5px;//hide box shadow of card
+    margin-bottom: -5px;
+    position: relative;
+}
 
 //component styles
 .card{
     &:not(.no-header){
         &::before{
+            @include cardHeader();
             content:attr(data-title);
-            color: white;
-            background-color: $gold;
-            display: flex;
-            margin-left: -0.3333rem;
-            margin-right: -0.3333rem;
-            justify-content: center;
-            align-items: center;
-            height:2.222rem;
-            font-size: 1.333rem;
-            font-weight: normal;
-            z-index: 5;
-            @include boxShadow(0, 0, 4px, 0.4);
-            top: -5px;//hide box shadow of card
-            margin-bottom: -5px;
-            position: relative;
         }
     }
    
@@ -252,10 +253,9 @@ p {
     outline: none;
     border: none;
     margin: 0;
-    height: 100%;
     width:100%;
     background-color: $white;
-    @include insetBoxShadow(0.25, false);
+    @include insetBoxShadow(0.25, false, 10px);
     border-radius: 0px 0px 5px 5px;
     font-size: 1.333rem;
     text-align: center;
@@ -267,13 +267,13 @@ p {
 
 
 .displayText {
-    position: relative;
-
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
     &::before {
+        content: attr(data-title);
         display: block;
-        position: absolute;
-        left: 0;
-        top: -0.5556rem;
         background-color: $gold;
         color: $white;
         font-size: 0.5556rem;
@@ -284,12 +284,37 @@ p {
         font-weight: 300;
     }
 
-    &::before {
-        content: attr(data-title);
+    p, input {
+        flex-grow:1;
+        @include textFieldStyle();
     }
 
-    p, input {
-        @include textFieldStyle();
+    &[data-title='FATS']{
+        input{
+            color: $fats;
+        }
+        &::before{
+            color: white;
+            background-color: $fats;
+        }
+    }
+    &[data-title='CARBS']{
+        input{
+            color: $carbs;
+        }
+        &::before{
+            color: white;
+            background-color: $carbs;
+        }
+    }
+    &[data-title='PROTEIN']{
+        input{
+            color: $proteins;
+        }
+        &::before{
+            color: white;
+            background-color: $proteins;
+        }
     }
 }
 

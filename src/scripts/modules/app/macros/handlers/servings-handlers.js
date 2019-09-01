@@ -17,18 +17,6 @@ const previousAlertToShow = {
 }
 
 export default () => {
-    //ADD FOOD HANDLERS
-    $(document).on("input", "#fatsCount, #proteinsCount, #carbsCount", function () {
-        $(this).val($(this).val().replace(",", ".").trim().match(/^\d*\.?\d*$/));
-        if ($(this).val() > 500)
-            $(this).val(500);
-    });
-
-    $(document).on("input", "#gramsCount", function () {
-        $(this).val($(this).val().replace(",", ".").trim().match(/^\d*\.?\d*$/));
-        if ($(this).val() > 9999)
-            $(this).val(9999);
-    });
     //Add Serving
     //CHECK BELOW
     $(document).on("focusin", "#foodName", function () {

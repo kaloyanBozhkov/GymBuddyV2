@@ -73,10 +73,6 @@ export function calculatePercentage(current, total) {
     return (100 * current / total);
 }
 
-export function returnGrams(percentage, total, caloriePerGram) {
-    return (Math.round((total * percentage / 100 / caloriePerGram) * 100) / 100);
-}
-
 export function camelCaseInput(string) {
     var camel = "";
     var lastLetter = string.substr(string.length - 1) == " " ? " " : "";

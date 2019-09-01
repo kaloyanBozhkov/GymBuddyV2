@@ -15,7 +15,17 @@ export default global = {
     exercises: undefined, 
     dailyExercises: undefined, 
     exerciseCategories: undefined,
-    alerts: ["addFavorites", "importFromFavorites", "setGoalsGrams", "setGoalsPercentages", "setGoalsWhich", "setServingSize", "addSet", "addNewExercise", "createExercise", "miniAlert", "multiPurposeAlert"],
+    alerts: [
+        "addFavorites", 
+        "importFromFavorites", 
+        "setGoals", 
+        "setServingSize", 
+        "addSet", 
+        "addNewExercise", 
+        "createExercise", 
+        "miniAlert", 
+        "multiPurposeAlert"
+    ],
     msgBox: {},
     pageNames: ["workouts", "macros"],
     otherHtmlToLoad: ["errorMsg"],

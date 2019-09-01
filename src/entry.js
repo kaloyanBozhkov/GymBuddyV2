@@ -1,6 +1,6 @@
 //font icons and styles
 import {dom, library} from '@fortawesome/fontawesome-svg-core';
-import {faAngleLeft, faAngleRight, faAngleUp, faHeart, faTrashAlt, faExclamationTriangle, faBook, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import {faAngleLeft, faAngleRight, faAngleUp, faHeart, faTrashAlt, faExclamationTriangle, faBook, faArrowLeft, faCheck} from '@fortawesome/free-solid-svg-icons';
 library.add(
     faAngleLeft, 
     faAngleRight, 
@@ -9,7 +9,8 @@ library.add(
     faTrashAlt,
     faExclamationTriangle,
     faBook,
-    faArrowLeft);
+    faArrowLeft,
+    faCheck);
 dom.watch();
 import './scss/entry.scss';
 //device-related events

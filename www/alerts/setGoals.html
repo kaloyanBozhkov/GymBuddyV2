@@ -1,0 +1,95 @@
+<div class="displayMessage__header">
+    <div id="cancel">
+        <i class="fas fa-arrow-left"></i>  
+    </div>
+    <h3>Set Macros</h3>
+    <div id="setMacros">
+        <i class="fas fa-check"></i>
+    </div>
+</div>
+<div id="setMacrosContent" class="displayMessage__content">
+    <div data-title="Step 1: Select how to set macros">
+        <div>
+            <p id="setGrams" class="active">Grams</p><p id="setPercentages">Percentages</p>
+        </div>
+    </div>
+
+    <div id="setGramsSection" class="active">
+        <div class="wrapper" data-title="Step 2: Set desired grams for macros">
+            <div>
+                <div class="displayText" data-title="FATS">
+                    <input type="text" value="0" class="validateNumeric" />
+                </div>
+                <div class="displayText" data-title="CARBS">
+                    <input type="text" value="0" class="validateNumeric" />
+                </div>
+                <div class="displayText" data-title="PROTEIN">
+                    <input type="text" value="0" class="validateNumeric" />
+                </div>
+            </div>
+        </div>
+        <div class="wrapper" data-title="Step 3: Check the calculated calories">
+        <!-- WHITE RIBBON -->
+        <div class="whiteRibbonHeader whiteRibbonHeader--centered">
+                <div class="wrapper">
+                    <p data-title="TOTAL CALORIES" class="setMacrosContent__totalCalories">0</p>
+                </div>
+                <div class="whiteRibbon__background whiteRibbon__background--left">
+                    <svg width="100%" height="100%" viewBox="-12 -4 32 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <filter id="shadow">
+                                <feDropShadow dx="0" dy="0" stdDeviation="2"/>
+                            </filter>
+                        </defs>
+                        <path d="M0 0L13 23L0 46H22V0H0Z" style="fill:white; filter: url(#shadow)"/>
+                    </svg>
+                </div>
+                <div class="whiteRibbon__background whiteRibbon__background--right">
+                    <svg width="100%" height="100%" viewBox="-12 -4 32 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <filter id="shadow">
+                                <feDropShadow dx="0" dy="0" stdDeviation="2"/>
+                            </filter>
+                        </defs>
+                        <path d="M0 0L13 23L0 46H22V0H0Z" style="fill:white; filter: url(#shadow)"/>
+                    </svg>
+                </div>
+            </div>
+            <!-- END WHITE RIBBON -->
+        </div>
+    </div>
+    <div id="setPercentagesSection" data-title="Step 2: Set percentages for macros:">
+        <div class="wrapper" data-title="Step 2: Set total calories">
+            <div class="displayText" data-title="TOTAL CALORIES">
+                <input type="text" value="0" class="validateNumeric validateNumeric--grams" />
+            </div>
+        </div>
+        <div class="wrapper" data-title="Step 3: Set percentages for macros">
+            <div>
+                <div class="displayText" data-title="FATS">
+                    <input type="text" value="25%" class="validateNumeric validateNumeric--percentages" />
+                </div>
+                <div class="displayText" data-title="CARBS">
+                    <input type="text" value="50%" class="validateNumeric validateNumeric--percentages" />
+                </div>
+                <div class="displayText" data-title="PROTEIN">
+                    <input type="text" value="25%" class="validateNumeric validateNumeric--percentages" />
+                </div>
+            </div>
+        </div>
+        <div class="wrapper"  data-title="Step 4: Check calculated grams for macros">
+            <!-- TOTAL MACROS DISPLAY -->
+            <div class="setPercentagesSection__totalMacros totalMacrosDisplay">
+                <div class="wrapper" data-title="- Total Macros -">
+                    <div class="fats"><span>0</span></div>
+                    <div class="carbs"><span>0</span></div>
+                    <div class="proteins"><span>0</span></div>
+                </div>
+            </div>
+            <!-- END TOTAL MACROS DISPLAY --> 
+        </div>
+
+    </div>
+    <p class="errorMsg errorMsg__grams">You must fill in all the fields before continuing.</p>
+    <p class="errorMsg errorMsg__percentages">The total percentage must be equal to 100.</p>
+</div>

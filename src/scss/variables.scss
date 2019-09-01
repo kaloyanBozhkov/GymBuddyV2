@@ -11,15 +11,9 @@ $cancel: #e85858;
 $transparent: transparent;
 $activeButton: #e8b558;
 $niceBlue: #58B4E8;
+$alertBackground: #eaeaea;
+$btnActiveWhite: #fdfdfd;
 
-$background_color_14: #e2e2e2;
-$background_color_15: #e0e0e0;
-$background_color_16: rgba(255, 255, 255, 0.55);
-$background_color_17: #dcdcdc;
-$background_color_4: #fdfdfd;
-$background_color_5: rgba(234, 234, 234, 0.65);
-$background_color_9: #a59fa1;
-$background_color_11: rgba(0,0,0,0.2);
 
 @font-face {
     font-family: "coolFont";
@@ -77,20 +71,20 @@ $background_color_11: rgba(0,0,0,0.2);
     }
 }
 
-@mixin insetBoxShadow($amount, $withTransition: true) {
+@mixin insetBoxShadow($amount, $withTransition: true, $blur: 3px) {
     transition: all 0.5s;
-    box-shadow: inset 0px 0px 3px rgba(0, 0, 0, $amount);
-    -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, $amount);
+    box-shadow: inset 0px 0px $blur rgba(0, 0, 0, $amount);
+    -webkit-box-shadow: inset 0px 0px $blur rgba(0, 0, 0, $amount);
 
     @if($withTransition == true) {
         &:hover {
-            box-shadow: inset 0px 0px 3px rgba(0, 0, 0, $amount + 0.1);
-            -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, $amount + 0.1);
+            box-shadow: inset 0px 0px $blur rgba(0, 0, 0, $amount + 0.1);
+            -webkit-box-shadow: inset 0px 0px $blur rgba(0, 0, 0, $amount + 0.1);
         }
 
         &:focus {
-            box-shadow: inset 0px 0px 3px rgba(0, 0, 0, $amount + 0.1);
-            -webkit-box-shadow: inset 0px 0px 3px rgba(0, 0, 0, $amount + 0.1);
+            box-shadow: inset 0px 0px $blur rgba(0, 0, 0, $amount + 0.1);
+            -webkit-box-shadow: inset 0px 0px $blur rgba(0, 0, 0, $amount + 0.1);
         }
     }
 }
