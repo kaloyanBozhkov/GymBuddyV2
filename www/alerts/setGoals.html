@@ -18,13 +18,13 @@
         <div class="wrapper" data-title="Step 2: Set desired grams for macros">
             <div>
                 <div class="displayText" data-title="FATS">
-                    <input type="text" value="0" class="validateNumeric" />
+                    <input id="gramsFats" type="text" value="0" class="validateNumeric" />
                 </div>
                 <div class="displayText" data-title="CARBS">
-                    <input type="text" value="0" class="validateNumeric" />
+                    <input id="gramsCarbs" type="text" value="0" class="validateNumeric" />
                 </div>
                 <div class="displayText" data-title="PROTEIN">
-                    <input type="text" value="0" class="validateNumeric" />
+                    <input id="gramsProtein" type="text" value="0" class="validateNumeric" />
                 </div>
             </div>
         </div>
@@ -61,19 +61,19 @@
     <div id="setPercentagesSection" data-title="Step 2: Set percentages for macros:">
         <div class="wrapper" data-title="Step 2: Set total calories">
             <div class="displayText" data-title="TOTAL CALORIES">
-                <input type="text" value="0" class="validateNumeric validateNumeric--grams" />
+                <input id="gramsForPercents" type="text" value="0" class="validateNumeric validateNumeric--grams" />
             </div>
         </div>
         <div class="wrapper" data-title="Step 3: Set percentages for macros">
             <div>
                 <div class="displayText" data-title="FATS">
-                    <input type="text" value="25%" class="validateNumeric validateNumeric--percentages" />
+                    <input id="percentFats" type="text" value="25%" class="validateNumeric validateNumeric--percentages" />
                 </div>
                 <div class="displayText" data-title="CARBS">
-                    <input type="text" value="50%" class="validateNumeric validateNumeric--percentages" />
+                    <input id="percentCarbs"  type="text" value="50%" class="validateNumeric validateNumeric--percentages" />
                 </div>
                 <div class="displayText" data-title="PROTEIN">
-                    <input type="text" value="25%" class="validateNumeric validateNumeric--percentages" />
+                    <input id="percentProteins" type="text" value="25%" class="validateNumeric validateNumeric--percentages" />
                 </div>
             </div>
         </div>
@@ -81,9 +81,9 @@
             <!-- TOTAL MACROS DISPLAY -->
             <div class="setPercentagesSection__totalMacros totalMacrosDisplay">
                 <div class="wrapper" data-title="- Total Macros -">
-                    <div class="fats"><span>0</span></div>
-                    <div class="carbs"><span>0</span></div>
-                    <div class="proteins"><span>0</span></div>
+                    <div class="fats">0</div>
+                    <div class="carbs">0</div>
+                    <div class="proteins">0</div>
                 </div>
             </div>
             <!-- END TOTAL MACROS DISPLAY --> 

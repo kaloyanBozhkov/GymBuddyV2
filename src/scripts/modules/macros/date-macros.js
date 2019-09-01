@@ -15,4 +15,8 @@ export default class DateMacros extends BaseMacros{
     static returnGrams(percentage, total, caloriePerGram){
         return (Math.round((total * percentage / 100 / caloriePerGram) * 100) / 100);
     }
+
+    static returnTotalCalories(fats, carbs, proteins){
+        return Math.round((parseFloat(fats) * 9) + (parseFloat(carbs) + parseFloat(proteins)) * 4);
+    }
 }

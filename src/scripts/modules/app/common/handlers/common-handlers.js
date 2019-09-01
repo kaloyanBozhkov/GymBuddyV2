@@ -64,6 +64,10 @@ export default () => {
         let thisValue = $(this).val().trim();
         if (isPercentField)
             $(this).val(thisValue.replace(/\%/g, ""));
+        
+        thisValue = $(this).val().trim();
+        if(thisValue == 0)
+            $(this).val("");
     });
 }
 

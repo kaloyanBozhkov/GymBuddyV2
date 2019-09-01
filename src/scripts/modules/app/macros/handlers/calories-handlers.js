@@ -4,9 +4,47 @@ import save from '../../../common/save';
 import alertMsg from '../../common/alert-msg';
 import updateBarWidths from '../update-bar-widths';
 import closeAlert from '../../common/close-alert';
-
 export default () => {
     //Set New Goal For Calories
+
+    $(document).on("focusout mouseleave", "#percentProteins, #percentCarbs, #percentFats, #gramsForPercents", function(){
+        let thisId = $(this).attr("id");
+        let totalCalories = thisId == "gramsForPercents" ? $(this).val().trim() : $("#gramsForPercents").val().trim();
+        if(totalCalories > 0){
+            let percent = $(this).val().replace(/\%/g, "");
+            switch(thisId){
+                case "percentProteins":
+                    $(".setPercentagesSection__totalMacros .proteins").html(Macros.returnGrams(percent,totalCalories, 4));
+                    break;
+                case "percentCarbs":
+                    $(".setPercentagesSection__totalMacros .carbs").html(Macros.returnGrams(percent,totalCalories, 4));
+                break;
+                case "percentFats":
+                    $(".setPercentagesSection__totalMacros .fats").html(Macros.returnGrams(percent,totalCalories, 9));
+                break;
+                case "gramsForPercents":
+                    let pProt = $("#percentProteins").val().trim().replace(/\%/g, "");
+                    let pCarbs = $("#percentCarbs").val().trim().replace(/\%/g, "");
+                    let pFats = $("#percentFats").val().trim().replace(/\%/g, "");
+                    $(".setPercentagesSection__totalMacros .proteins").html(Macros.returnGrams(pProt,totalCalories, 4));
+                    $(".setPercentagesSection__totalMacros .carbs").html(Macros.returnGrams(pCarbs,totalCalories, 4));
+                    $(".setPercentagesSection__totalMacros .fats").html(Macros.returnGrams(pFats,totalCalories, 9));
+                break;
+            }
+        }else{
+            $(".setPercentagesSection__totalMacros .proteins").html(0);
+            $(".setPercentagesSection__totalMacros .carbs").html(0);
+            $(".setPercentagesSection__totalMacros .fats").html(0);
+        }
+    });
+
+    $(document).on("focusout mouseleave", "#gramsFats, #gramsCarbs, #gramsProtein", function(){
+        let fats = $("#gramsFats").val().trim();
+        let carbs = $("#gramsCarbs").val().trim();
+        let proteins = $("#gramsProtein").val().trim();
+        $(".setMacrosContent__totalCalories").html(Macros.returnTotalCalories(fats, carbs, proteins));
+    });
+
     $(document).on("click", "#setGoals", function () {
         alertMsg("setGoals");
     });
