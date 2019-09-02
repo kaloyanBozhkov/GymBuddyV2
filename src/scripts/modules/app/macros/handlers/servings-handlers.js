@@ -17,8 +17,6 @@ const previousAlertToShow = {
 }
 
 export default () => {
-    //Add Serving
-    //CHECK BELOW
     $(document).on("focusin", "#foodName", function () {
         $(this).attr("placeholder", "");
     });
@@ -26,55 +24,6 @@ export default () => {
     $(document).on("focusout", "#foodName", function () {
         $(this).attr("placeholder", "Type Food Name Here");
     });
-
-    $(document).on("input", "#singleFoodCarbs input, #singleFoodProteins input, #singleFoodFats input, #singleFoodServingSize input, input.carbsOrange, input.fatsRed, input.proteinsGreen, input#kgCount", function () {
-        $(this).val($(this).val().replace(",", ".").trim().match(/^\d*\.?\d*$/));
-        if ($(this).val().trim() == ".")
-            $(this).val("0.");
-    });
-
-    $(document).on("focusin", "#singleFoodCarbs input, #singleFoodProteins input, #singleFoodFats input, #singleFoodServingSize input, input.carbsOrange, input.fatsRed, input.proteinsGreen, input#repCount", function () {
-        if ($(this).val().trim() == "0")
-            $(this).val("");
-    });
-
-    $(document).on("focusin click", "input#kgCount", function () {
-        if ($(this).val().trim() == "0.0")
-            $(this).val("");
-    });
-
-    $(document).on("focusout", "input#kgCount", function () {
-        let val = round($(this).val().trim());
-        if (val % 2 == 0)
-            val = val.toFixed(1);
-
-        $(this).val(val);
-    });
-
-    $(document).on("focusout", "#singleFoodCarbs input, #singleFoodProteins input, #singleFoodFats input, #singleFoodServingSize input, input.carbsOrange, input.fatsRed, input.proteinsGreen, input#repCount", function () {
-        if ($(this).val().trim().length <= 0)
-            $(this).val("0");
-
-        if ($(this).val().trim().indexOf(".") == 0)
-            $(this).val("0" + $(this).val());
-    });
-
-    $(document).on("change", "#foodTracker > div > div:not(#singleFoodServingSize) input", function () {
-        if ($(this).val() > 500)
-            $(this).val(500);
-    });
-
-    $(document).on("change", "#foodTracker > div > #singleFoodServingSize input, #displayMessage input", function () {
-        if ($(this).val() > 9999)
-            $(this).val(9999);
-    });
-
-    $(document).on("change", "#foodTracker > input", function () {
-        if ($(this).val().length > 100)
-            $(this).val($(this).val().substr(0, 99));
-
-    });
-    //RECHECK ABOVE
 
     $(document).on("click", "#addServing", function () {
         var serving = $("#singleFoodServingSize input").val().trim();

@@ -34,40 +34,5 @@ export default () => {
     
         loadContent(global.selected);
     });
-
-    $(document).on("input", ".validateNumeric", function () {
-        $(this).val($(this).val().replace(",", ".").trim().match(/^\d*\.?\d*$/));
-        let isGramsField = $(this).hasClass("validateNumeric--grams");
-        let isPercentField = $(this).hasClass("validateNumeric--percentages");
-        let thisValue = $(this).val().trim();
-        if (thisValue == ".")
-            $(this).val("0.");
-
-        if(isGramsField && thisValue > 9999)
-            $(this).val(9999);
-        else if(isPercentField && thisValue.replace("%", "") > 500 
-             || !isGramsField && thisValue > 500)
-                $(this).val(500);
-    });
-
-    $(document).on("focusout mouseleave", ".validateNumeric", function(){
-        let isPercentField = $(this).hasClass("validateNumeric--percentages");
-        let thisValue = $(this).val().trim();
-        if (thisValue == "")
-            $(this).val(`0${isPercentField ? "%" : ""}`);
-        else if (isPercentField && thisValue >= 0 )
-            $(this).val(`${thisValue}%`);
-    });
-
-    $(document).on("focusin mouseenter click", ".validateNumeric", function(){
-        let isPercentField = $(this).hasClass("validateNumeric--percentages");
-        let thisValue = $(this).val().trim();
-        if (isPercentField)
-            $(this).val(thisValue.replace(/\%/g, ""));
-        
-        thisValue = $(this).val().trim();
-        if(thisValue == 0)
-            $(this).val("");
-    });
 }
 

@@ -6,7 +6,6 @@ import updateBarWidths from '../update-bar-widths';
 import closeAlert from '../../common/close-alert';
 export default () => {
     //Set New Goal For Calories
-
     $(document).on("focusout mouseleave", "#percentProteins, #percentCarbs, #percentFats, #gramsForPercents", function(){
         let thisId = $(this).attr("id");
         let totalCalories = thisId == "gramsForPercents" ? $(this).val().trim() : $("#gramsForPercents").val().trim();
