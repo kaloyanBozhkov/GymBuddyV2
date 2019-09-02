@@ -39,9 +39,9 @@ export default () => {
     });
 
     $(document).on("focusout mouseleave", "#gramsFats, #gramsCarbs, #gramsProtein", function(){
-        let fats = $("#gramsFats").val().trim();
-        let carbs = $("#gramsCarbs").val().trim();
-        let proteins = $("#gramsProtein").val().trim();
+        let fats = $("#gramsFats").val() || 0;
+        let carbs = $("#gramsCarbs").val() || 0;
+        let proteins = $("#gramsProtein").val() || 0;
         $(".setMacrosContent__totalCalories").html(Macros.returnTotalCalories(fats, carbs, proteins));
     });
 
@@ -64,9 +64,9 @@ export default () => {
 
         if($("#setGrams").hasClass("active")){
             //set calories with grams
-            let fats = $("#fatsCount").val().trim();
-            let carbs =  $("#carbsCount").val().trim();
-            let protein = $("#proteinsCount").val().trim();
+            let fats = $("#gramsFats").val().trim();
+            let carbs =  $("#gramsCarbs").val().trim();
+            let protein = $("#gramsProtein").val().trim();
             if (fats > 0 && carbs > 0 && protein > 0) {
                 global.totalMacros = new Macros(fats, carbs, protein);
                 set = true;
@@ -74,18 +74,23 @@ export default () => {
                 $(".errorMsg__grams").slideDown(300);
             }
         }else{
+            debugger;
             //set calories with percentages
-            let fats = $("#setPercentagesSection .displayText[data-title='FATS'] > input").val().trim().replace("%","");
-            let carbs = $("#setPercentagesSection .displayText[data-title='CARBS'] > input").val().trim().replace("%","");
-            let protein = $("#setPercentagesSection .displayText[data-title='PROTEIN'] > input").val().trim().replace("%","");
-            let calories = $("#setPercentagesSection .displayText[data-title='TOTAL CALORIES'] > input").val().trim();
-            if (fats > 0 && carbs > 0 && protein > 0 && calories > 0 && parseFloat(fats+carbs+protein) == 100) {
+            let fats = parseFloat($("#percentFats").val().replace("%",""));
+            let carbs = parseFloat($("#percentCarbs").val().replace("%",""));
+            let protein = parseFloat($("#percentProteins").val().replace("%",""));
+            let calories = parseFloat($("#gramsForPercents").val());
+            if (fats > 0 && carbs > 0 && protein > 0 && fats+carbs+protein == 100) {
                 //set new goals
-                let carbsGrams = Macros.returnGrams($("#carbsCount").val().trim(), calories, 4);
-                let fatsGrams = Macros.returnGrams($("#fatsCount").val().trim(), calories, 9);
-                let proteinGrams =  Macros.returnGrams($("#proteinsCount").val().trim(), calories, 4);
-                global.totalMacros = new Macros(fatsGrams, carbsGrams, proteinGrams);
-                set = true;
+                if(calories > 0){
+                    let carbsGrams = Macros.returnGrams(carbs, calories, 4);
+                    let fatsGrams = Macros.returnGrams(fats, calories, 9);
+                    let proteinGrams =  Macros.returnGrams(protein, calories, 4);
+                    global.totalMacros = new Macros(fatsGrams, carbsGrams, proteinGrams);
+                    set = true;
+                }else{
+                    $(".errorMsg__grams").slideDown(300);
+                }
             } else {
                 $(".errorMsg__percentages").slideDown(300);
             }
@@ -94,7 +99,7 @@ export default () => {
         if(set){
             save.totalMacros();
             save.historyTotalMacros();
-            updateBarWidths();
+            updateBarWidths("#caloriesCounter", global.currentMacros, global.totalMacros);
             closeAlert();
         }
     });
