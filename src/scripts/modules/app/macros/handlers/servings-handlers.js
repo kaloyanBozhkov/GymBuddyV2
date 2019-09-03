@@ -3,7 +3,6 @@ import SingleServing from '../../../macros/serving';
 import FavoriteItem from '../../../macros/favorite-item';
 import save from '../../../common/save';
 import alertMsg from '../../common/alert-msg';
-import errorMsg from '../../common/errorMsg';
 import updateBarWidths from '../update-bar-widths';
 import searchThroughList from '../../common/search-through-list';
 import closeAlert from '../../common/close-alert';
@@ -26,44 +25,24 @@ export default () => {
     });
 
     $(document).on("click", "#addServing", function () {
-        var serving = $("#singleFoodServingSize input").val().trim();
-        if (global.totalMacros.calculateCalories() > 0) {
-            if (serving.length > 0 && serving !== "0") {
-                var name = $("#foodName").val().trim().length > 0 ? $("#foodName").val().trim() : "Unnamed";
-                alertMsg("setServingSize", true, ["GRAMS", "FOODNAME"], [serving, name], [{attrName: "servingSize", attrValue: serving}]);
-            } else {
-                errorMsg("You must fill in the serving's values before adding it", "#singleFoodServingSize p");
-            }
-        } else {
-            $("body").scrollTop(0);
-            errorMsg("Cannot add a serving since macros have been set yet!", "#caloriesCounter > p:first-of-type");
-        }
-    });
-
-    $(document).on("click", "#setServingSize", function () { //alertMsg button of add serving by size
-        var fats = $("#singleFoodFats input").val().trim();
-        var carbs = $("#singleFoodCarbs input").val().trim();
-        var proteins = $("#singleFoodProteins input").val().trim();
-        var serving = $("#alertBg").data("servingSize");//grams
-        var servingQuantity = $("#servingSize").val().trim();//servings
-        var name = $("#foodName").val().trim().length > 0 ? $("#foodName").val().trim() : "Unnamed Entry";
-        if (servingQuantity.length > 0) {
-            global.currentMacros.fats += round(parseFloat(fats) * servingQuantity);
-            global.currentMacros.carbs += round(parseFloat(carbs) * servingQuantity);
-            global.currentMacros.proteins += round(parseFloat(proteins) * servingQuantity);
+        let fields = ["singleFoodFats", "singleFoodCarbs", "singleFoodProteins", "singleFoodServingSize", "singleFoodQuantity"];
+        let [fats, carbs, proteins, servingSize, quantity] = fields.reduce((acc, field) => [...acc, $(`#${field} input`).val().trim()],[]);
+        let name = $("#foodName").val().trim();
+        name = name.length > 0 ? name : "Unnamed Entry";
+        if (quantity > 0) {
+            global.currentMacros.fats += round(parseFloat(fats) * quantity);
+            global.currentMacros.carbs += round(parseFloat(carbs) * quantity);
+            global.currentMacros.proteins += round(parseFloat(proteins) * quantity);
             save.currentMacros();
-            global.singleDayServing.addServing(new SingleServing(fats, carbs, proteins, null, name, serving, servingQuantity));
+            global.singleDayServing.addServing(new SingleServing(fats, carbs, proteins, null, name, servingSize, quantity));
             save.singleDayServing();
             global.historyServings[getCurrentTime().keyFromDate] = global.singleDayServing;
             save.historyServings();
-            updateBarWidths();
+            updateBarWidths("#caloriesCounter", global.currentMacros, global.totalMacros);
             $("#foodName").val("");
-            $("#foodTracker > div input").each(function () {
-                $(this).val("0");
-            });
-            closeAlert();
+            fields.map(field => $(`#${field} input`).val(0));
         } else {
-            errorField($("#servingSize").siblings("p:first-of-type"));
+            $("#foodTracker__container .errorMsg").addClass("active");
         }
     });
 

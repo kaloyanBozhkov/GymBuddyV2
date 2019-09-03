@@ -1,5 +1,6 @@
-@import 'macros/common/macros-container.scss';
-@import 'macros/common/entries-container.scss';
+@import './common/macros-container';
+@import './common/entries-container';
+@import '../common/mixins/fancy-hr-line';
 #pastEntries{
 
     >  #menuHistoryServings.whiteRibbonHeader{

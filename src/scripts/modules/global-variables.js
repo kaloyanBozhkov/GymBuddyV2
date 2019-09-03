@@ -18,17 +18,10 @@ export default global = {
     alerts: [
         "addFavorites", 
         "importFromFavorites", 
-        "setGoals", 
-        "setServingSize", 
-        "addSet", 
-        "addNewExercise", 
-        "createExercise", 
-        "miniAlert", 
-        "multiPurposeAlert"
+        "setGoals"
     ],
     msgBox: {},
-    pageNames: ["workouts", "macros"],
-    otherHtmlToLoad: ["errorMsg"],
+    pageNames: ["workouts", "macros", "landingPage"],
     pages: {},
     otherHtml: {},
     locale: "en-EN",

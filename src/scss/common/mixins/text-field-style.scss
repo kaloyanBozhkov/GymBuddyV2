@@ -1,0 +1,12 @@
+@import '../../variables';
+@mixin textFieldStyle{
+    outline: none;
+    border: none;
+    margin: 0;
+    width:100%;
+    background-color: $white;
+    @include insetBoxShadow(0.25, false, 10px);
+    border-radius: 0px 0px 5px 5px;
+    font-size: 1.333rem;
+    text-align: center;
+}

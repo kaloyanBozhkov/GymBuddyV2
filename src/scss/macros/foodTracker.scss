@@ -1,4 +1,4 @@
-@import './common/total-macros-display.scss';
+@import './common/total-macros-display';
 
 #foodTracker{
     margin-left:35px;//space for whiteRibbonHeader's sides
@@ -115,7 +115,7 @@
             &#singleFoodCarbs{
                 margin: 1rem 0px;
             }
-            &#singleFoodServingSize{
+            &#singleFoodQuantity{
                 &::before{
                     background-color: $niceBlue;
                 }
@@ -123,7 +123,7 @@
                     color:$niceBlue;
                 }
             }
-            &#servingSize{
+            &#singleFoodServingSize{
                 &::before{
                     background-color: lighten($niceBlue, 15%);
                 }

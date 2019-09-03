@@ -1,0 +1,55 @@
+@import '../variables';
+@import '../common/mixins/text-field-style.scss';
+
+.displayText {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    &::before {
+        content: attr(data-title);
+        display: block;
+        background-color: $gold;
+        color: $white;
+        font-size: 0.5556rem;
+        line-height: 0.6111rem;
+        width: 100%;
+        border-radius: 10px 10px 0px 0px;
+        text-align: center;
+        font-weight: 300;
+    }
+
+    p, input {
+        flex-grow:1;
+        @include textFieldStyle();
+    }
+
+    &[data-title='FATS']{
+        input{
+            color: $fats;
+        }
+        &::before{
+            color: white;
+            background-color: $fats;
+        }
+    }
+    &[data-title='CARBS']{
+        input{
+            color: $carbs;
+        }
+        &::before{
+            color: white;
+            background-color: $carbs;
+        }
+    }
+    &[data-title='PROTEIN']{
+        input{
+            color: $proteins;
+        }
+        &::before{
+            color: white;
+            background-color: $proteins;
+        }
+    }
+}
+

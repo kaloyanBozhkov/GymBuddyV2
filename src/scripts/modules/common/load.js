@@ -13,7 +13,6 @@ export default function loader(){
     var load = {
         alerts: preloadAlerts,
         pages: preloadPages,
-        otherHtml: preloadOtherHtml,
         totalMacros: loadTotalMacros,
         currentMacros: loadCurrentMacros,
         historyTotalMacros: loadHistoryTotalMacros,
@@ -40,13 +39,6 @@ export default function loader(){
     });
 
     return load;
-}
-function preloadOtherHtml() { //pre loads all possible message boxes, so that in real time there is no delay when reading from disk
-    for (let j = 0; j < global.otherHtmlToLoad.length; j++) {
-        $.get(`../alerts/${global.otherHtmlToLoad[j]}.html`, function (data) {
-            global.otherHtml[global.otherHtmlToLoad[j]] = data;
-        });
-    }
 }
 
 function preloadAlerts() { //pre loads all possible message boxes, so that in real time there is no delay when reading from disk

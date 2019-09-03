@@ -1,0 +1,12 @@
+@import '../../variables';
+@mixin threeColorUnderline($color1: $fats, $color2: $carbs, $color3: $proteins, $height: 2px, $isAbsolutePosition: true){//to use on pseudo element 
+    content:'';
+    height:$height;
+    background: linear-gradient(to right, $color1 33%,$color2 33%,$color2 66%,$color2 66%,$color3 66%);
+    display: block;
+    border-radius: 3px;
+    @if $isAbsolutePosition {
+        left: 0;
+        right: 0;
+    }
+}

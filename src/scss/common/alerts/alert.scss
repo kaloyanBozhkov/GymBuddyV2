@@ -1,14 +1,14 @@
-@import '../common.scss';
-@import '../variables.scss';
+@import '../../variables';
+@import '../mixins/card-header';
 
-@keyframes errorMsgIn{
+@keyframes PopIn{
     0%{
         opacity: 0;
-        top:10px;
+        transform: scale(0);
     }
     100%{
         opacity: 1;
-        top:0;
+        transform: scale(1);
     }
 }
 
@@ -24,23 +24,8 @@
     align-items: center;
     background-color: rgba(0,0,0,0.4);
     z-index: 12;
-    .errorMsg{
-        font-size:0.7778rem;
-        color: $warning;         
-        padding: 5px;
-        text-align: center;
-        &:not(.active){
-            display: none;
-        }
-
-        &.active{
-            opacity:0;
-            position:relative;
-            top:10px;
-            @include animation(errorMsgIn, 300ms);
-        }
-    }
     > #displayMessage{
+        @include animation(PopIn, 300ms);
         max-width: 400px;
         margin: 10px;
         background-color: $alertBackground;

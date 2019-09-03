@@ -1,0 +1,50 @@
+@import '../variables';
+
+@keyframes slideDownHangingSign{
+    0%{
+        top:-1.667rem;
+    }
+
+    100%{
+        top:0.6667rem;
+    }
+}
+
+.hangingSign{
+    height:2.778rem;
+    overflow:hidden;
+    > .wrapper{
+        position: relative;
+        width:8.889rem;
+        margin:0 auto;
+        top:-1.667rem;
+        @include animation(slideDownHangingSign, 1s, forwards);
+        animation-delay: 1s;
+        &::before, &::after{
+            content:'';
+            width: 0.2778rem;
+            height:0.8889rem;
+            position:absolute;
+            top:-0.8889rem;
+            background-color:$gold;
+        }
+    
+        &::before{
+            left:0
+        }
+    
+        &::after{
+            right:0;
+        }
+        background-color:white;
+        color: $jet;
+        border-radius:0 0 11px 11px;
+        @include boxShadow(0, 0, 4px, 0.25);
+        margin: 0 auto;
+        > p{
+            width:100%;
+            text-align: center;
+            font-size:1rem;
+        }
+    }
+}

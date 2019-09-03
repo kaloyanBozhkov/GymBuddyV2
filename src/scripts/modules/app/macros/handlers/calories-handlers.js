@@ -50,6 +50,7 @@ export default () => {
 
     $(document).on("click", "#setGrams, #setPercentages", function () {
         if(!$(this).hasClass("active")){
+            resetFieldValuesOnSwapTab();
             $(this).siblings(".active").removeClass("active");
             $(this).addClass("active");
             $(`#setMacrosContent > div.active`).toggleClass("active");
@@ -58,7 +59,7 @@ export default () => {
     });
 
     $(document).on("click", "#setMacros", function () {
-        $(".errorMsg").slideUp();
+        $(".errorMsg.active").removeClass("active");
         let set = false;
 
         if($("#setGrams").hasClass("active")){
@@ -70,7 +71,7 @@ export default () => {
                 global.totalMacros = new Macros(fats, carbs, protein);
                 set = true;
             } else {
-                $(".errorMsg__grams").slideDown(300);
+                $(".errorMsg__grams").addClass("active");
             }
         }else{
             debugger;
@@ -88,10 +89,10 @@ export default () => {
                     global.totalMacros = new Macros(fatsGrams, carbsGrams, proteinGrams);
                     set = true;
                 }else{
-                    $(".errorMsg__grams").slideDown(300);
+                    $(".errorMsg__grams").addClass("active");
                 }
             } else {
-                $(".errorMsg__percentages").slideDown(300);
+                $(".errorMsg__percentages").addClass("active");
             }
         }
 
@@ -102,4 +103,13 @@ export default () => {
             closeAlert();
         }
     });
+}
+
+function resetFieldValuesOnSwapTab(){
+    $("#displayMessage input:not(.validateNumeric--percentages)").val(0);
+    $("#percentFats, #percentProtein").val("25%");
+    $("#percentCarbs").val("50%");
+    $(".errorMsg.active").removeClass("active");
+    $(".setPercentagesSection__totalMacros .fats, .setPercentagesSection__totalMacros .carbs, .setPercentagesSection__totalMacros .proteins").html(0);
+    $(".setMacrosContent__totalCalories").html(0);
 }

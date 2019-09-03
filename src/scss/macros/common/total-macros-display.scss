@@ -1,3 +1,5 @@
+@import '../../common/mixins/three-color-underline';
+
 @mixin totalMacrosDisplay($containerName){
     > .#{$containerName}__totalMacros{
         transition: all 300ms;
@@ -53,7 +55,7 @@
             }
             &::after{
                 top:0;
-                @include fatCarbProteinUnderLine();
+                @include threeColorUnderline();
             }
         }
     }

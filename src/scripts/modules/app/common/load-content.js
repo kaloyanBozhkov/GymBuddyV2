@@ -10,9 +10,8 @@ import loadWorkoutsForToday from '../workouts/load-workouts-for-today';
 
 export default function(what) {//initializes one part of the app vs the other
     if (what !== "none") {
-        global.originalBodyContent = $("#body").html();
-        $("#body").empty().append(global.pages[what]);
-        pushTopAnimation("#pushContent", what);
+        global.originalBodyContent = $("#container").html();
+        $("#container").empty().addClass("opened").append(global.pages[what]);
         let d = getTime(-1);
         if (what == "macros") {
             //Calories
@@ -31,31 +30,10 @@ export default function(what) {//initializes one part of the app vs the other
             loadWorkoutsForToday();
         }
     } else {
-        $("#pushContent").children("div").each(function (i, e) {
-            if ($(this).attr("id") == "workoutsToday"){
-                $(this).children("div").each(function (ii, ee) {
-                    $(ee).addClass("animatedOut");
-                });
-            } else {
-                $(e).addClass("animatedOut");
-            }
-        });
-        setTimeout(function () {
-            $("#body").empty().append(global.originalBodyContent.replace("parent both-full", "parent opacity-0 both-full"));
-            $("#body .opacity-0").animate({
+            $("#container").empty().removeClass("opened").append(global.originalBodyContent);
+            $("#container").animate({
                 "opacity": "1"
             }, 250);
             localStorage.removeItem("lastOpened");
-        }, 300);
     }
-}
-
-function pushTopAnimation(element, what) {
-    var delay = 0; //regardless of how many children div, all will animate
-    $(element).children("div").each(function (i, e) {
-        setTimeout(function () {
-            $(e).addClass("animatedIn");
-        }, delay);
-        delay += 250 - (i * 50);
-    });
 }

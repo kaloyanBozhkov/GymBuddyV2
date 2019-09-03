@@ -1,3 +1,4 @@
+@import '../../common/mixins/three-color-underline';
 @mixin entriesContainer($containerName){
     > .#{$containerName}__container{
         flex-grow:1;
@@ -68,7 +69,7 @@
                         &::before{
                             position:absolute;
                             bottom:-2px;
-                            @include fatCarbProteinUnderLine();
+                            @include threeColorUnderline();
                         }
     
                         &::after{

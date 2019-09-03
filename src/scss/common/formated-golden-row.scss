@@ -1,0 +1,48 @@
+@import '../variables';
+
+//row with golden counter on left
+.formatedRow{
+    background-color:white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height:1.667rem;//30px
+    padding-left: 1.944rem;
+    margin-left:-2px;
+    margin-right:-2px;
+    position:relative;
+    counter-reset: formatedRow;
+    overflow: hidden;
+    @include boxShadow(0, 0, 4px, 0.25);
+    &::before, &::after{
+        position: absolute;
+    }
+
+    &::before{
+        content:'';
+        background-color:$gold;
+        display: block;
+        height: 2.222rem;
+        width: 2.222rem;
+        left: -0.8333rem;
+        top: - 0.2778rem;
+        transform: rotate(45deg);
+        @include boxShadow(0, 0, 2px, 0.25);
+    }
+
+    &::after{
+        counter-increment: formatedRow;
+        content: '40';
+        color:white;
+        top: 0;
+        left: 0;
+        font-size: 0.8889rem;
+        text-align: center;
+        width: 1.389rem;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+}

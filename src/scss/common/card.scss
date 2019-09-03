@@ -1,0 +1,14 @@
+@import '../variables';
+@import './mixins/card-header';
+.card{
+    &:not(.no-header){
+        &::before{
+            @include cardHeader();
+            content:attr(data-title);
+        }
+    }
+   
+    @include boxShadow(0, 0, 4px, 0.4);
+    margin: 0 12px;
+    background-color: rgba(255,255,255,0.55);
+}

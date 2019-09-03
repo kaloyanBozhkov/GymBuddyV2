@@ -1,4 +1,4 @@
-@import 'macros/common/macros-container.scss';
+@import './common/macros-container';
 #caloriesCounter{
     @include macrosContainerStyling("caloriesCounter");
 }

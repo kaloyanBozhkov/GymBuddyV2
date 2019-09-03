@@ -17,31 +17,31 @@ $btnActiveWhite: #fdfdfd;
 
 @font-face {
     font-family: "coolFont";
-    src: url("./fonts/Kanit-ExtraLight.ttf") format('truetype');
+    src: url("./common/fonts/Kanit-ExtraLight.ttf") format('truetype');
     font-weight: 100;
 }
 @font-face {
     font-family: "coolFont";
-    src: url("./fonts/Kanit-Light.ttf") format('truetype');
+    src: url("./common/fonts/Kanit-Light.ttf") format('truetype');
     font-weight: 300;
 }
 
 @font-face {
     font-family: "coolFont";
-    src: url("./fonts/Kanit-Regular.ttf") format('truetype');
+    src: url("./common/fonts/Kanit-Regular.ttf") format('truetype');
     font-weight: bold;
 }
 
 @font-face {
     font-family: "coolFont";
-    src: url("./fonts/Kanit-ExtraLightItalic.ttf") format('truetype');
+    src: url("./common/fonts/Kanit-ExtraLightItalic.ttf") format('truetype');
     font-weight: 100;
     font-style: italic;
 }
 
 @font-face {
     font-family: "coolFont";
-    src: url("./fonts/Kanit-LightItalic.ttf") format('truetype');
+    src: url("./common/fonts/Kanit-LightItalic.ttf") format('truetype');
     font-weight: 300;
     font-style: italic;
 }
@@ -89,53 +89,4 @@ $btnActiveWhite: #fdfdfd;
     }
 }
 
-@mixin fatCarbProteinUnderLine(){//to use on pseudo element 
-    content:'';
-    height:2px;
-    background: linear-gradient(to right, $fats 33%,$carbs 33%,$carbs 66%,$carbs 66%,$proteins 66%);
-    display: block;
-    border-radius: 3px;
-    left:0;
-    right:0;
-}
-@keyframes topIn {
-    from {
-        top: -60px;
-    }
 
-    to {
-        top: 0;
-    }
-}
-
-@keyframes popIn {
-    from {
-        transform: scale(0);
-    }
-
-    to {
-        transform: scale(1);
-    }
-}
-
-@keyframes shake {
-    0% {
-        color: inherit;
-        transform: rotate(0deg);
-    }
-
-    33% {
-        color: $warning;
-        transform: rotate(5deg);
-    }
-
-    66% {
-        color: $warning;
-        transform: rotate(-5deg);
-    }
-
-    100% {
-        color: inherit;
-        transform: rotate(0deg);
-    }
-}

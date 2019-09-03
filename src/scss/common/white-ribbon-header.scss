@@ -1,0 +1,76 @@
+@import '../variables';
+
+.whiteRibbonHeader{
+    z-index: 1;
+    position: relative;
+    margin-bottom: -4px;
+    height:2.556rem;
+    .wrapper{    
+        background-color:white;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        @include boxShadow(0, 0, 4px, 0.4);
+    }
+    .whiteRibbon__background{
+        position: absolute;
+        height:100%;
+        top:0;
+        width:1.111rem;
+        z-index:-2;
+
+        #shadow feDropShadow{
+            flood-color: rgba(52, 49, 50, 0.75);
+        }
+
+        &.whiteRibbon__background--left{
+            right:100%;
+        }
+        &.whiteRibbon__background--right{
+            left:100%;
+            svg{
+                transform: rotate(180deg);
+            }
+        }
+    }
+    
+    &.whiteRibbonHeader--header{
+        margin: 0 -0.2778rem;
+    }
+
+    &.whiteRibbonHeader--centered{
+        margin: 0 auto;
+    }
+
+    &.whiteRibbonHeader--box{
+        margin: 0 1.111rem;//makes sure the whiteribbon is space-aware
+    }
+
+    &.whiteRibbonHeader--withArrowsAndText{
+        width: 11.28rem;
+        height: 1.667rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        p{
+            height: 100%;
+            flex-grow:1;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .menu-left,.menu-right{
+            width:1.222rem;
+            font-size: 0.8889rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+    }
+}
