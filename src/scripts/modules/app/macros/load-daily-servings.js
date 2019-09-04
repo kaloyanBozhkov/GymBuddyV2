@@ -1,8 +1,9 @@
 import global from '../../global-variables';
 import { round, isEmpty } from '../../common/utilities';
 import getTime from '../../common/get-current-time';
-export default (container = ".dailyEntries", singleDayServing = global.singleDayServing, msgDate) => {
-    $(container).empty();
+export default (containerSelector = ".dailyEntries", singleDayServing = global.singleDayServing, msgDate) => {
+    let container = containerSelector.substr(1);
+    $(containerSelector).empty();
     console.log(singleDayServing);
     if (!isEmpty(singleDayServing) && singleDayServing.getServings().length > 0) {
         for (let j = singleDayServing.getServings().length - 1; j >= 0; j--) {
@@ -39,18 +40,18 @@ export default (container = ".dailyEntries", singleDayServing = global.singleDay
                             <div class='saveEntry' data-values='${JSON.stringify(tmpObj)}'>
                                 <i class='fa fa-heart'></i>
                             </div>
-                            ${(container == ".dailyEntries" ? `
-                            <div class='removeEntry' data-item-id='${container == ".dailyEntries" ? j : ""}'>
+                            ${(containerSelector == ".dailyEntries" ? `
+                            <div class='removeEntry' data-item-id='${containerSelector == ".dailyEntries" ? j : ""}'>
                                 <i class="fa fa-trash-alt"></i>
                             </div>` : "")}
                         </div>
                     </div>
                 </div>
             </div>`;
-            $(`${container}__container`).append(singleServingEntryDiv);
+            $(`${containerSelector}__container`).append(singleServingEntryDiv);
         }
     } else {
-        $(`${container}__container`).append(`<p>No servings have been added for ${msgDate ? msgDate : "today yet"}.</p>`);
+        $(`${containerSelector}__container`).append(`<p>No servings have been added for ${msgDate ? msgDate : "today yet"}.</p>`);
     }
     console.log(`Finished ${container} loadDailyServings`);
 }
