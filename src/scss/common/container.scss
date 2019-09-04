@@ -1,4 +1,13 @@
 @import '../variables';
+@keyframes SlideFromBottom{
+    0%{
+        top: 100vh;
+    }
+
+    100%{
+        top: 0;
+    }
+}
 #container {
     min-width: 280px;
     max-width: 100%;
@@ -9,6 +18,18 @@
     &.opened{
         padding-top:81px;//61 header, 10 spacing
     }
+
+    > div{
+        position:relative;
+        top: 100vh;
+        @include animation(SlideFromBottom, 400ms);
+        @for $i from 1 through 10 {
+            &:nth-child(#{$i}) {
+              animation-delay: $i * 100ms;
+            }
+          }
+    }
+
     > div:not(:last-of-type){
         margin-bottom: 18px;
     }

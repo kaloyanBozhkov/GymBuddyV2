@@ -8,6 +8,8 @@ import global from './modules/global-variables';
 $(document).ready(function () {
     global.load.bulkLoader();
     console.log("Finished loading!");
+    //REMOVE WHEN FINISHED. USED TO HIDE CONTENT BEFORE JS IS READY TO TAKE OVER
+    $("body").attr("style", "");
 });
 
 // import './modules/app/common/handlers';

@@ -39,6 +39,7 @@ export default () => {
             global.historyServings[getCurrentTime().keyFromDate] = global.singleDayServing;
             save.historyServings();
             updateBarWidths("#caloriesCounter", global.currentMacros, global.totalMacros);
+            loadDailyServings(".dailyEntries");
             $("#foodName").val("");
             fields.map(field => $(`#${field} input`).val(0));
         } else {

@@ -43,7 +43,7 @@ export default function loader(){
 
 function preloadAlerts() { //pre loads all possible message boxes, so that in real time there is no delay when reading from disk
     for (let j = 0; j < global.alerts.length; j++) {
-        $.get(`../alerts/${global.alerts[j]}.html`, function (data) {
+        $.get(`alerts/${global.alerts[j]}.html`, function (data) {
             global.msgBox[global.alerts[j]] = data;
         });
     }
@@ -51,7 +51,7 @@ function preloadAlerts() { //pre loads all possible message boxes, so that in re
 
 function preloadPages() {
     for (let j = 0; j < global.pageNames.length; j++) 
-        $.get(`../${global.pageNames[j]}.html`, function (data) {
+        $.get(`${global.pageNames[j]}.html`, function (data) {
             global.pages[global.pageNames[j]] = data;
         });
 }
