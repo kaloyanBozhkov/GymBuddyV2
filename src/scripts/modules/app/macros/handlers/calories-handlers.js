@@ -6,42 +6,59 @@ import updateBarWidths from '../update-bar-widths';
 import closeAlert from '../../common/close-alert';
 export default () => {
     //Set New Goal For Calories
-    $(document).on("focusout mouseleave", "#percentProteins, #percentCarbs, #percentFats, #gramsForPercents", function(){
-        let thisId = $(this).attr("id");
-        let totalCalories = thisId == "gramsForPercents" ? $(this).val().trim() : $("#gramsForPercents").val().trim();
-        if(totalCalories > 0){
-            let percent = $(this).val().replace(/\%/g, "");
-            switch(thisId){
-                case "percentProteins":
-                    $(".setPercentagesSection__totalMacros .proteins").html(Macros.returnGrams(percent,totalCalories, 4));
+    $(document).on("focusout", "#percentProteins, #percentCarbs, #percentFats, #totalCaloriesForPercents", function(){
+        (function hideErrorMessageOfAlertOnInputChange(){
+            $("#alertBg .errorMsg.active").removeClass("active");
+        })();
+        (function onSetMacrosPercentagesInputFieldsFocusOutUpdateTotalMacrosWidgetsDisplayValues(self){
+            let thisId = $(self).attr("id");
+            let totalCalories = thisId == "totalCaloriesForPercents" ? $(self).val().trim() : $("#totalCaloriesForPercents").val().trim();
+            if(totalCalories > 0){
+                let percent = $(self).val().replace(/\%/g, "");
+                switch(thisId){
+                    case "percentProteins":
+                        (function setTotalMacrosWidgetsDisplayValueForProteinsOnUpdateOfProteinsPercentagesInputForSetMacrosPercentages(){
+                            $(".setPercentagesSection__totalMacros .proteins").html(Macros.returnGrams(percent,totalCalories, 4));
+                        })();
+                        break;
+                    case "percentCarbs":
+                        (function setTotalMacrosWidgetsDisplayValueForCarbsOnUpdateOfCarbsPercentagesInputForSetMacrosPercentages(){
+                            $(".setPercentagesSection__totalMacros .carbs").html(Macros.returnGrams(percent,totalCalories, 4));
+                        })();
                     break;
-                case "percentCarbs":
-                    $(".setPercentagesSection__totalMacros .carbs").html(Macros.returnGrams(percent,totalCalories, 4));
-                break;
-                case "percentFats":
-                    $(".setPercentagesSection__totalMacros .fats").html(Macros.returnGrams(percent,totalCalories, 9));
-                break;
-                case "gramsForPercents":
-                    let pProt = $("#percentProteins").val().trim().replace(/\%/g, "");
-                    let pCarbs = $("#percentCarbs").val().trim().replace(/\%/g, "");
-                    let pFats = $("#percentFats").val().trim().replace(/\%/g, "");
-                    $(".setPercentagesSection__totalMacros .proteins").html(Macros.returnGrams(pProt,totalCalories, 4));
-                    $(".setPercentagesSection__totalMacros .carbs").html(Macros.returnGrams(pCarbs,totalCalories, 4));
-                    $(".setPercentagesSection__totalMacros .fats").html(Macros.returnGrams(pFats,totalCalories, 9));
-                break;
+                    case "percentFats":
+                        (function setTotalMacrosWidgetsDisplayValueForFatsOnUpdateOfCarbsFatsInputForSetMacrosPercentages(){
+                            $(".setPercentagesSection__totalMacros .fats").html(Macros.returnGrams(percent,totalCalories, 9));
+                        })();
+                    break;
+                    case "totalCaloriesForPercents":
+                       (function setTotalMacrosWidgetsDisplayValuesWhenTotalCaloriesIsUpdatedForSetMacrosPercentages(){
+                            let pProt = $("#percentProteins").val().trim().replace(/\%/g, "");
+                            let pCarbs = $("#percentCarbs").val().trim().replace(/\%/g, "");
+                            let pFats = $("#percentFats").val().trim().replace(/\%/g, "");
+                            $(".setPercentagesSection__totalMacros .proteins").html(Macros.returnGrams(pProt,totalCalories, 4));
+                            $(".setPercentagesSection__totalMacros .carbs").html(Macros.returnGrams(pCarbs,totalCalories, 4));
+                            $(".setPercentagesSection__totalMacros .fats").html(Macros.returnGrams(pFats,totalCalories, 9));
+                       })();
+                    break;
+                }
+            }else{
+                (function setTotalMacrosWidgetToDisplayZeroWhenTotalCaloriesIsZeroForSetMacrosPercentages(){
+                    $(".setPercentagesSection__totalMacros .proteins").html(0);
+                    $(".setPercentagesSection__totalMacros .carbs").html(0);
+                    $(".setPercentagesSection__totalMacros .fats").html(0);
+                })();
             }
-        }else{
-            $(".setPercentagesSection__totalMacros .proteins").html(0);
-            $(".setPercentagesSection__totalMacros .carbs").html(0);
-            $(".setPercentagesSection__totalMacros .fats").html(0);
-        }
+        })(this);
     });
 
     $(document).on("focusout mouseleave", "#gramsFats, #gramsCarbs, #gramsProtein", function(){
-        let fats = $("#gramsFats").val() || 0;
-        let carbs = $("#gramsCarbs").val() || 0;
-        let proteins = $("#gramsProtein").val() || 0;
-        $(".setMacrosContent__totalCalories").html(Macros.returnTotalCalories(fats, carbs, proteins));
+        (function setTotalMacrosWidgetValuesBasedOnCurrentInputFieldsValuesOnSetCaloriesGrams(){
+            let fats = $("#gramsFats").val() || 0;
+            let carbs = $("#gramsCarbs").val() || 0;
+            let proteins = $("#gramsProtein").val() || 0;
+            $(".setMacrosContent__totalCalories").html(Macros.returnTotalCalories(fats, carbs, proteins));
+        })();
     });
 
     $(document).on("click", "#setGoals", function () {
@@ -50,66 +67,79 @@ export default () => {
 
     $(document).on("click", "#setGrams, #setPercentages", function () {
         if(!$(this).hasClass("active")){
-            resetFieldValuesOnSwapTab();
-            $(this).siblings(".active").removeClass("active");
-            $(this).addClass("active");
-            $(`#setMacrosContent > div.active`).toggleClass("active");
-            $(`#setMacrosContent #${$(this).attr("id")}Section`).toggleClass("active");
+            (function resetFieldValuesOnSwapTab(){
+                $("#displayMessage input:not(.validateNumeric--percentages)").val(0);
+                $("#percentFats, #percentProtein").val("25%");
+                $("#percentCarbs").val("50%");
+                $(".errorMsg.active").removeClass("active");
+                $(".setPercentagesSection__totalMacros .fats, .setPercentagesSection__totalMacros .carbs, .setPercentagesSection__totalMacros .proteins").html(0);
+                $(".setMacrosContent__totalCalories").html(0);
+            })();
+            (function toggleActiveTab(self){
+                $(self).siblings(".active").removeClass("active");
+                $(self).addClass("active");
+                $(`#setMacrosContent > div.active`).toggleClass("active");
+                $(`#setMacrosContent #${$(self).attr("id")}Section`).toggleClass("active");
+            })(this);
         }
     });
 
     $(document).on("click", "#setMacros", function () {
-        $(".errorMsg.active").removeClass("active");
+        (function hideErrorMessageOfAlertOnClick(){
+            $("#alertBg .errorMsg.active").removeClass("active");
+        })();
         let set = false;
-
         if($("#setGrams").hasClass("active")){
-            //set calories with grams
-            let fats = $("#gramsFats").val().trim();
-            let carbs =  $("#gramsCarbs").val().trim();
-            let protein = $("#gramsProtein").val().trim();
-            if (fats > 0 && carbs > 0 && protein > 0) {
-                global.totalMacros = new Macros(fats, carbs, protein);
-                set = true;
-            } else {
-                $(".errorMsg__grams").addClass("active");
-            }
+            (function setMacrosWithGramsGiven(){
+                let fats,carbs,protein;
+                (function setFatsCarbsProteinFromFieldsOnSetMacrosGramsAlert(){
+                    fats = $("#gramsFats").val().trim();
+                    carbs =  $("#gramsCarbs").val().trim();
+                    protein = $("#gramsProtein").val().trim();
+                })();
+                if (fats > 0 && carbs > 0 && protein > 0) {
+                    global.totalMacros = new Macros(fats, carbs, protein);
+                    set = true;
+                } else {
+                    (function showErrorMessageOfAlertForOneOfTheMacroFieldsBeingUnset(){
+                        $(".errorMsg__grams").addClass("active");
+                    })();
+                }
+            })();
         }else{
-            debugger;
-            //set calories with percentages
-            let fats = parseFloat($("#percentFats").val().replace("%",""));
-            let carbs = parseFloat($("#percentCarbs").val().replace("%",""));
-            let protein = parseFloat($("#percentProteins").val().replace("%",""));
-            let calories = parseFloat($("#gramsForPercents").val());
-            if (fats > 0 && carbs > 0 && protein > 0 && fats+carbs+protein == 100) {
-                //set new goals
-                if(calories > 0){
+            (function setMacrosWithPercentagesGiven(){
+                let fats,carbs,protein,calories;
+                (function formatAndSetVarsFatsCarbsProteinCaloriesFromFieldsOnSetMacrosPercentagesAlert(){
+                    fats = parseFloat($("#percentFats").val().replace("%",""));
+                    carbs = parseFloat($("#percentCarbs").val().replace("%",""));
+                    protein = parseFloat($("#percentProteins").val().replace("%",""));
+                    calories = parseFloat($("#totalCaloriesForPercents").val());
+                })();
+                if (fats > 0 && carbs > 0 && protein > 0 && fats+carbs+protein == 100 && calories > 0) {
                     let carbsGrams = Macros.returnGrams(carbs, calories, 4);
                     let fatsGrams = Macros.returnGrams(fats, calories, 9);
                     let proteinGrams =  Macros.returnGrams(protein, calories, 4);
                     global.totalMacros = new Macros(fatsGrams, carbsGrams, proteinGrams);
                     set = true;
+                } else if(calories <= 0){
+                   (function showErrorMessageOfAlertForTotalCaloriesBeingZero(){
+                        $(".errorMsg__grams").addClass("active");
+                   })();
                 }else{
-                    $(".errorMsg__grams").addClass("active");
+                    (function showErrorMessageOfAlertForFatsCarbsProteinsPercentagesNotAddingToHundred(){
+                        $(".errorMsg__percentages").addClass("active");
+                    })();
                 }
-            } else {
-                $(".errorMsg__percentages").addClass("active");
+            })();
+        }
+        (function saveTotalMacrosAndTotalHistoryMacrosAfterUpdateOfCaloriesMacrosThenUpdateCaloriesBarsToMatchNewTotalMacrosThenCloseAlert(){
+            if(set){
+                save.totalMacros();
+                save.historyTotalMacros();
+                updateBarWidths("#caloriesCounter", global.currentMacros, global.totalMacros);
+                closeAlert();
             }
-        }
-
-        if(set){
-            save.totalMacros();
-            save.historyTotalMacros();
-            updateBarWidths("#caloriesCounter", global.currentMacros, global.totalMacros);
-            closeAlert();
-        }
+        })();
     });
 }
 
-function resetFieldValuesOnSwapTab(){
-    $("#displayMessage input:not(.validateNumeric--percentages)").val(0);
-    $("#percentFats, #percentProtein").val("25%");
-    $("#percentCarbs").val("50%");
-    $(".errorMsg.active").removeClass("active");
-    $(".setPercentagesSection__totalMacros .fats, .setPercentagesSection__totalMacros .carbs, .setPercentagesSection__totalMacros .proteins").html(0);
-    $(".setMacrosContent__totalCalories").html(0);
-}

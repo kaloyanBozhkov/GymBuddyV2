@@ -24,26 +24,48 @@ export default () => {
         $(this).attr("placeholder", "Type Food Name Here");
     });
 
+    $(document).on("click input focusin focusout", "#singleFoodQuantity input", ()=>{
+        (function hideErrorFieldForAddServing(){
+            $("#foodTracker .errorMsg.active").removeClass("active");
+        })();
+    });
+
     $(document).on("click", "#addServing", function () {
-        let fields = ["singleFoodFats", "singleFoodCarbs", "singleFoodProteins", "singleFoodServingSize", "singleFoodQuantity"];
-        let [fats, carbs, proteins, servingSize, quantity] = fields.reduce((acc, field) => [...acc, $(`#${field} input`).val().trim()],[]);
-        let name = $("#foodName").val().trim();
-        name = name.length > 0 ? name : "Unnamed Entry";
+        (function hideErrorFieldForAddServing(){
+            $("#foodTracker .errorMsg.active").removeClass("active");
+        })();
+        let fats, carbs, proteins, servingSize, quantity, name;
+        (function getAllInputFieldsValuesForAddServing(){
+            let fields = ["singleFoodFats", "singleFoodCarbs", "singleFoodProteins", "singleFoodServingSize", "singleFoodQuantity"];
+            [fats, carbs, proteins, servingSize, quantity] = fields.reduce((acc, field) => [...acc, $(`#${field} input`).val().trim()],[]);
+            name = $("#foodName").val().trim();
+            name = name.length > 0 ? name : "Unnamed Entry";
+        })();
         if (quantity > 0) {
-            global.currentMacros.fats += round(parseFloat(fats) * quantity);
-            global.currentMacros.carbs += round(parseFloat(carbs) * quantity);
-            global.currentMacros.proteins += round(parseFloat(proteins) * quantity);
-            save.currentMacros();
-            global.singleDayServing.addServing(new SingleServing(fats, carbs, proteins, null, name, servingSize, quantity));
-            save.singleDayServing();
-            global.historyServings[getCurrentTime().keyFromDate] = global.singleDayServing;
-            save.historyServings();
-            updateBarWidths("#caloriesCounter", global.currentMacros, global.totalMacros);
-            loadDailyServings(".dailyEntries");
-            $("#foodName").val("");
-            fields.map(field => $(`#${field} input`).val(0));
+            (function addCaloriesToCurrentMacros(){
+                    global.currentMacros.fats += round(parseFloat(fats) * quantity);
+                    global.currentMacros.carbs += round(parseFloat(carbs) * quantity);
+                    global.currentMacros.proteins += round(parseFloat(proteins) * quantity);
+                    save.currentMacros();
+            })();
+            (function createSingleDayServingFromNewlyAddedServingAndSaveItAlsoAddItToHistoryServingsAndSave(){
+                    global.singleDayServing.addServing(new SingleServing(fats, carbs, proteins, null, name, servingSize, quantity));
+                    save.singleDayServing();
+                    global.historyServings[getCurrentTime().keyFromDate] = global.singleDayServing;
+                    save.historyServings();
+            })();
+            (function updateTodaysCaloriesBarsAndTodaysEntriesItems(){
+                    updateBarWidths("#caloriesCounter", global.currentMacros, global.totalMacros);
+                    loadDailyServings(".dailyEntries");
+            })();
+            (function resetAddServingInputFieldsAfterUse(){
+                $("#foodName").val("");
+                fields.map(field => $(`#${field} input`).val(0));
+            })();
         } else {
-            $("#foodTracker__container .errorMsg").addClass("active");
+            (function showErrorFieldForAddServing(){
+                $("#foodTracker .errorMsg").addClass("active");
+            })();
         }
     });
 
