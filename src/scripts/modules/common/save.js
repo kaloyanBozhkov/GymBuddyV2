@@ -40,9 +40,9 @@ export default {
         if(global.currentMacros)
         localStorage.setItem("currentMacros", JSON.stringify(global.currentMacros));
     },
-    favoriteItems(){
-        if(global.favoriteItems)
-        localStorage.setItem("favoriteItems", JSON.stringify(global.favoriteItems));
+    favoriteServings(){
+        if(global.favoriteServings)
+        localStorage.setItem("favoriteServings", JSON.stringify(global.favoriteServings));
     }
 };
 

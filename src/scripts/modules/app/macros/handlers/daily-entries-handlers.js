@@ -19,8 +19,8 @@ export default () => {
     $(document).on("click", "#saveItemToFavorites", function () {
         $(".errorMsg").slideUp();
         if ($("#fatsCount").val().trim().length > 0 && $("#carbsCount").val().trim().length > 0 && $("#proteinsCount").val().trim().length > 0 && $("#gramsCount").val().trim().length > 0 && $("#itemName").val().trim().length > 0) {
-            global.favoriteItems.push(new FavoriteItem($("#fatsCount").val().trim(), $("#carbsCount").val().trim(), $("#proteinsCount").val().trim(), $("#itemName").val().trim(), $("#gramsCount").val().trim()));
-            save.favoriteItems();
+            global.favoriteServings.push(new FavoriteItem($("#fatsCount").val().trim(), $("#carbsCount").val().trim(), $("#proteinsCount").val().trim(), $("#itemName").val().trim(), $("#gramsCount").val().trim()));
+            save.favoriteServings();
             closeAlert();
         } else {
             $(".errorMsg").slideDown(300);

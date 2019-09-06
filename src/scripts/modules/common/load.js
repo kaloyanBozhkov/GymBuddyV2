@@ -18,7 +18,7 @@ export default function loader(){
         historyTotalMacros: loadHistoryTotalMacros,
         historyServings: loadHistoryServings,
         singleDayServing: loadSingleDayServing,
-        favoriteItems: loadFavoriteItems,
+        favoriteServings: loadfavoriteServings,
         historyWorkouts: loadHistoryWorkouts,
         exercises: loadExercises,
         exerciseCategories: loadExerciseCategories,
@@ -89,12 +89,12 @@ function loadLastSectionOpened(){
         }, 500)
 }
 
-function loadFavoriteItems(){
-    if(doesNotExist(localStorage.getItem("favoriteItems"))){
+function loadfavoriteServings(){
+    if(doesNotExist(localStorage.getItem("favoriteServings"))){
         console.log("No Favorites");
-        global.favoriteItems = [];
+        global.favoriteServings = [];
     }else{
-        global.favoriteItems = JSON.parse(localStorage.getItem("favoriteItems"));
+        global.favoriteServings = JSON.parse(localStorage.getItem("favoriteServings"));
     }
 }
 

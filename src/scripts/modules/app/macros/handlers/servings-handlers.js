@@ -8,12 +8,14 @@ import searchThroughList from '../../common/search-through-list';
 import closeAlert from '../../common/close-alert';
 import holdToEdit from '../../common/hold-to-edit';
 import { round } from '../../../common/utilities';
-import loadServing from '../load-serving';
+import loadFavoriteServing from '../load-favorite-serving';
 import getCurrentTime from '../../../common/get-current-time';
 
 const previousAlertToShow = {
-    deleteFavorite: loadServing
+    deleteFavorite: loadFavoriteServing
 }
+
+const fields = ["singleFoodFats", "singleFoodCarbs", "singleFoodProteins", "singleFoodQuantity", "singleFoodServingSize"];
 
 export default () => {
     $(document).on("focusin", "#foodName", function () {
@@ -30,14 +32,24 @@ export default () => {
         })();
     });
 
+    $(document).on("input focusout", fields.reduce((selectorsArr, el) => [...selectorsArr, `#${el} input`], []).join(), function(){
+        (function updateTotalMacrosWidgetWhenInputsChanged(){
+            let [fats, carbs, proteins, quantity] = fields.reduce((acc, field) => [...acc, $(`#${field} input`).val()],[]);
+           
+            $(".foodTracker__totalMacros .fats span").html(round(parseFloat(fats) * quantity) || 0);
+            $(".foodTracker__totalMacros .carbs span").html(round(parseFloat(carbs) * quantity) || 0);
+            $(".foodTracker__totalMacros .proteins span").html(round(parseFloat(proteins) * quantity) || 0);
+
+        })();
+    });
+
     $(document).on("click", "#addServing", function () {
         (function hideErrorFieldForAddServing(){
             $("#foodTracker .errorMsg.active").removeClass("active");
         })();
-        let fats, carbs, proteins, servingSize, quantity, name;
+        let fats, carbs, proteins, quantity, servingSize, name;
         (function getAllInputFieldsValuesForAddServing(){
-            let fields = ["singleFoodFats", "singleFoodCarbs", "singleFoodProteins", "singleFoodServingSize", "singleFoodQuantity"];
-            [fats, carbs, proteins, servingSize, quantity] = fields.reduce((acc, field) => [...acc, $(`#${field} input`).val().trim()],[]);
+            [fats, carbs, proteins, quantity, servingSize] = fields.reduce((acc, field) => [...acc, $(`#${field} input`).val()],[]);
             name = $("#foodName").val().trim();
             name = name.length > 0 ? name : "Unnamed Entry";
         })();
@@ -81,8 +93,8 @@ export default () => {
         var carbs = $("#carbsCount").val().trim();
         var favoriteFoodObj = $("#alertBg").data("favoriteFoodObj");
         if (title.length > 0 && grams.length > 0 && fats.length > 0 && proteins.length > 0 && carbs.length > 0) {
-            global.favoriteItems[favoriteFoodObj.key] = new FavoriteItem(fats, carbs, proteins, title, grams);
-            save.favoriteItems();
+            global.favoriteServings[favoriteFoodObj.key] = new FavoriteItem(fats, carbs, proteins, title, grams);
+            save.favoriteServings();
             previousAlertToShow.deleteFavorite();
         } else {
             errorMsg("You must fill in all the fields before proceeding.");
@@ -95,7 +107,7 @@ export default () => {
     
     $(document).on("click", ".deleteFavorite", function () {
         var indexToRemove = $(this).data("index");
-        alertMsg("miniAlert", true, ["TOPIDHERE", "MESSAGEID", "MSG", "IDOFYESBTN", "IDOFNOBTN", "YESMESG", "NOMESG"], ["deleteFromWorkoutsConfirm", "titleForDelete", "Delete <span>" + global.favoriteItems[indexToRemove].title + "</span> from favorites?", "removeFromFavorites", "cancelRemoveFromFavorites", "Delete", "Cancel"], [{ attrName: "index", attrValue: indexToRemove }]);
+        alertMsg("miniAlert", true, ["TOPIDHERE", "MESSAGEID", "MSG", "IDOFYESBTN", "IDOFNOBTN", "YESMESG", "NOMESG"], ["deleteFromWorkoutsConfirm", "titleForDelete", "Delete <span>" + global.favoriteServings[indexToRemove].title + "</span> from favorites?", "removeFromFavorites", "cancelRemoveFromFavorites", "Delete", "Cancel"], [{ attrName: "index", attrValue: indexToRemove }]);
     });
     
     $(document).on("click", "#cancelRemoveFromFavorites", function () {
@@ -104,8 +116,8 @@ export default () => {
     
     $(document).on("click", "#removeFromFavorites", function () {
         var indexToRemove = $("#alertBg").data("index");
-        global.favoriteItems.splice(indexToRemove, 1);
-        save.favoriteItems();
+        global.favoriteServings.splice(indexToRemove, 1);
+        save.favoriteServings();
         previousAlertToShow.deleteFavorite();
     });
     
@@ -120,7 +132,7 @@ export default () => {
     });
     
     $(document).on("click", "#loadServing", function () {
-        loadServing();
+        loadFavoriteServing();
     });
     
     $(document).on("input", "#favoriteName", function () {

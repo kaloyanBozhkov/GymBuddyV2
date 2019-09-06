@@ -10,14 +10,14 @@ export default global = {
     historyServings: {}, 
     singleDayServing: undefined, 
     historyTotalMacros: {}, 
-    favoriteItems: undefined,
+    favoriteServings: undefined,
     historyWorkouts: {}, 
     exercises: undefined, 
     dailyExercises: undefined, 
     exerciseCategories: undefined,
     alerts: [
         "addFavorites", 
-        "importFromFavorites", 
+        "importFavoriteServing", 
         "setGoals"
     ],
     msgBox: {},

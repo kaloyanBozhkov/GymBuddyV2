@@ -10,10 +10,11 @@
 @import './common/error-msg';
 @import './common/display-text';
 @import './common/card';
-@import './common/alerts/setGoals';
 @import './common/alerts/alert';
 @import './macros/caloricDistribution';
 @import './macros/calories';
 @import './macros/dailyEntries';
 @import './macros/foodTracker';
 @import './macros/pastEntries';
+@import './macros/alerts/set-goals';
+@import './macros/alerts/import-favorite-serving';

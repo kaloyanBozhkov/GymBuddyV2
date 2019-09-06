@@ -1,5 +1,5 @@
 @import '../../variables';
-@import '../../macros/common/total-macros-display';
+@import '../common/total-macros-display';
 @mixin stepTitle(){
     &::before{
         content: attr(data-title);

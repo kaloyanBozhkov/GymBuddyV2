@@ -1,7 +1,7 @@
 @import '../variables';
 @import './mixins/card-header';
 .card{
-    &:not(.no-header){
+    &:not(.card--noHeader){
         &::before{
             @include cardHeader();
             content:attr(data-title);
