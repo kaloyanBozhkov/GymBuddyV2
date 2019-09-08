@@ -1,0 +1,9 @@
+@import '../../variables';
+@import '../common/total-macros-display';
+#favoriteSelect{
+    display: flex;
+    min-height: 80px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

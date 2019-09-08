@@ -5,14 +5,6 @@ export default () => {
         $(this).val(camelCaseInput($(this).val()));
     });
 
-    $(document).on("mouseenter touchstart", ".menu-left, .menu-right", function () {
-        $(this).addClass("btnHover");
-    });
-    
-    $(document).on("mouseleave touchend", ".menu-left, .menu-right", function () {
-        $(this).removeClass("btnHover");
-    });
-
     $(document).on("input", ".validateNumeric", function () {
         $(this).val($(this).val().replace(",", ".").trim().match(/^\d*\.?\d*$/));
         let isGramsField = $(this).hasClass("validateNumeric--grams");

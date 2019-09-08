@@ -13,6 +13,23 @@
 .hangingSign{
     height:2.778rem;
     overflow:hidden;
+
+    &.hangingSign--withSubtitle{
+        p{
+            padding: 2px 0;
+            font-size: 0.6667rem;
+            line-height: 0.7778rem;
+            &::before{
+                content: attr(data-title);
+                display: block;
+                color: $gold;
+                font-weight: 900;
+                font-size: 0.5rem;
+                line-height: 0.5556rem;
+            }
+        }
+    }
+
     > .wrapper{
         position: relative;
         width:8.889rem;

@@ -1,38 +1,35 @@
 //handlers common for macors/calories sections, not for general use those are in general-handlers
-import loadContent from '.././load-content';
 import global from '../../../global-variables';
 import save from '../../../common/save';
+import load from '../../../common/load';
 //To fix stickyhover on mobile devices
 export default () => {
-    $("#btnMacros, #btnWorkouts").on('mouseenter touchstart', function () {
-        $(this).addClass("btnHovered");
+    $(document).on('mouseenter touchstart', "#btnMacros, #btnWorkouts, .menu-left, .menu-right", function () {
+        $(this).addClass("active");
     });
     
-    $("#btnMacros, #btnWorkouts").on('mouseleave touchend', function () {
-        $(this).removeClass("btnHovered");
+    $(document).on('mouseleave touchend', "#btnMacros, #btnWorkouts, .menu-left, .menu-right", function () {
+        $(this).removeClass("active");
     });
     
     $("#btnMacros, #btnWorkouts").on("click", function () {
-        var width1 = "";
-        var width2 = "";
-        if (global.selected == "none") {
-            width1 = "110%";
-            width2 = "0%";
-            global.selected = $(this).attr("id").replace("btn", "").toLowerCase();
-            $(this).addClass("btnActive");
-            $("#header > div:first-of-type, #body").addClass("opened");
-            save.lastSectionOpened(global.selected);
-        } else {
-            width1 = width2 = "55%";
-            global.selected = "none";
-            $(".btnActive").trigger("mouseleave"); //To fix stickyhover on mobile devices
-            $(".btnActive").removeClass("btnActive");
-            $("#header > div:first-of-type, #body").removeClass("opened");
-        }
-        $(this).width(width1);
-        $(this).siblings().width(width2);
-    
-        loadContent(global.selected);
+        $(".btnActive").mouseleave(); //To fix stickyhover on mobile devices
+        (function toggleCaloriesOrMacrosHeaderButtonOnClick(self){
+            global.lastPageOpened = global.lastPageOpened == "landingPage" ?  $(self).attr("id").replace("btn", "").toLowerCase() : "landingPage";
+            save.lastPageOpened();
+            load.loadLastPageOpened(true);
+        })(this);
     });
+
+    $(document).on("click touchstart touchend", "body.errorMsgShowing", ()=>{
+        $("body.errorMsgShowing").removeClass("errorMsgShowing");
+        $("#errorMsg").addClass("closing").animate({
+            opacity: 0
+        }, 400, function(){
+           setTimeout(()=>{
+            $(this).remove();
+           }, 400);
+        });
+    })
 }
 

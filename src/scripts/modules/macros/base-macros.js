@@ -5,7 +5,29 @@ export default class BaseMacros{
         this.carbs = round(carbs);
         this.proteins = round(proteins);
     }
-    calculateCalories(){//calories should always be full
-        return Math.round((parseFloat(this.fats) * 9) + (parseFloat(this.carbs) + parseFloat(this.proteins)) * 4);
+
+    static returnGrams(percentage, total, caloriePerGram){
+        return (round((total * percentage / 100 / caloriePerGram) * 100) / 100);
+    }
+
+    static returnMacrosParsedAndRounded(...fcp){//returns fats, carbs proteins 
+        return fcp.reduce((acc, i) => [...acc, round(parseFloat(i || 0))],[]);
+    }
+
+    static returnCaloriesForMacros(fats,carbs,proteins){
+        return [fats * 9, carbs * 4, proteins * 4];
+    }
+
+    static returnTotalCalories(fats, carbs, proteins){
+        return this.returnCaloriesForMacros(fats,carbs,proteins).reduce((totalCalories, macroCalories)=> (totalCalories + macroCalories), 0);
+    }
+
+    static returnTotalMacros(fats, carbs, proteins, quantity){
+        return this.returnMacrosParsedAndRounded(fats,carbs,proteins).reduce((acc, m) => [...acc, m * quantity], []);
+    }
+
+    static returnCaloricStats(fats, carbs, proteins, quantity, skipTotalCalories = false){//returns macros and calories as [totalFats, totalCarbs, totalProteins, totalCalories]
+        let fcp = this.returnMacrosParsedAndRounded(fats,carbs,proteins).reduce((totMacros, m) => [...totMacros, m * quantity], []);
+        return (skipTotalCalories ? fcp : [...fcp, this.returnTotalCalories(...fcp)]);
     }
 }

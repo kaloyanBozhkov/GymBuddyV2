@@ -32,6 +32,9 @@
         .displayMessage__header{
             height: 1.778rem;
             justify-content: space-evenly;
+            &.displayMessage__header--noHeader{
+                height: 2.556rem;//same as ribbon that will replace normal golden header
+            }
             &:not(.displayMessage__header--noHeader){
                 @include cardHeader();
                 > div {

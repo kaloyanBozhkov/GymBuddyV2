@@ -70,7 +70,7 @@ export function replaceArrays(string, arrayOne, arrayTwo) {
 }
 
 export function calculatePercentage(current, total) {
-    return (100 * current / total);
+    return round(current == 0 || total == 0 ? 0 : 100 * current / total);
 }
 
 export function camelCaseInput(string) {

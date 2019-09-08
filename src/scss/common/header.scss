@@ -20,6 +20,19 @@
     top: -60px;
     @include animation(topIn, 500ms);
     text-align:center;
+
+    &.opened{
+        > div:first-of-type{
+            margin-top:-61px;
+        }
+        #btnHolder > .btnActive{
+            width:110%;
+        }
+        #btnHolder > div:not(.btnActive){
+            width:0;
+        }
+    }
+
     > div:first-of-type{
         display:flex;
         flex-direction:column;
@@ -29,9 +42,6 @@
         transition: all 500ms;
         height:100%;
         @include boxShadow(0, 0, 2px, 0.45, false);
-        &.opened{
-            margin-top:-61px;
-        }
         > h1{
             color:$jet;
             margin:0;
@@ -64,10 +74,10 @@
                 transform: skew(-30deg);
             }
 
-            &:not(.btnActive):not(.btnHovered){
+            &:not(.btnActive):not(.active){
                 background-color:$silver;
             }
-            &.btnActive, &.btnHovered {
+            &.btnActive, &.active {
                 background-color: $btnActiveWhite;
             }
         }

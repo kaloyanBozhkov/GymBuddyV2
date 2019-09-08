@@ -1,0 +1,59 @@
+@import '../../variables.scss';
+@keyframes enterIn{
+    0%{
+        top: -100%;
+        opacity:0;
+    }
+
+    100%{
+        opacity:1;
+        top: 80px;
+    }
+}
+#errorMsg{
+    position: fixed;
+    z-index: 20;
+    width: 275px;
+    top:0;
+    left:0;
+    right:0; 
+    margin: 0 auto;
+    transition: all 400ms;    
+    background: white;
+    border-radius:3px;   
+    &.closing{
+        opacity:1;
+        top: 80px;
+    }
+    &:not(.closing){
+        @include animation(enterIn, 400ms);
+    }
+    @include boxShadow(0, 0, 4px, 0.4);
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: stretch;
+    > div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding:0 5px;
+    }
+    > div:first-of-type{
+        width: 3.056rem;
+        height: 3.056rem;
+        align-items: center;
+        svg {
+            font-size: 2rem;
+            color: $warning
+        }
+    }
+    > div:last-of-type{
+        flex-grow:1;
+        align-items: flex-start;
+        p{
+            font-size: 0.7778rem;
+            line-height:0.8333rem;
+        }
+    }
+}

@@ -11,7 +11,7 @@
         <div class="caloriesCounter__mainContainer">
             <div>
                 <div class="progressBar" data-title="FATS">
-                    <div id="barFats" data-progress="0"><div></div></div>
+                    <div id="barFats"><div></div></div>
                     <i id="warningFats" class="fas fa-exclamation-triangle hidden"></i>
                 </div>
                 <div class="displayText" data-title="GRAMS">
@@ -20,7 +20,7 @@
             </div>
             <div>
                 <div class="progressBar" data-title="CARBS">
-                    <div id="barCarbs" data-progress="0"><div></div></div>
+                    <div id="barCarbs"><div></div></div>
                     <i id="warningCarbs" class="fas fa-exclamation-triangle hidden"></i>
                 </div>
                 <div class="displayText" data-title="GRAMS">
@@ -29,7 +29,7 @@
             </div>
             <div>
                 <div class="progressBar" data-title="PROTEINS">
-                    <div id="barProteins" data-progress="0"><div></div></div>
+                    <div id="barProteins"><div></div></div>
                     <i id="warningProteins" class="fas fa-exclamation-triangle hidden"></i>
                 </div>
                 <div class="displayText" data-title="GRAMS">
@@ -84,9 +84,9 @@
         </div>
         <!-- END WHITE RIBBON -->
         <!-- HANGING SIGN -->
-        <div class="hangingSign">
+        <div class="hangingSign hangingSign--withSubtitle">
             <div class="wrapper">
-                 <p><span id="servingCalories">0</span></p>
+                 <p id="servingCalories" data-title="TOTAL CALORIES">0</p>
             </div>
          </div>
          <!-- END HANGING SIGN -->
@@ -121,13 +121,8 @@
            </div>
         </div>
         <!-- END TOTAL MACROS DISPLAY -->
-        <!-- ERROR MSG -->
-        <div class="errorMsg">
-            <p>You must specify the serving quantity in order to add a serving.</p>
-        </div>
-        <!-- END ERROR MSG -->
         <!-- BUTTON -->
-        <div id="addServing" class="hoverableGoldButton noselect" data-text="Add Servings">
+        <div id="addServing" class="hoverableGoldButton noselect" data-text="Add Servings" data-error-msg="You must specify the serving quantity in order to add a serving.">
             <div></div>
             <div></div>
         </div>
@@ -189,7 +184,7 @@
         <div class="pastEntries__mainContainer">
             <div>
                 <div class="progressBar" data-title="FATS">
-                    <div id="barFats" data-progress="0"><div></div></div>
+                    <div id="barFats"><div></div></div>
                     <i id="warningFats" class="fas fa-exclamation-triangle hidden"></i>
                 </div>
                 <div class="displayText" data-title="GRAMS">
@@ -198,7 +193,7 @@
             </div>
             <div>
                 <div class="progressBar" data-title="CARBS">
-                    <div id="barCarbs" data-progress="0"><div></div></div>
+                    <div id="barCarbs"><div></div></div>
                     <i id="warningCarbs" class="fas fa-exclamation-triangle hidden"></i>
                 </div>
                 <div class="displayText" data-title="GRAMS">
@@ -207,7 +202,7 @@
             </div>
             <div>
                 <div class="progressBar" data-title="PROTEINS">
-                    <div id="barProteins" data-progress="0"><div></div></div>
+                    <div id="barProteins"><div></div></div>
                     <i id="warningProteins" class="fas fa-exclamation-triangle hidden"></i>
                 </div>
                 <div class="displayText" data-title="GRAMS">
@@ -269,7 +264,7 @@
             </div>
             <!-- END WHITE RIBBON -->
             <!-- HANGING SIGN -->
-            <div class="hangingSign">
+            <div class="hangingSign hangingSign--withSubtitle">
                 <div class="wrapper">
                     <p data-title="WEEKLY TOTAL">0</p>
                 </div>
@@ -403,7 +398,7 @@
         <div class="caloricDistribution__detailsContainer__mainContainer">
             <div>
                 <div class="progressBar" data-title="FATS">
-                    <div id="barFats" data-progress="0"><div></div></div>
+                    <div id="barFats"><div></div></div>
                     <i id="warningFats" class="fas fa-exclamation-triangle hidden"></i>
                 </div>
                 <div class="displayText" data-title="GRAMS">
@@ -412,7 +407,7 @@
             </div>
             <div>
                 <div class="progressBar" data-title="CARBS">
-                    <div id="barCarbs" data-progress="0"><div></div></div>
+                    <div id="barCarbs"><div></div></div>
                     <i id="warningCarbs" class="fas fa-exclamation-triangle hidden"></i>
                 </div>
                 <div class="displayText" data-title="GRAMS">
@@ -421,7 +416,7 @@
             </div>
             <div>
                 <div class="progressBar" data-title="PROTEINS">
-                    <div id="barProteins" data-progress="0"><div></div></div>
+                    <div id="barProteins"><div></div></div>
                     <i id="warningProteins" class="fas fa-exclamation-triangle hidden"></i>
                 </div>
                 <div class="displayText" data-title="GRAMS">

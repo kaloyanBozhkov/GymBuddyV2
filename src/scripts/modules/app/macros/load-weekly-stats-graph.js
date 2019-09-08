@@ -3,44 +3,44 @@ import getTime from '../../common/get-current-time';
 import {round} from '../../common/utilities';
 
 export default function(){
-    console.log("Starting macros graph load..");
-    var highestCalorieCountOfLast7Days = getHighestTotalMacrosFromLast7Days();
-    var singleIncrementUnit = Math.round(highestCalorieCountOfLast7Days) / 4;
-    highestCalorieCountOfLast7Days += singleIncrementUnit;
-    var graphMaxHeight = $("#statsBox").height() - 30;//30 is to offset to height of last index eg 3500
-    for (let j = 1; j < 8; j++) {
-        let pastDate = getTime(-j);
-        let singleDayServingId = pastDate.keyFromDate;
+    // console.log("Starting macros graph load..");
+    // var highestCalorieCountOfLast7Days = getHighestTotalMacrosFromLast7Days();
+    // var singleIncrementUnit = Math.round(highestCalorieCountOfLast7Days) / 4;
+    // highestCalorieCountOfLast7Days += singleIncrementUnit;
+    // var graphMaxHeight = $("#statsBox").height() - 30;//30 is to offset to height of last index eg 3500
+    // for (let j = 1; j < 8; j++) {
+    //     let pastDate = getTime(-j);
+    //     let singleDayServingId = pastDate.keyFromDate;
 
-        $("#xAxisDays p:nth-of-type(" + (8 - j) + ")").html(pastDate.dayNameShort + "<br/>" + pastDate.day);
-        let tmpObj = {
-            calsFats: 0,
-            calsCarbs: 0,
-            calsProteins: 0,
-            fats: 0,
-            carbs: 0,
-            proteins: 0
-        };
-        if (global.historyServings.hasOwnProperty(singleDayServingId)) {
-            tmpObj.calsFats = round(global.historyServings[singleDayServingId].fats * 9);
-            tmpObj.calsCarbs = round(global.historyServings[singleDayServingId].carbs * 4);
-            tmpObj.calsProteins = round(global.historyServings[singleDayServingId].proteins * 4);
-            tmpObj.fats = getHeightForGraph(tmpObj.calsFats, highestCalorieCountOfLast7Days, graphMaxHeight);
-            tmpObj.carbs = getHeightForGraph(tmpObj.calsCarbs, highestCalorieCountOfLast7Days, graphMaxHeight);
-            tmpObj.proteins = getHeightForGraph(tmpObj.calsProteins, highestCalorieCountOfLast7Days, graphMaxHeight);
-        }
-        setGraphDivValues((8 - j), tmpObj, graphMaxHeight);
-    }
+    //     $("#xAxisDays p:nth-of-type(" + (8 - j) + ")").html(pastDate.dayNameShort + "<br/>" + pastDate.day);
+    //     let tmpObj = {
+    //         calsFats: 0,
+    //         calsCarbs: 0,
+    //         calsProteins: 0,
+    //         fats: 0,
+    //         carbs: 0,
+    //         proteins: 0
+    //     };
+    //     if (global.historyServings.hasOwnProperty(singleDayServingId)) {
+    //         tmpObj.calsFats = round(global.historyServings[singleDayServingId].fats * 9);
+    //         tmpObj.calsCarbs = round(global.historyServings[singleDayServingId].carbs * 4);
+    //         tmpObj.calsProteins = round(global.historyServings[singleDayServingId].proteins * 4);
+    //         tmpObj.fats = getHeightForGraph(tmpObj.calsFats, highestCalorieCountOfLast7Days, graphMaxHeight);
+    //         tmpObj.carbs = getHeightForGraph(tmpObj.calsCarbs, highestCalorieCountOfLast7Days, graphMaxHeight);
+    //         tmpObj.proteins = getHeightForGraph(tmpObj.calsProteins, highestCalorieCountOfLast7Days, graphMaxHeight);
+    //     }
+    //     setGraphDivValues((8 - j), tmpObj, graphMaxHeight);
+    // }
 
-    if (highestCalorieCountOfLast7Days > 0) {
-        $("#calorieIndex p").each(function () {
-            $(this).html(highestCalorieCountOfLast7Days);
-            highestCalorieCountOfLast7Days -= singleIncrementUnit;
-        });
-    } else {
-        $("#graphOldValuesDisplayer > div > p").html("No entries within last 7 days.");
-    }
-    console.log("Completed loading graph!");
+    // if (highestCalorieCountOfLast7Days > 0) {
+    //     $("#calorieIndex p").each(function () {
+    //         $(this).html(highestCalorieCountOfLast7Days);
+    //         highestCalorieCountOfLast7Days -= singleIncrementUnit;
+    //     });
+    // } else {
+    //     $("#graphOldValuesDisplayer > div > p").html("No entries within last 7 days.");
+    // }
+    // console.log("Completed loading graph!");
 }
 
 function setGraphDivValues(count, tmpObj) {
@@ -72,20 +72,20 @@ function getHeightForGraph(macroCalories, maxGraphCalories, graphHeightAtMaxGrap
 
 
 function getHighestTotalMacrosFromLast7Days() {
-    var totalMacroIdsToCheck = [];
-    for (let j = 1; j < 8; j++) {
-        let singleDayServingId = getTime(-j).keyFromDate;
+    // var totalMacroIdsToCheck = [];
+    // for (let j = 1; j < 8; j++) {
+    //     let singleDayServingId = getTime(-j).keyFromDate;
 
-        if (global.historyServings.hasOwnProperty(singleDayServingId))
-            totalMacroIdsToCheck.push(global.historyServings[singleDayServingId].totalMacrosId);
-    }
-    var maxTotalMacros = 0;
-    for (let j = 0; j < totalMacroIdsToCheck.length; j++)
-        if (global.historyTotalMacros.hasOwnProperty(totalMacroIdsToCheck[j])) {
-            let totalCals = global.historyTotalMacros[totalMacroIdsToCheck[j]].calculateCalories();
-            if (maxTotalMacros < totalCals)
-                maxTotalMacros = totalCals;
-        }
+    //     if (global.historyServings.hasOwnProperty(singleDayServingId))
+    //         totalMacroIdsToCheck.push(global.historyServings[singleDayServingId].totalMacrosId);
+    // }
+    // var maxTotalMacros = 0;
+    // for (let j = 0; j < totalMacroIdsToCheck.length; j++)
+    //     if (global.historyTotalMacros.hasOwnProperty(totalMacroIdsToCheck[j])) {
+    //         let totalCals = global.historyTotalMacros[totalMacroIdsToCheck[j]].calculateCalories();
+    //         if (maxTotalMacros < totalCals)
+    //             maxTotalMacros = totalCals;
+    //     }
 
-    return Math.round(maxTotalMacros);
+    // return Math.round(maxTotalMacros);
 }

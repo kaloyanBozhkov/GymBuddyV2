@@ -15,10 +15,10 @@
         justify-content: center;
         @include boxShadow(0, 0, 4px, 0.4);
     }
-    &.whiteRibbon__background--fatterBackground .whiteRibbon__background{
+    &.whiteRibbonHeader--fatterBackground .whiteRibbon__background{
         width:1.667rem;
     }
-    &:not(.whiteRibbon__background--fatterBackground) .whiteRibbon__background{
+    &:not(.whiteRibbonHeader--fatterBackground) .whiteRibbon__background{
         width:1.111rem;
     }
     .whiteRibbon__background{
@@ -76,6 +76,11 @@
             align-items: center;
             justify-content: center;
             height: 100%;
+            transition: all 300ms;
+            &.active{
+                transform: scale(0.9);
+                opacity: 0.6;
+            }
         }
     }
 

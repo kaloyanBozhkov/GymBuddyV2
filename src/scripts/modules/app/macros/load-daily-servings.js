@@ -1,22 +1,20 @@
 import global from '../../global-variables';
 import { round, isEmpty } from '../../common/utilities';
 import getTime from '../../common/get-current-time';
+import BaseMacros from '../../macros/base-macros';
+
 export default (containerSelector = ".dailyEntries", singleDayServing = global.singleDayServing, msgDate) => {
     let container = containerSelector.substr(1);
     $(containerSelector).empty();
     console.log(singleDayServing);
-    if (!isEmpty(singleDayServing) && singleDayServing.getServings().length > 0) {
-        for (let j = singleDayServing.getServings().length - 1; j >= 0; j--) {
-            let item = singleDayServing.getServings()[j];
-            let calories = round(singleDayServing.calculateCalories.call(item) * parseFloat(item.servingQuantity)); //serving inside servings array of SingleDayServing may not have calculateCalories inherited from BaseMacro if it is loaded through JSON. SingleDayServing WILL have it, since on load it is re-set.
-            let proteins = round(parseFloat(item.proteins) * parseFloat(item.servingQuantity));
-            let carbs = round(parseFloat(item.carbs) * parseFloat(item.servingQuantity));
-            let fats = round(parseFloat(item.fats) * parseFloat(item.servingQuantity));
+    if (!isEmpty(singleDayServing) && singleDayServing.servings.length > 0) {
+        for (let j = singleDayServing.servings.length - 1; j >= 0; j--) {
+            let item = singleDayServing.servings[j];
             let tmpObj = {
                 title: item.itemName,
-                proteins: round(proteins / item.servingQuantity),
-                fats: round(fats / item.servingQuantity),
-                carbs: round(carbs / item.servingQuantity),
+                proteins: round(item.proteins / item.servingQuantity),
+                fats: round(item.fats / item.servingQuantity),
+                carbs: round(item.carbs / item.servingQuantity),
                 grams: item.servingSize
             }
             let singleServingEntryDiv = `<div class="${container}__entry">
@@ -29,11 +27,11 @@ export default (containerSelector = ".dailyEntries", singleDayServing = global.s
                     <p>You had ${item.servingQuantity} serving${item.servingQuantity > 1 ? "s" : ""} of ${item.servingSize}g:</p>
                     <div class="${container}__entry__details__content">
                         <div class="${container}__entry__details__content__tracker">
-                            <p>${calories}</p>
+                            <p>${BaseMacros.returnTotalCalories(item.fats, item.carbs, item.proteins)}</p>
                             <div>
-                                <p class='fats'>${fats}</p>
-                                <p class='carbs'>${carbs}</p>
-                                <p class='proteins'>${proteins}</p>
+                                <p class='fats'>${item.fats}</p>
+                                <p class='carbs'>${item.carbs}</p>
+                                <p class='proteins'>${item.proteins}</p>
                             </div>
                         </div>
                         <div class="${container}__entry__details__content__actions">

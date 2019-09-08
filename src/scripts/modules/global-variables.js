@@ -1,9 +1,9 @@
 import save from './common/save';
-import loader from './common/load';
+import load from './common/load';
 
-export default global = {
+export default {
     database: null,
-    selected: "none",
+    lastPageOpened: "landingPage",
     originalBodyContent: "",
     totalMacros: undefined,
     currentMacros: undefined,
@@ -25,7 +25,7 @@ export default global = {
     pages: {},
     otherHtml: {},
     locale: "en-EN",
-    load: loader(),
+    load,
     save, 
     holdTimer: null
 }

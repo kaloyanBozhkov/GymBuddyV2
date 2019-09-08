@@ -12,9 +12,13 @@
     }
 
     > .hangingSign{
-        transition: all 300ms;
+        transition: all 300ms;    
+        top: -4px;
+        position: relative;
         > .wrapper{
-            animation-delay:0ms;
+            animation-name: none;
+            transition: all 300ms;
+            top:0.6667rem;
         }
     }
 
@@ -23,7 +27,7 @@
             height:0;
             margin-bottom:15px;
             > .wrapper{
-                animation-name: none;
+                top:-1.667rem;
             }
         }
     }

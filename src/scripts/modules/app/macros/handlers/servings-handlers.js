@@ -3,11 +3,12 @@ import SingleServing from '../../../macros/serving';
 import FavoriteItem from '../../../macros/favorite-item';
 import save from '../../../common/save';
 import alertMsg from '../../common/alert-msg';
+import errorMsg from '../../common/error';
 import updateBarWidths from '../update-bar-widths';
+import loadDailyServings from '../load-daily-servings';
 import searchThroughList from '../../common/search-through-list';
 import closeAlert from '../../common/close-alert';
 import holdToEdit from '../../common/hold-to-edit';
-import { round } from '../../../common/utilities';
 import loadFavoriteServing from '../load-favorite-serving';
 import getCurrentTime from '../../../common/get-current-time';
 
@@ -26,27 +27,23 @@ export default () => {
         $(this).attr("placeholder", "Type Food Name Here");
     });
 
-    $(document).on("click input focusin focusout", "#singleFoodQuantity input", ()=>{
-        (function hideErrorFieldForAddServing(){
-            $("#foodTracker .errorMsg.active").removeClass("active");
-        })();
-    });
-
     $(document).on("input focusout", fields.reduce((selectorsArr, el) => [...selectorsArr, `#${el} input`], []).join(), function(){
         (function updateTotalMacrosWidgetWhenInputsChanged(){
-            let [fats, carbs, proteins, quantity] = fields.reduce((acc, field) => [...acc, $(`#${field} input`).val()],[]);
-           
-            $(".foodTracker__totalMacros .fats span").html(round(parseFloat(fats) * quantity) || 0);
-            $(".foodTracker__totalMacros .carbs span").html(round(parseFloat(carbs) * quantity) || 0);
-            $(".foodTracker__totalMacros .proteins span").html(round(parseFloat(proteins) * quantity) || 0);
-
+            let fcpq = fields.slice(0, fields.length-1).reduce((acc, field) => [...acc, $(`#${field} input`).val()],[]);
+            let [calsFats, calsCarbs, calsProteins, totalCals] = SingleServing.returnCaloricStats(...fcpq);
+            $(".foodTracker__totalMacros .fats span").html(calsFats);
+            $(".foodTracker__totalMacros .carbs span").html(calsCarbs);
+            $(".foodTracker__totalMacros .proteins span").html(calsProteins);
+            $("#servingCalories").html(totalCals);
+            if(totalCals > 0){
+                $("#foodTracker").addClass("active");
+            }else if($("#foodTracker").hasClass("active")){
+                $("#foodTracker").removeClass("active");
+            }
         })();
     });
 
     $(document).on("click", "#addServing", function () {
-        (function hideErrorFieldForAddServing(){
-            $("#foodTracker .errorMsg.active").removeClass("active");
-        })();
         let fats, carbs, proteins, quantity, servingSize, name;
         (function getAllInputFieldsValuesForAddServing(){
             [fats, carbs, proteins, quantity, servingSize] = fields.reduce((acc, field) => [...acc, $(`#${field} input`).val()],[]);
@@ -55,9 +52,10 @@ export default () => {
         })();
         if (quantity > 0) {
             (function addCaloriesToCurrentMacros(){
-                    global.currentMacros.fats += round(parseFloat(fats) * quantity);
-                    global.currentMacros.carbs += round(parseFloat(carbs) * quantity);
-                    global.currentMacros.proteins += round(parseFloat(proteins) * quantity);
+                    let [f,c,p] = SingleServing.returnCaloricStats(fats,carbs,proteins,quantity, true);
+                    global.currentMacros.fats +=f;
+                    global.currentMacros.carbs +=c;
+                    global.currentMacros.proteins +=p;
                     save.currentMacros();
             })();
             (function createSingleDayServingFromNewlyAddedServingAndSaveItAlsoAddItToHistoryServingsAndSave(){
@@ -75,9 +73,9 @@ export default () => {
                 fields.map(field => $(`#${field} input`).val(0));
             })();
         } else {
-            (function showErrorFieldForAddServing(){
-                $("#foodTracker .errorMsg").addClass("active");
-            })();
+            (function showErrorFieldForAddServing(self){
+                errorMsg($(self).data("errorMsg"));
+            })(this);
         }
     });
 

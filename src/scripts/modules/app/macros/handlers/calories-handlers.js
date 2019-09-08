@@ -1,15 +1,13 @@
 import Macros from '../../../macros/date-macros';
 import global from '../../../global-variables';
 import save from '../../../common/save';
+import errorMsg from '../../common/error';
 import alertMsg from '../../common/alert-msg';
 import updateBarWidths from '../update-bar-widths';
 import closeAlert from '../../common/close-alert';
 export default () => {
     //Set New Goal For Calories
     $(document).on("focusout", "#percentProteins, #percentCarbs, #percentFats, #totalCaloriesForPercents", function(){
-        (function hideErrorMessageOfAlertOnInputChange(){
-            $("#alertBg .errorMsg.active").removeClass("active");
-        })();
         (function onSetMacrosPercentagesInputFieldsFocusOutUpdateTotalMacrosWidgetsDisplayValues(self){
             let thisId = $(self).attr("id");
             let totalCalories = thisId == "totalCaloriesForPercents" ? $(self).val().trim() : $("#totalCaloriesForPercents").val().trim();
@@ -85,12 +83,9 @@ export default () => {
     });
 
     $(document).on("click", "#setMacros", function () {
-        (function hideErrorMessageOfAlertOnClick(){
-            $("#alertBg .errorMsg.active").removeClass("active");
-        })();
         let set = false;
         if($("#setGrams").hasClass("active")){
-            (function setMacrosWithGramsGiven(){
+            (function setMacrosWithGramsGiven(self){
                 let fats,carbs,protein;
                 (function setFatsCarbsProteinFromFieldsOnSetMacrosGramsAlert(){
                     fats = $("#gramsFats").val().trim();
@@ -102,12 +97,12 @@ export default () => {
                     set = true;
                 } else {
                     (function showErrorMessageOfAlertForOneOfTheMacroFieldsBeingUnset(){
-                        $(".errorMsg__grams").addClass("active");
+                        errorMsg($(self).data("errorMsgGrams"));
                     })();
                 }
-            })();
+            })(this);
         }else{
-            (function setMacrosWithPercentagesGiven(){
+            (function setMacrosWithPercentagesGiven(self){
                 let fats,carbs,protein,calories;
                 (function formatAndSetVarsFatsCarbsProteinCaloriesFromFieldsOnSetMacrosPercentagesAlert(){
                     fats = parseFloat($("#percentFats").val().replace("%",""));
@@ -123,14 +118,14 @@ export default () => {
                     set = true;
                 } else if(calories <= 0){
                    (function showErrorMessageOfAlertForTotalCaloriesBeingZero(){
-                        $(".errorMsg__grams").addClass("active");
+                        errorMsg($(self).data("errorMsgGrams"));
                    })();
                 }else{
                     (function showErrorMessageOfAlertForFatsCarbsProteinsPercentagesNotAddingToHundred(){
-                        $(".errorMsg__percentages").addClass("active");
+                        errorMsg($(self).data("errorMsgPercentages"));
                     })();
                 }
-            })();
+            })(this);
         }
         (function saveTotalMacrosAndTotalHistoryMacrosAfterUpdateOfCaloriesMacrosThenUpdateCaloriesBarsToMatchNewTotalMacrosThenCloseAlert(){
             if(set){

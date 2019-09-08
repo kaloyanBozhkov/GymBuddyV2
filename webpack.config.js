@@ -44,12 +44,16 @@ var config = {
             }
     ],
     },
-    mode: 'production',
+    devtool: "inline-source-map",
+    devServer: {
+        stats: 'errors-only'
+    },
+    mode: 'development',
     performance: {
       hints: false
     },
     watchOptions: {
-        aggregateTimeout:  2000
+        aggregateTimeout:  1000
     }
 };
 module.exports = config;
