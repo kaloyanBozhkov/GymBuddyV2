@@ -18,6 +18,7 @@ export default {
     alerts: [
         "addFavorites", 
         "importFavoriteServing", 
+        "confirmOperation",
         "setGoals"
     ],
     msgBox: {},

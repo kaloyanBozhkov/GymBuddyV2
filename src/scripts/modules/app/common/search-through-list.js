@@ -19,9 +19,15 @@ export default (optionElementClass, optionContainer, self, runSecondPart = false
         }
     })();
     (function showHideNothingToDisplayNoEntriesFoundMessages(){
-        if ($(optionElementClass + ":not(.hidden)").length == 0)
-            $(optionContainer).addClass("noNote");
-        else
-            $(optionContainer).removeClass("noNote");
+        if ($(optionElementClass).length == 0){
+            $(optionContainer).removeClass("noSearchResult");
+            $(optionContainer).addClass("noFavorites");
+        }else if($(optionElementClass + ":not(.hidden)").length == 0){
+            $(optionContainer).removeClass("noFavorites");
+            $(optionContainer).addClass("noSearchResult");
+        }else{
+            $(optionContainer).removeClass("noFavorites");
+            $(optionContainer).removeClass("noSearchResult");
+        }
     })();
 }

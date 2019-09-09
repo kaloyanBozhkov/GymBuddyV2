@@ -27,7 +27,7 @@ export default () => {
         $(this).attr("placeholder", "Type Food Name Here");
     });
 
-    $(document).on("input focusout", fields.reduce((selectorsArr, el) => [...selectorsArr, `#${el} input`], []).join(), function(){
+    $(document).on("input focusout", fields.reduce((selectorsArr, el) => [...selectorsArr, `#${el} input`], []).join(), ()=>{
         (function updateTotalMacrosWidgetWhenInputsChanged(){
             let fcpq = fields.slice(0, fields.length-1).reduce((acc, field) => [...acc, $(`#${field} input`).val()],[]);
             let [calsFats, calsCarbs, calsProteins, totalCals] = SingleServing.returnCaloricStats(...fcpq);
@@ -43,7 +43,7 @@ export default () => {
         })();
     });
 
-    $(document).on("click", "#addServing", function () {
+    $(document).on("click", "#addServing", () => {
         let fats, carbs, proteins, quantity, servingSize, name;
         (function getAllInputFieldsValuesForAddServing(){
             [fats, carbs, proteins, quantity, servingSize] = fields.reduce((acc, field) => [...acc, $(`#${field} input`).val()],[]);
@@ -80,10 +80,42 @@ export default () => {
     });
 
     //FAVORITES HANDLERS
+   
+    $(document).on("click", "#loadServing", () => {
+        loadFavoriteServing();
+    });
+    
+    $(document).on("input", "#favoriteName", function () {
+        searchThroughList(".favoriteEntry", "#favoriteSelect", $(this));
+    });
+    
+    $(document).on("click", ".deleteFavorite", function () {
+        debugger;
+        let indexToRemove = $(this).data("index");
+        alertMsg("confirmOperation", true, 
+        ["TITLE", "MSG", "CONFIRMBUTTONID","CANCELBUTTONID"], 
+        ["Confirm Operation", 
+        `Delete <span>${global.favoriteServings[indexToRemove].title}</span> from favorites?`,
+        "deleteFromFavoritesConfirm", 
+        "cancelRemoveFromFavorites"], [{ attrName: "index", attrValue: indexToRemove }]);
+    });
+    
+    $(document).on("click", "#deleteFromFavoritesConfirm", () => {
+        let indexToRemove = $("#alertBg").data("index");
+        global.favoriteServings.splice(indexToRemove, 1);
+        save.favoriteServings();
+        previousAlertToShow.deleteFavorite();
+    });
+    
+    $(document).on("click", "#cancelRemoveFromFavorites", () => {
+        previousAlertToShow.deleteFavorite();
+    });
     //set the on hold events for the edit functionality
     holdToEdit(".favoriteEntry", editFavoriteFood);
-   
-    $(document).on("click", "#saveFavoriteFoodChanges", function () {
+
+
+
+    $(document).on("click", "#saveFavoriteFoodChanges", () => {
         var title = $("#itemName").val().trim();
         var grams = $("#gramsCount").val().trim();
         var fats = $("#fatsCount").val().trim();
@@ -99,25 +131,11 @@ export default () => {
         }
     });
     
-    $(document).on("click", "#cancelFavoriteFoodChanges", function () {
+    $(document).on("click", "#cancelFavoriteFoodChanges", () => {
         previousAlertToShow.deleteFavorite();
     });
-    
-    $(document).on("click", ".deleteFavorite", function () {
-        var indexToRemove = $(this).data("index");
-        alertMsg("miniAlert", true, ["TOPIDHERE", "MESSAGEID", "MSG", "IDOFYESBTN", "IDOFNOBTN", "YESMESG", "NOMESG"], ["deleteFromWorkoutsConfirm", "titleForDelete", "Delete <span>" + global.favoriteServings[indexToRemove].title + "</span> from favorites?", "removeFromFavorites", "cancelRemoveFromFavorites", "Delete", "Cancel"], [{ attrName: "index", attrValue: indexToRemove }]);
-    });
-    
-    $(document).on("click", "#cancelRemoveFromFavorites", function () {
-        previousAlertToShow.deleteFavorite();
-    });
-    
-    $(document).on("click", "#removeFromFavorites", function () {
-        var indexToRemove = $("#alertBg").data("index");
-        global.favoriteServings.splice(indexToRemove, 1);
-        save.favoriteServings();
-        previousAlertToShow.deleteFavorite();
-    });
+
+
     
     $(document).on("click", ".favoriteEntry > div", function () {
         var parent = $(this).parent();
@@ -128,14 +146,7 @@ export default () => {
         $("#foodName").val(parent.data("values").title);
         closeAlert();
     });
-    
-    $(document).on("click", "#loadServing", function () {
-        loadFavoriteServing();
-    });
-    
-    $(document).on("input", "#favoriteName", function () {
-        searchThroughList(".favoriteEntry", "#favoriteSelect", $(this));
-    });
+
 
     //hold functions
     function editFavoriteFood(elem) {

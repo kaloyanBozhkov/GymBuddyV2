@@ -19,7 +19,7 @@ export default (fileToAppend, smoothSwitch = true, replaceWhat = [], replaceWith
             "opacity": "1"
         }, 100);
     } else {
-        $("#displayMessage").animate({
+        $("#displayMessage > *").animate({
             "opacity": "0"
         }, 100, function () {
             $("#alertBg").empty().prepend(content);
