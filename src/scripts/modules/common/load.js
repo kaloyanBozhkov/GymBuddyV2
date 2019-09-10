@@ -13,7 +13,6 @@ const loadLastPageOpened = (immediate=false) => {
     global.lastPageOpened = doesNotExist(localStorage.getItem("lastPageOpened")) ? "landingPage" : localStorage.getItem("lastPageOpened");
     setTimeout(function waitForAnimation() {
         if(global.lastPageOpened != "landingPage"){
-            console.log(global.lastPageOpened);
             $(`#btn${global.lastPageOpened.substr(0,1).toUpperCase() + global.lastPageOpened.substr(1).toLocaleLowerCase()}`).addClass("btnActive");
             $("#header, #container").addClass("opened");
         }else{
@@ -57,7 +56,7 @@ const loadSingleDayServing = () => {
         global.singleDayServing = new SingleDayServing();
      } else {
         let tmpObj = JSON.parse(localStorage.getItem("singleDayServing"));
-        global.singleDayServing = new SingleDayServing(tmpObj.time, tmpObj.fats, tmpObj.carbs, tmpObj.proteins);
+        global.singleDayServing = new SingleDayServing(tmpObj.time, tmpObj.fats, tmpObj.carbs, tmpObj.proteins, tmpObj.servings);
         let time = getCurrentTime();
         if (global.singleDayServing.day !== time.day || global.singleDayServing.month !== time.month || global.singleDayServing.year !== time.year)
             global.singleDayServing = new SingleDayServing();

@@ -41,7 +41,6 @@
     }
     > div:first-of-type{
         width: 3.056rem;
-        height: 3.056rem;
         align-items: center;
         svg {
             font-size: 2rem;
@@ -54,6 +53,7 @@
         p{
             font-size: 0.7778rem;
             line-height:0.8333rem;
+            padding:10px;
         }
     }
 }

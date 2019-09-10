@@ -1,10 +1,10 @@
 import {camelCaseInput} from '../../common/utilities';
-export default (optionElementClass, optionContainer, self, runSecondPart = false) => {
+export default function (optionElementClass, optionContainer){
     let searchValue;
-    (function setSearchToCamelCase(){
-        searchValue = camelCaseInput(self.val());//using JS intead of CSS cause JS is cooler <3
-        self.val(searchValue);
-    })();
+    (function setSearchToCamelCase(searchBar){
+        searchValue = camelCaseInput(searchBar.val());//using JS intead of CSS cause JS is cooler <3
+        searchBar.val(searchValue);
+    })($(this));
     (function showHideElementsSerchedThrough(){
         if (searchValue.trim().length == 0) {
             $(optionElementClass + ".hidden").removeClass("hidden");

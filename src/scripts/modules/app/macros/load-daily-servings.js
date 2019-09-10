@@ -5,7 +5,7 @@ import BaseMacros from '../../macros/base-macros';
 
 export default (containerSelector = ".dailyEntries", singleDayServing = global.singleDayServing, msgDate) => {
     let container = containerSelector.substr(1);
-    $(containerSelector).empty();
+    $(`${containerSelector}__container`).empty();
     console.log(singleDayServing);
     if (!isEmpty(singleDayServing) && singleDayServing.servings.length > 0) {
         for (let j = singleDayServing.servings.length - 1; j >= 0; j--) {

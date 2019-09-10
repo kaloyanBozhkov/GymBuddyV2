@@ -17,7 +17,21 @@ const previousAlertToShow = {
 }
 
 const fields = ["singleFoodFats", "singleFoodCarbs", "singleFoodProteins", "singleFoodQuantity", "singleFoodServingSize"];
-
+const updateTotalMacrosAndTotalCaloriesWidgetsWhenInputsChanged = () => {
+    let fcpq = fields.slice(0, fields.length-1).reduce((acc, field) => [...acc, $(`#${field} input`).val()],[]);
+    let [calsFats, calsCarbs, calsProteins, totalCals] = SingleServing.returnCaloricStats(...fcpq);
+    $(".foodTracker__totalMacros .fats span").html(calsFats);
+    $(".foodTracker__totalMacros .carbs span").html(calsCarbs);
+    $(".foodTracker__totalMacros .proteins span").html(calsProteins);
+    (function setAndToggleTotalCaloriesWidget(){
+        $("#servingCalories").html(totalCals);
+        if(totalCals > 0){
+            $("#foodTracker").addClass("active");
+        }else if($("#foodTracker").hasClass("active")){
+            $("#foodTracker").removeClass("active");
+        }
+    })();
+}
 export default () => {
     $(document).on("focusin", "#foodName", function () {
         $(this).attr("placeholder", "");
@@ -27,23 +41,9 @@ export default () => {
         $(this).attr("placeholder", "Type Food Name Here");
     });
 
-    $(document).on("input focusout", fields.reduce((selectorsArr, el) => [...selectorsArr, `#${el} input`], []).join(), ()=>{
-        (function updateTotalMacrosWidgetWhenInputsChanged(){
-            let fcpq = fields.slice(0, fields.length-1).reduce((acc, field) => [...acc, $(`#${field} input`).val()],[]);
-            let [calsFats, calsCarbs, calsProteins, totalCals] = SingleServing.returnCaloricStats(...fcpq);
-            $(".foodTracker__totalMacros .fats span").html(calsFats);
-            $(".foodTracker__totalMacros .carbs span").html(calsCarbs);
-            $(".foodTracker__totalMacros .proteins span").html(calsProteins);
-            $("#servingCalories").html(totalCals);
-            if(totalCals > 0){
-                $("#foodTracker").addClass("active");
-            }else if($("#foodTracker").hasClass("active")){
-                $("#foodTracker").removeClass("active");
-            }
-        })();
-    });
+    $(document).on("input focusout", fields.reduce((selectorsArr, el) => [...selectorsArr, `#${el} input`], []).join(),  updateTotalMacrosAndTotalCaloriesWidgetsWhenInputsChanged);
 
-    $(document).on("click", "#addServing", () => {
+    $(document).on("click", "#addServing", function() {
         let fats, carbs, proteins, quantity, servingSize, name;
         (function getAllInputFieldsValuesForAddServing(){
             [fats, carbs, proteins, quantity, servingSize] = fields.reduce((acc, field) => [...acc, $(`#${field} input`).val()],[]);
@@ -72,6 +72,7 @@ export default () => {
                 $("#foodName").val("");
                 fields.map(field => $(`#${field} input`).val(0));
             })();
+            updateTotalMacrosAndTotalCaloriesWidgetsWhenInputsChanged();
         } else {
             (function showErrorFieldForAddServing(self){
                 errorMsg($(self).data("errorMsg"));
@@ -81,21 +82,29 @@ export default () => {
 
     //FAVORITES HANDLERS
    
-    $(document).on("click", "#loadServing", () => {
-        loadFavoriteServing();
+    $(document).on("click", "#loadServing", loadFavoriteServing);
+    
+    $(document).on("input", "#favoriteName", function(){
+        searchThroughList.call(this, ".favoriteEntry","#favoriteSelect");
     });
     
-    $(document).on("input", "#favoriteName", function () {
-        searchThroughList(".favoriteEntry", "#favoriteSelect", $(this));
+    $(document).on("click", ".favoriteEntry > div:not(.deleteFavorite)", function () {
+        var parent = $(this).parent();
+        $("#singleFoodServingSize > input").val(parent.data("values").grams);
+        $("#singleFoodFats > input").val(parent.data("values").fats);
+        $("#singleFoodCarbs > input").val(parent.data("values").carbs);
+        $("#singleFoodProteins > input").val(parent.data("values").proteins);
+        $("#singleFoodQuantity > input").val(1);//set default serving size to 1, for imported food
+        closeAlert();
+        updateTotalMacrosAndTotalCaloriesWidgetsWhenInputsChanged();
     });
-    
+
     $(document).on("click", ".deleteFavorite", function () {
-        debugger;
         let indexToRemove = $(this).data("index");
         alertMsg("confirmOperation", true, 
         ["TITLE", "MSG", "CONFIRMBUTTONID","CANCELBUTTONID"], 
         ["Confirm Operation", 
-        `Delete <span>${global.favoriteServings[indexToRemove].title}</span> from favorites?`,
+        `Do you really wish to continue deleting '<span>${global.favoriteServings[indexToRemove].title}</span>' from favorites?`,
         "deleteFromFavoritesConfirm", 
         "cancelRemoveFromFavorites"], [{ attrName: "index", attrValue: indexToRemove }]);
     });
@@ -106,10 +115,8 @@ export default () => {
         save.favoriteServings();
         previousAlertToShow.deleteFavorite();
     });
-    
-    $(document).on("click", "#cancelRemoveFromFavorites", () => {
-        previousAlertToShow.deleteFavorite();
-    });
+
+    $(document).on("click", "#cancelRemoveFromFavorites", previousAlertToShow.deleteFavorite);
     //set the on hold events for the edit functionality
     holdToEdit(".favoriteEntry", editFavoriteFood);
 
@@ -133,18 +140,6 @@ export default () => {
     
     $(document).on("click", "#cancelFavoriteFoodChanges", () => {
         previousAlertToShow.deleteFavorite();
-    });
-
-
-    
-    $(document).on("click", ".favoriteEntry > div", function () {
-        var parent = $(this).parent();
-        $("#singleFoodServingSize > input").val(parent.data("values").grams);
-        $("#singleFoodFats > input").val(parent.data("values").fats);
-        $("#singleFoodCarbs > input").val(parent.data("values").carbs);
-        $("#singleFoodProteins > input").val(parent.data("values").proteins);
-        $("#foodName").val(parent.data("values").title);
-        closeAlert();
     });
 
 

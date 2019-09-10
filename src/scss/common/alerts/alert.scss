@@ -29,6 +29,12 @@
         max-width: 400px;
         margin: 10px;
         background-color: $alertBackground;
+        .displayMessage__content > p{
+            padding: 15px;
+            > span{
+                font-weight:900;
+            }
+        }
         .displayMessage__header{
             height: 1.778rem;
             justify-content: space-evenly;
