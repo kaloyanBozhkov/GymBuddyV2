@@ -59,7 +59,7 @@ export default () => {
                     save.currentMacros();
             })();
             (function createSingleDayServingFromNewlyAddedServingAndSaveItAlsoAddItToHistoryServingsAndSave(){
-                    global.singleDayServing.addServing(new SingleServing(fats, carbs, proteins, null, name, servingSize, quantity));
+                    global.singleDayServing.addServing(new SingleServing(fats, carbs, proteins, getCurrentTime().literal, name, servingSize, quantity));
                     save.singleDayServing();
                     global.historyServings[getCurrentTime().keyFromDate] = global.singleDayServing;
                     save.historyServings();
@@ -104,7 +104,7 @@ export default () => {
         alertMsg("confirmOperation", true, 
         ["TITLE", "MSG", "CONFIRMBUTTONID","CANCELBUTTONID"], 
         ["Confirm Operation", 
-        `Do you really wish to continue deleting '<span>${global.favoriteServings[indexToRemove].title}</span>' from favorites?`,
+        `Do you really wish to proceed with deleting '<span>${global.favoriteServings[indexToRemove].title}</span>' from favorites?`,
         "deleteFromFavoritesConfirm", 
         "cancelRemoveFromFavorites"], [{ attrName: "index", attrValue: indexToRemove }]);
     });
@@ -124,10 +124,10 @@ export default () => {
 
     $(document).on("click", "#saveFavoriteFoodChanges", () => {
         var title = $("#itemName").val().trim();
-        var grams = $("#gramsCount").val().trim();
-        var fats = $("#fatsCount").val().trim();
-        var proteins = $("#proteinsCount").val().trim();
-        var carbs = $("#carbsCount").val().trim();
+        var grams = $("#gramsCount > input").val().trim();
+        var fats = $("#fatsCount > input").val().trim();
+        var proteins = $("#proteinsCount > input").val().trim();
+        var carbs = $("#carbsCount > input").val().trim();
         var favoriteFoodObj = $("#alertBg").data("favoriteFoodObj");
         if (title.length > 0 && grams.length > 0 && fats.length > 0 && proteins.length > 0 && carbs.length > 0) {
             global.favoriteServings[favoriteFoodObj.key] = new FavoriteItem(fats, carbs, proteins, title, grams);

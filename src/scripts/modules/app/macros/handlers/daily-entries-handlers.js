@@ -3,6 +3,7 @@ import global from '../../../global-variables';
 import FavoriteItem from '../../../macros/favorite-item';
 import save from '../../../common/save';
 import alertMsg from '../../common/alert-msg';
+import errorMsg from '../../common/error';
 import updateBarWidths from '../update-bar-widths';
 import closeAlert from '../../common/close-alert';
 import { round } from '../../../common/utilities';
@@ -17,13 +18,15 @@ export default () => {
     });
     
     $(document).on("click", "#saveItemToFavorites", function () {
-        $(".errorMsg").slideUp();
-        if ($("#fatsCount").val().trim().length > 0 && $("#carbsCount").val().trim().length > 0 && $("#proteinsCount").val().trim().length > 0 && $("#gramsCount").val().trim().length > 0 && $("#itemName").val().trim().length > 0) {
-            global.favoriteServings.push(new FavoriteItem($("#fatsCount").val().trim(), $("#carbsCount").val().trim(), $("#proteinsCount").val().trim(), $("#itemName").val().trim(), $("#gramsCount").val().trim()));
+        let grams = $("#gramsCount > input").val().trim();
+        let itemName = $("#itemName").val().trim();
+        if (grams > 0 && itemName.length > 0) {
+            let [f, c, p] = ["fats", "carbs", "proteins"].reduce((acc, i) => [...acc, $(`#${i}Count > input`).val()], []);
+            global.favoriteServings.push(new FavoriteItem(f, c, p, itemName, grams));
             save.favoriteServings();
             closeAlert();
         } else {
-            $(".errorMsg").slideDown(300);
+            errorMsg($(this).data("errorMsg"));
         }
     });
     

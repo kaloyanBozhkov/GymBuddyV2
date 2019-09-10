@@ -1,0 +1,33 @@
+#saveToFavoritesContent{
+    > div:first-of-type{
+        &::before{
+            content: attr(data-title);
+            display: block;    
+            text-align: center;    
+            font-size: 0.7778rem;
+            margin-top: 10px;
+        }
+        > div{
+            max-width: 125px;
+            margin:0 auto;
+            margin-bottom:10px;
+        }
+    }
+    .saveToFavoritesContent__macros{
+        &::before{
+            content: attr(data-title);
+            display: block;    
+            position: absolute;
+            bottom: 100%;
+            font-size: 0.7778rem;
+        }
+        position: relative;
+        margin: 30px 10px 10px 10px;
+        display:flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        > div:not(:first-of-type):not(:last-of-type){
+            margin: 0 10px;
+        }
+    }
+}

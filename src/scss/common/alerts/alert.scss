@@ -26,13 +26,20 @@
     z-index: 12;
     > #displayMessage{
         @include animation(PopIn, 300ms);
-        max-width: 400px;
+
+        max-width: 22.22rem;
+
+        @media only screen and (max-width: 470px){
+            max-width: 85vw;
+        }
+
         margin: 10px;
         background-color: $alertBackground;
         .displayMessage__content > p{
             padding: 15px;
             > span{
                 font-weight:900;
+                color: $gold;
             }
         }
         .displayMessage__header{

@@ -2,6 +2,26 @@
 
 //row with golden counter on left
 .formatedRow{
+    &:not(.formatedRow--withoutMargin){
+        &:not(:only-of-type):first-of-type{
+            margin-top:10px;
+            margin-bottom:5px;
+        }
+        &:not(:only-of-type):last-of-type{
+            margin-top:5px;
+            margin-bottom:10px;
+        }
+        &:not(:first-of-type):not(:last-of-type){
+            margin-top:5px;
+            margin-bottom:5px;
+        }
+        &:only-of-type{
+            margin-top:0;
+            margin-bottom:0;
+        }
+    }
+    margin-left:-2px;
+    margin-right:-2px;
     background-color:white;
     display: flex;
     flex-direction: row;
@@ -9,8 +29,6 @@
     align-items: center;
     height:1.667rem;//30px
     padding-left: 1.944rem;
-    margin-left:-2px;
-    margin-right:-2px;
     position:relative;
     counter-reset: formatedRow;
     overflow: hidden;

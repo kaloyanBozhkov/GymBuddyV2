@@ -12,7 +12,7 @@
         background-color: $gold;
         color: $white;
         font-size: 0.5556rem;
-        line-height: 0.6111rem;
+        line-height: 0.62rem;
         width: 100%;
         border-radius: 10px 10px 0px 0px;
         text-align: center;
@@ -49,6 +49,15 @@
         &::before{
             color: white;
             background-color: $proteins;
+        }
+    }
+    &[data-title='SERVING SIZE']{
+        input{
+            color: $niceBlue;
+        }
+        &::before{
+            color: white;
+            background-color: $niceBlue;
         }
     }
 }

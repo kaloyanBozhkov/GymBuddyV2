@@ -12,13 +12,13 @@ export default (containerSelector = ".dailyEntries", singleDayServing = global.s
             let item = singleDayServing.servings[j];
             let tmpObj = {
                 title: item.itemName,
-                proteins: round(item.proteins / item.servingQuantity),
-                fats: round(item.fats / item.servingQuantity),
-                carbs: round(item.carbs / item.servingQuantity),
+                proteins: item.proteins,
+                fats: item.fats,
+                carbs: item.carbs,
                 grams: item.servingSize
             }
             let singleServingEntryDiv = `<div class="${container}__entry">
-                <div class='formatedRow'>
+                <div class='formatedRow formatedRow--withoutMargin'>
                     <p>${item.itemName}</p>
                     <p>${getTime(0, item.time).displayTime}</p>
                     <i class="fas fa-angle-up"></i>
@@ -27,7 +27,7 @@ export default (containerSelector = ".dailyEntries", singleDayServing = global.s
                     <p>You had ${item.servingQuantity} serving${item.servingQuantity > 1 ? "s" : ""} of ${item.servingSize}g:</p>
                     <div class="${container}__entry__details__content">
                         <div class="${container}__entry__details__content__tracker">
-                            <p>${BaseMacros.returnTotalCalories(item.fats, item.carbs, item.proteins)}</p>
+                            <p>${BaseMacros.returnTotalCalories(...BaseMacros.returnTotalMacros(item.fats, item.carbs, item.proteins, item.servingQuantity))}</p>
                             <div>
                                 <p class='fats'>${item.fats}</p>
                                 <p class='carbs'>${item.carbs}</p>
