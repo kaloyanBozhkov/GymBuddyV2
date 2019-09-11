@@ -11,7 +11,8 @@ export default function (optionElementClass, optionContainer){
         } else {
             $(optionElementClass).each(function () {
                 let vals = $(this).data("values");
-                if (vals.hasOwnProperty("title") && ~vals.title.toLowerCase().indexOf(searchValue.toLowerCase()))
+                let key = $(this).data("id");
+                if (key == searchValue || vals.hasOwnProperty("title") && ~vals.title.toLowerCase().indexOf(searchValue.toLowerCase()))
                     $(this).removeClass("hidden");
                 else
                     $(this).addClass("hidden");

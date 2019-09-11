@@ -51,7 +51,7 @@
 
     &::after{
         counter-increment: formatedRow;
-        content: '40';
+        content: attr(data-id);
         color:white;
         top: 0;
         left: 0;

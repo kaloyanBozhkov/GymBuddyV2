@@ -89,11 +89,12 @@ export default () => {
     });
     
     $(document).on("click", ".favoriteEntry > div:not(.deleteFavorite)", function () {
-        var parent = $(this).parent();
-        $("#singleFoodServingSize > input").val(parent.data("values").grams);
-        $("#singleFoodFats > input").val(parent.data("values").fats);
-        $("#singleFoodCarbs > input").val(parent.data("values").carbs);
-        $("#singleFoodProteins > input").val(parent.data("values").proteins);
+        let {title, grams, fats, carbs, proteins} = $(this).parent().data("values");
+        $("#foodName").val(title);
+        $("#singleFoodServingSize > input").val(grams);
+        $("#singleFoodFats > input").val(fats);
+        $("#singleFoodCarbs > input").val(carbs);
+        $("#singleFoodProteins > input").val(proteins);
         $("#singleFoodQuantity > input").val(1);//set default serving size to 1, for imported food
         closeAlert();
         updateTotalMacrosAndTotalCaloriesWidgetsWhenInputsChanged();
@@ -117,6 +118,10 @@ export default () => {
     });
 
     $(document).on("click", "#cancelRemoveFromFavorites", previousAlertToShow.deleteFavorite);
+
+
+
+    
     //set the on hold events for the edit functionality
     holdToEdit(".favoriteEntry", editFavoriteFood);
 

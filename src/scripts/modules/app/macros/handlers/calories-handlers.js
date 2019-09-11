@@ -59,9 +59,7 @@ export default () => {
         })();
     });
 
-    $(document).on("click", "#setGoals", function () {
-        alertMsg("setGoals");
-    });
+    $(document).on("click", "#setGoals", ()=> alertMsg("setGoals"));
 
     $(document).on("click", "#setGrams, #setPercentages", function () {
         if(!$(this).hasClass("active")){

@@ -6,7 +6,7 @@ import alertMsg from '../../common/alert-msg';
 import errorMsg from '../../common/error';
 import updateBarWidths from '../update-bar-widths';
 import closeAlert from '../../common/close-alert';
-import { round } from '../../../common/utilities';
+import BaseMacros from '../../../macros/base-macros';
 
 export default () => {
     $(document).on("click", ".dailyEntries__entry", function () {
@@ -31,25 +31,27 @@ export default () => {
     });
     
     $(document).on("click", ".removeEntry", function () {
-        var itemId = $(this).data("itemId");
-        alertMsg("miniAlert", true, ["TOPIDHERE", "MESSAGEID", "MSG", "IDOFYESBTN", "IDOFNOBTN", "YESMESG", "NOMESG"], ["deleteFoodEntry", "titleForDelete", "Remove <span>" + global.singleDayServing.getServings()[itemId].itemName + "</span> from today's servings?", "removeEntryFromServings", "cancel", "Delete", "Cancel"], [{ attrName: "index", attrValue: itemId }]);
+        let itemId = $(this).data("itemId");
+        alertMsg("confirmOperation", true, 
+        ["TITLE", "MSG", "CONFIRMBUTTONID","CANCELBUTTONID"], 
+        ["Confirm Removal", 
+        `Do you wish to procede with removing '<span>${global.singleDayServing.servings[itemId].itemName}</span>' from today's servings?`,
+        "removeEntryFromServings", 
+        "cancel"], [{ attrName: "index", attrValue: itemId }]);
     });
     
     $(document).on("click", "#removeEntryFromServings", function () {
         let indexToRemove = $("#alertBg").data("index");
-        let item = global.singleDayServing.getServings()[indexToRemove];
-        let carbs = round(parseFloat(item.carbs) * parseFloat(item.servingQuantity));
-        let fats = round(parseFloat(item.fats) * parseFloat(item.servingQuantity));
-        let proteins = round(parseFloat(item.proteins) * parseFloat(item.servingQuantity));
+        let itemToRemove = global.singleDayServing.servings[indexToRemove];
+        let [fats, carbs, proteins] = BaseMacros.returnTotalMacros(itemToRemove.fats, itemToRemove.carbs, itemToRemove.proteins, itemToRemove.servingQuantity);
         global.currentMacros.proteins -= proteins;
         global.currentMacros.carbs -= carbs;
         global.currentMacros.fats -= fats;
         global.singleDayServing.proteins -= proteins;
         global.singleDayServing.carbs -= carbs;
         global.singleDayServing.fats -= fats;
-        let newServingsArray = global.singleDayServing.getServings().filter(x => x != item);
-        global.singleDayServing.setServings(newServingsArray, true);
-        global.historyServings[global.singleDayServing.keyFromDate].setServings(newServingsArray, true);
+        global.singleDayServing.servings = global.singleDayServing.servings.filter(x => x != itemToRemove);
+        global.historyServings[global.singleDayServing.keyFromDate].servings = global.singleDayServing.servings;
         save.currentMacros();
         save.singleDayServing();
         save.historyServings();
