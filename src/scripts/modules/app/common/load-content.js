@@ -18,7 +18,7 @@ export default ()=>{
             updateBarWidths("#caloriesCounter", global.currentMacros, global.totalMacros);
             loadDailyServings(".dailyEntries");
             //Past Entries
-            $("#dayEntriesShownFor").html(d.displayDate).data("date", d.date);
+            $("#dayEntriesShownFor").html(d.displayDate).data("date", d.literal);
             let pastHistorySerings = getPastHistorySerings(d.keyFromDate);
             updateBarWidths("#pastEntries", pastHistorySerings.currentServings, pastHistorySerings.totalMacros);
             loadDailyServings(".pastEntries", pastHistorySerings.currentServings, d.keyFromDate);
