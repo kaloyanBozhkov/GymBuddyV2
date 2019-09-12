@@ -61,7 +61,7 @@ export default () => {
             (function createSingleDayServingFromNewlyAddedServingAndSaveItAlsoAddItToHistoryServingsAndSave(){
                     global.singleDayServing.addServing(new SingleServing(fats, carbs, proteins, getCurrentTime().literal, name, servingSize, quantity));
                     save.singleDayServing();
-                    global.historyServings[getCurrentTime().keyFromDate] = global.singleDayServing;
+                    global.historyServings[getCurrentTime().keyFromDate] = global.singleDayServing.returnObjectForSave();
                     save.historyServings();
             })();
             (function updateTodaysCaloriesBarsAndTodaysEntriesItems(){

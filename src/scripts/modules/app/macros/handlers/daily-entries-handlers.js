@@ -5,6 +5,7 @@ import save from '../../../common/save';
 import alertMsg from '../../common/alert-msg';
 import errorMsg from '../../common/error';
 import updateBarWidths from '../update-bar-widths';
+import loadDailyServings from '../load-daily-servings';
 import closeAlert from '../../common/close-alert';
 import BaseMacros from '../../../macros/base-macros';
 
@@ -14,7 +15,7 @@ export default () => {
     });
 
     $(document).on("click", ".saveEntry", function () {
-        alertMsg("addFavorites", true, ["VALUETITLE", "VALUEFATS", "VALUECARBS", "VALUEPROTEINS", "VALUEGRAMS"], [$(this).data("values").title, $(this).data("values").fats, $(this).data("values").carbs, $(this).data("values").proteins, $(this).data("values").grams]);
+        alertMsg("addFavorites", true, ["VALUETITLE", "VALUEFATS", "VALUECARBS", "VALUEPROTEINS", "VALUEGRAMS"], [$(this).data("values").itemName, $(this).data("values").fats, $(this).data("values").carbs, $(this).data("values").proteins, $(this).data("values").servingSize]);
     });
     
     $(document).on("click", "#saveItemToFavorites", function () {
@@ -54,8 +55,9 @@ export default () => {
         global.historyServings[global.singleDayServing.keyFromDate].servings = global.singleDayServing.servings;
         save.currentMacros();
         save.singleDayServing();
-        save.historyServings();
-        updateBarWidths();
+        save.historyServings();            
+        updateBarWidths("#caloriesCounter", global.currentMacros, global.totalMacros);
+        loadDailyServings(".dailyEntries");
         closeAlert();
     });
 }

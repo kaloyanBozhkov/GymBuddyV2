@@ -28,8 +28,8 @@ const loadTotalMacros = () => {
         global.totalMacros = new Macros(); //save only on set of new macros! (unlike current daily macros) 
     }
     else{
-        let totalMacros = JSON.parse(localStorage.getItem("totalMacros"));
-        global.totalMacros = new Macros(totalMacros.fats, totalMacros.carbs, totalMacros.proteins, totalMacros.time);//re-sets the inner functions of the objects, since JSON stringify does not consider them
+        let {fats, carbs, proteins, literal} = JSON.parse(localStorage.getItem("totalMacros"));
+        global.totalMacros = new Macros(fats, carbs, proteins, literal);//re-sets the inner functions of the objects, since JSON stringify does not consider them
     }
 }
 

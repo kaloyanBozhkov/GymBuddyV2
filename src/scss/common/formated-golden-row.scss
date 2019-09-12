@@ -2,6 +2,9 @@
 
 //row with golden counter on left
 .formatedRow{
+    > p{
+        padding-left: 2px;
+    }
     &:not(.formatedRow--withoutMargin){
         &:not(:only-of-type):first-of-type{
             margin-top:10px;
