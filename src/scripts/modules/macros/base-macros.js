@@ -19,15 +19,15 @@ export default class BaseMacros{
     }
 
     static returnTotalCalories(fats, carbs, proteins){
-        return this.returnCaloriesForMacros(fats,carbs,proteins).reduce((totalCalories, macroCalories)=> (totalCalories + macroCalories), 0);
+        return round(this.returnCaloriesForMacros(fats,carbs,proteins).reduce((totalCalories, macroCalories)=> (totalCalories + macroCalories), 0));
     }
 
     static returnTotalMacros(fats, carbs, proteins, quantity){
-        return this.returnMacrosParsedAndRounded(fats,carbs,proteins).reduce((acc, m) => [...acc, m * quantity], []);
+        return this.returnMacrosParsedAndRounded(fats,carbs,proteins).reduce((acc, m) => [...acc, round(m * quantity)], []);
     }
 
     static returnCaloricStats(fats, carbs, proteins, quantity, skipTotalCalories = false){//returns macros and calories as [totalFats, totalCarbs, totalProteins, totalCalories]
-        let fcp = this.returnMacrosParsedAndRounded(fats,carbs,proteins).reduce((totMacros, m) => [...totMacros, m * quantity], []);
+        let fcp = this.returnMacrosParsedAndRounded(fats,carbs,proteins).reduce((totMacros, m) => [...totMacros, round(m * quantity)], []);
         return (skipTotalCalories ? fcp : [...fcp, this.returnTotalCalories(...fcp)]);
     }
 }

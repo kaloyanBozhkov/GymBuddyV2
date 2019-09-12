@@ -9,7 +9,7 @@ export default (container, currentServ, totalMacros) => {
     $(`${container} #totalCarbs`).html(totalMacros.carbs);
     $(`${container} #totalProteins`).html(totalMacros.proteins);
     $(`${container} #currentCalories`).html(BaseMacros.returnTotalCalories(currentServ.fats, currentServ.carbs, currentServ.proteins));
-    $(`${container} #totalCalories`).html(BaseMacros.returnTotalCalories(totalMacros.fats, totalMacros.carbs, totalMacros.proteins));
+    $(`${container} #totalCalories`).html(parseInt(BaseMacros.returnTotalCalories(totalMacros.fats, totalMacros.carbs, totalMacros.proteins)));//total calories shown have no need of dot decimal notation
 
     let barFatsWidth = calculatePercentage(currentServ.fats, totalMacros.fats);
     let barCarbsWidth = calculatePercentage(currentServ.carbs, totalMacros.carbs);
