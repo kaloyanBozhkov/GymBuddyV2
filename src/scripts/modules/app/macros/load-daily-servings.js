@@ -1,5 +1,4 @@
 import global from '../../global-variables';
-import { round, isEmpty } from '../../common/utilities';
 import getTime from '../../common/get-current-time';
 import BaseMacros from '../../macros/base-macros';
 
@@ -48,7 +47,7 @@ export default (containerSelector = ".dailyEntries", singleDayServing = global.s
     `<p>No servings have been added for ${msgDate ? msgDate : "today yet"}.</p>` : 
     singleDayServing.servings.reduceRight((acc, s, j) => [...acc, createEntryRowsForServing(s, container, containerSelector, j)] ,[]).join("");
 
-    $(`${containerSelector}__container`).append(singleServingEntryDiv);
+    $(`${containerSelector}__container`).append(singleServingEntryDiv);//one DOM API call!
 
     console.log(`Finished ${container} loadDailyServings`);
 }
