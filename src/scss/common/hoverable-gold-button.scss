@@ -39,7 +39,7 @@
         @include boxShadow(0, 1px, 2px, 0.45, false);
     }
 
-    &.active{
+    &.active,&:not(.noHover):hover{
         background-color:$gold;
         > div{
             width:50%;
@@ -56,7 +56,7 @@
         }
     }
 
-    &:not(.active){
+    &:not(.active):not(:hover), &.noHover{
         &::before{
             color: $jet;
         }

@@ -9,6 +9,11 @@
             margin:0;
             font-size:0.8333rem;
             padding: 20px;
+            text-align:center;
+            &::after{
+                content: ' ' attr(data-when);
+                display: inline;
+            }
         }
         > .#{$containerName}__entry{
             margin: 10px 0;

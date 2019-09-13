@@ -27,7 +27,7 @@ const createEntryRowsForServing = ({fats, carbs, proteins, itemName, servingSize
                 carbs,
                 servingSize
             })}'>
-                <i class='fa fa-heart'></i>
+            <i class='fa fa-heart'></i>
             </div>
             ${(containerSelector == ".dailyEntries" ? `
             <div class='removeEntry' data-item-id='${containerSelector == ".dailyEntries" ? j : ""}'>
@@ -39,15 +39,11 @@ const createEntryRowsForServing = ({fats, carbs, proteins, itemName, servingSize
 </div>`;
 
 export default (containerSelector = ".dailyEntries", singleDayServing = global.singleDayServing, msgDate) => {
+    debugger;
     let container = containerSelector.substr(1);
-
-    $(`${containerSelector}__container`).empty();
-
     let singleServingEntryDiv = singleDayServing.servings.length == 0 ? 
-    `<p>No servings have been added for ${msgDate ? msgDate : "today yet"}.</p>` : 
+    `<p data-when='${msgDate ? msgDate : "today yet"}'>No servings have been added for</p>` : 
     singleDayServing.servings.reduceRight((acc, s, j) => [...acc, createEntryRowsForServing(s, container, containerSelector, j)] ,[]).join("");
-
-    $(`${containerSelector}__container`).append(singleServingEntryDiv);//one DOM API call!
-
+    $(`${containerSelector}__container`).empty().append(singleServingEntryDiv);//one DOM API call!
     console.log(`Finished ${container} loadDailyServings`);
 }

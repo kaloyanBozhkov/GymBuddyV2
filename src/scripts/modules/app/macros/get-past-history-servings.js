@@ -3,13 +3,17 @@ import SingleDayServing from '../../macros/single-day-serving';
 import DateMacros from '../../macros/date-macros';
 
 export default servingId => {
-    let currentServings = new SingleDayServing();
-    let totalMacros = new DateMacros(0, 0, 0);
+    let currentServings = new SingleDayServing(new Date(servingId));
+    let totalMacros = new DateMacros(0, 0, 0, new Date(servingId));
     if (typeof global.historyServings != "undefined" && global.historyServings.hasOwnProperty(servingId)) {
-        let {time, fats, carbs, proteins} = global.historyServings[servingId];
-        currentServings = new SingleDayServing(time, fats, carbs, proteins);
-        let {tm_time, tm_fats, tm_carbs, tm_proteins} = global.historyTotalMacros[global.historyServings[servingId].totalMacrosId];
-        totalMacros = new DateMacros(tm_time, tm_fats, tm_carbs, tm_proteins);
+        (function getSpecificPastSingleDayServingThatWillBeShown(){
+            let {time, fats, carbs, proteins} = global.historyServings[servingId];
+            currentServings = new SingleDayServing(time, fats, carbs, proteins);
+        })();
+        (function getTotalMacrosForThatSpecificPastSingleDayServing(){
+            let {time, fats, carbs, proteins} = global.historyTotalMacros[global.historyServings[servingId].totalMacrosId];
+            totalMacros = new DateMacros(fats, carbs, proteins, time);
+        })();
     }
     return {currentServings, totalMacros};
 }

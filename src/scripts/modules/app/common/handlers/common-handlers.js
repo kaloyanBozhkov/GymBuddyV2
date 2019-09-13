@@ -30,6 +30,15 @@ export default () => {
             $(this).remove();
            }, 400);
         });
-    })
+    });
+    //fixes sticky hover for button
+    $(document).on("touchend", ".hoverableGoldButton", function(){
+        setTimeout(()=>{
+            $(this).addClass("noHover");
+        },300);
+    });
+    $(document).on("mouseleave focusout touchstart", ".hoverableGoldButton", function(){
+        $(this).removeClass("noHover");
+    });
 }
 

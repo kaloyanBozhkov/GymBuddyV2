@@ -12,6 +12,9 @@
         overflow: hidden;
         transition: all 400ms;
         
+        @include insetBoxShadow(0.3, true, 4px);
+
+
         &:not(.active){
             max-height: 0;
         }
@@ -25,7 +28,7 @@
         }
 
     }
-
+    
 
     @include macrosContainerStyling("pastEntries");
     @include entriesContainer("pastEntries");
