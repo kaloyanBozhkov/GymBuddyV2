@@ -6,15 +6,15 @@ export default {
     },
     totalMacros(){
         if(global.totalMacros)
-        localStorage.setItem("totalMacros", JSON.stringify(global.totalMacros));
+        localStorage.setItem("totalMacros", JSON.stringify(global.totalMacros.returnDateMacrosObjectForSave()));
     },
     currentMacros(){
         if(global.currentMacros)
-        localStorage.setItem("currentMacros", JSON.stringify(global.currentMacros));
+        localStorage.setItem("currentMacros", JSON.stringify(global.currentMacros.returnDateMacrosObjectForSave()));
     },
     singleDayServing(){
         if(global.singleDayServing)
-        localStorage.setItem("singleDayServing", JSON.stringify(global.singleDayServing.returnObjectForSave()));
+        localStorage.setItem("singleDayServing", JSON.stringify(global.singleDayServing.returnSingleDayServingObjectForSave()));
     },
     favoriteServings(){
         if(global.favoriteServings)
@@ -22,7 +22,7 @@ export default {
     },
     historyTotalMacros(){
         if(global.historyTotalMacros){
-            global.historyTotalMacros[getCurrentTime().keyFromDate] = global.totalMacros;
+            global.historyTotalMacros[getCurrentTime().keyFromDate] = global.totalMacros.returnDateMacrosObjectForSave();
             localStorage.setItem("historyTotalMacros", JSON.stringify(global.historyTotalMacros));
         }
     },

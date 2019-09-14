@@ -20,14 +20,12 @@ export default class SingleDayServing extends DateMacros{
     }
 
     //when saving, save only important information!
-    returnObjectForSave(){
-       return { 
-            fats:this.fats,
-            carbs:this.carbs,
-            proteins:this.proteins,
+    returnSingleDayServingObjectForSave(){
+        let dateMacrosObjForSave = this.returnDateMacrosObjectForSave();
+        return { 
+            ...dateMacrosObjForSave,
             totalMacrosId:this.totalMacrosId,
-            servings:this.servings.reduce((acc, s)=> [...acc, returnImportantPropertiesFromServingsObject(s)], []),
-            time:this.literal
+            servings:this.servings.reduce((acc, s)=> [...acc, returnImportantPropertiesFromServingsObject(s)], [])
         }
     }
 }

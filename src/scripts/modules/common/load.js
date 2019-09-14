@@ -23,64 +23,46 @@ const loadLastPageOpened = (immediate=false) => {
     }, immediate ? 0 : 500);
 }
 
-const loadTotalMacros = () => {
-    if (doesNotExist(localStorage.getItem("totalMacros"))){
-        global.totalMacros = new Macros(); //save only on set of new macros! (unlike current daily macros) 
-    }
-    else{
-        let {fats, carbs, proteins, literal} = JSON.parse(localStorage.getItem("totalMacros"));
-        global.totalMacros = new Macros(fats, carbs, proteins, literal);//re-sets the inner functions of the objects, since JSON stringify does not consider them
-    }
-}
+const loadTotalMacros = () => global.totalMacros = doesNotExist(localStorage.getItem("totalMacros")) ? new Macros() : new Macros(...(()=> {
+    let {fats, carbs, proteins, time} = JSON.parse(localStorage.getItem("totalMacros"));
+    return [fats, carbs, proteins, time];
+})());
 
 const loadCurrentMacros = () => {
-    if (doesNotExist(localStorage.getItem("currentMacros"))){
+    let newMacrosForToday = false;
+    if (!doesNotExist(localStorage.getItem("currentMacros"))){
+        let {fats, carbs, proteins, time} = JSON.parse(localStorage.getItem("currentMacros"));
+        global.currentMacros = new Macros(fats, carbs, proteins, time);
+        newMacrosForToday = getCurrentTime().keyFromDate != global.currentMacros.keyFromDate;//check if loaded daily macros are not for today
+    }else{
+        newMacrosForToday = true;
+    }
+
+    if(newMacrosForToday){
         global.currentMacros = new Macros();
         save.currentMacros();
     }
-    else{
-        global.currentMacros = JSON.parse(localStorage.getItem("currentMacros"));
-        //check if loaded daily macros are for today
-        let currentDate = getCurrentTime();
-        if (currentDate.day == global.currentMacros.day && currentDate.month == global.currentMacros.month && currentDate.year == global.currentMacros.year) {
-            global.currentMacros = new Macros(global.currentMacros.fats, global.currentMacros.carbs, global.currentMacros.proteins, global.currentMacros.time);
-        } else {
-            //load new current macros for the day
-            global.currentMacros = new Macros();
-            save.currentMacros();
-        }
-    }
 }
 const loadSingleDayServing = () => {
-    if (doesNotExist(localStorage.getItem("singleDayServing"))) {
+    let newSingleDayServing = false;
+    if (!doesNotExist(localStorage.getItem("singleDayServing"))) {
+        let {time, fats, carbs, proteins, servings} = JSON.parse(localStorage.getItem("singleDayServing"));
+        global.singleDayServing = new SingleDayServing(time, fats, carbs, proteins, servings);
+        newSingleDayServing = global.singleDayServing.keyFromDate != getCurrentTime().keyFromDate;
+     }else{
+        newSingleDayServing = true;
+    }
+
+    if(newSingleDayServing){
         global.singleDayServing = new SingleDayServing();
-     } else {
-        let tmpObj = JSON.parse(localStorage.getItem("singleDayServing"));
-        global.singleDayServing = new SingleDayServing(tmpObj.time, tmpObj.fats, tmpObj.carbs, tmpObj.proteins, tmpObj.servings);
-        let time = getCurrentTime();
-        if (global.singleDayServing.day !== time.day || global.singleDayServing.month !== time.month || global.singleDayServing.year !== time.year)
-            global.singleDayServing = new SingleDayServing();
+        save.singleDayServing();
     }
 }
-const loadfavoriteServings = () => {
-    if(doesNotExist(localStorage.getItem("favoriteServings"))){
-        console.log("No Favorites");
-        global.favoriteServings = [];
-    }else{
-        global.favoriteServings = JSON.parse(localStorage.getItem("favoriteServings"));
-    }
-}
+const loadfavoriteServings = () => global.favoriteServings = doesNotExist(localStorage.getItem("favoriteServings")) ? [] : JSON.parse(localStorage.getItem("favoriteServings"));
 
-const loadHistoryTotalMacros = () => {
-    if (!doesNotExist(localStorage.getItem("historyTotalMacros"))){//save only on set of new macros! (unlike current daily macros)
-        global.historyTotalMacros = JSON.parse(localStorage.getItem("historyTotalMacros"));
-    }
-}
+const loadHistoryTotalMacros = () => global.historyTotalMacros = doesNotExist(localStorage.getItem("historyTotalMacros")) ? undefined :  JSON.parse(localStorage.getItem("historyTotalMacros"));
 
-const loadHistoryServings = () => {
-    if (!doesNotExist(localStorage.getItem("historyServings")))
-        global.historyServings = JSON.parse(localStorage.getItem("historyServings"));
-}
+const loadHistoryServings = () => global.historyServings = doesNotExist(localStorage.getItem("historyServings")) ? undefined : JSON.parse(localStorage.getItem("historyServings"));
 
 const loadEverything = function(funcsToRun = Object.keys(this)){
     if(funcsToRun.length == 0)

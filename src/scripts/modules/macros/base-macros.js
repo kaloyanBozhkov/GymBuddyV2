@@ -6,6 +6,14 @@ export default class BaseMacros{
         this.proteins = round(proteins);
     }
 
+    returnBaseMacrosObjectForSave(){
+        return {
+            fats:this.fats,
+            carbs:this.carbs,
+            proteins:this.proteins,
+        }
+    }
+
     static returnGrams(percentage, total, caloriePerGram){
         return (round((total * percentage / 100 / caloriePerGram) * 100) / 100);
     }

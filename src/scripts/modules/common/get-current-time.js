@@ -21,10 +21,3 @@ export default function(differentDate = 0, differentStartDate = null){
         time.date = new Date(`${time.month}/${time.day}/${time.year}`);//set date without time
         return time;
 }
-
-// export default class Time{
-//         constructor(differentDate = 0, differentStartDate = null){
-//                 this.date = 1;
-
-//         }
-// }
