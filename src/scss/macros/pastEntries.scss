@@ -31,5 +31,19 @@
     
 
     @include macrosContainerStyling("pastEntries");
-    @include entriesContainer("pastEntries");
+    @include entriesContainer("pastEntries", true);
+    > .pastEntries__container {
+        
+        &:not(.active){
+            > .pastEntries__entry{
+                opacity:1;
+                top:0;
+                animation-name:none;
+            }
+        }
+        > .pastEntries__entry{
+            margin: 10px 10px;
+            z-index: 1;
+        }
+    }
 }

@@ -7,8 +7,8 @@ export default servingId => {
     let totalMacros = new DateMacros(0, 0, 0, new Date(servingId));
     if (typeof global.historyServings != "undefined" && global.historyServings.hasOwnProperty(servingId)) {
         (function getSpecificPastSingleDayServingThatWillBeShown(){
-            let {time, fats, carbs, proteins} = global.historyServings[servingId];
-            currentServings = new SingleDayServing(time, fats, carbs, proteins);
+            let {time, fats, carbs, proteins, servings} = global.historyServings[servingId];
+            currentServings = new SingleDayServing(time, fats, carbs, proteins, servings);
         })();
         (function getTotalMacrosForThatSpecificPastSingleDayServing(){
             let {time, fats, carbs, proteins} = global.historyTotalMacros[global.historyServings[servingId].totalMacrosId];

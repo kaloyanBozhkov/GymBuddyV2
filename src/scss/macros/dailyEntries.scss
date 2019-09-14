@@ -1,8 +1,9 @@
 @import 'macros/common/entries-container';
+
 #dailyEntries{
     min-height: 5.556rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    @include entriesContainer("dailyEntries");
+    @include entriesContainer("dailyEntries", true);
 }

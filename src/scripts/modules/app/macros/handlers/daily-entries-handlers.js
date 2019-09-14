@@ -10,10 +10,11 @@ import closeAlert from '../../common/close-alert';
 import BaseMacros from '../../../macros/base-macros';
 
 export default () => {
-    $(document).on("click", ".dailyEntries__entry", function () {
+    //Handler is same for DailyEntries and PastEntries
+    $(document).on("click", ".dailyEntries__entry, .pastEntries__entry", function () {
         $(this).toggleClass("active");
     });
-
+    //Handler is same for DailyEntries and PastEntries
     $(document).on("click", ".saveEntry", function () {
         alertMsg("addFavorites", true, ["VALUETITLE", "VALUEFATS", "VALUECARBS", "VALUEPROTEINS", "VALUEGRAMS"], [$(this).data("values").itemName, $(this).data("values").fats, $(this).data("values").carbs, $(this).data("values").proteins, $(this).data("values").servingSize]);
     });

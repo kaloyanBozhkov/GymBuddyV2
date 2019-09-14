@@ -37,13 +37,14 @@ const createEntryRowsForServing = ({fats, carbs, proteins, itemName, servingSize
     </div>
 </div>
 </div>`;
-
 export default (containerSelector = ".dailyEntries", singleDayServing = global.singleDayServing, msgDate) => {
-    debugger;
     let container = containerSelector.substr(1);
     let singleServingEntryDiv = singleDayServing.servings.length == 0 ? 
-    `<p data-when='${msgDate ? msgDate : "today yet"}'>No servings have been added for</p>` : 
-    singleDayServing.servings.reduceRight((acc, s, j) => [...acc, createEntryRowsForServing(s, container, containerSelector, j)] ,[]).join("");
-    $(`${containerSelector}__container`).empty().append(singleServingEntryDiv);//one DOM API call!
-    console.log(`Finished ${container} loadDailyServings`);
+    `<p data-when='${msgDate ? `on ${msgDate}` : "for today yet"}'>No servings have been added</p>` : 
+    singleDayServing.servings.reduceRight((acc, s, j) => [...acc, createEntryRowsForServing(s, container, containerSelector, j)], []).join("");
+    container = $(`${containerSelector}__container`);
+    setTimeout(()=>{
+        container.empty().append(singleServingEntryDiv);//one DOM API update call!
+    }, container.hasClass("active") ? 450 : 0);//if its open, wait for it to hide and then update (for Past Entries)
+    console.log(`Finished ${container.attr("class")} loadDailyServings`);
 }

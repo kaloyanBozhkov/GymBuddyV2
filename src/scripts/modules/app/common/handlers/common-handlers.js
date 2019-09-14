@@ -35,7 +35,7 @@ export default () => {
     $(document).on("touchend", ".hoverableGoldButton", function(){
         setTimeout(()=>{
             $(this).addClass("noHover");
-        },300);
+        },600);
     });
     $(document).on("mouseleave focusout touchstart", ".hoverableGoldButton", function(){
         $(this).removeClass("noHover");

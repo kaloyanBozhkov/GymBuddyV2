@@ -1,5 +1,16 @@
 @import '../../common/mixins/three-color-underline';
-@mixin entriesContainer($containerName){
+
+@keyframes slideEntryIn{
+    0%{
+        opacity:0;
+        top:50px;
+    }
+    100%{
+        opacity: 1;
+        top:0;
+    }
+}
+@mixin entriesContainer($containerName, $withSlideInChildren: false){
     > .#{$containerName}__container{
         flex-grow:1;
         display: flex;
@@ -11,11 +22,33 @@
             padding: 20px;
             text-align:center;
             &::after{
-                content: ' ' attr(data-when);
-                display: inline;
+                @if $containerName == "pastEntries" {
+                    content: attr(data-when);
+                    display: block;
+                }@else{
+                    content: ' ' attr(data-when);
+                    display: inline;
+                }
             }
         }
+
+        @if $withSlideInChildren {
+            @for $i from 0 through 20{
+                >  .#{$containerName}__entry:nth-child(#{$i}){
+                    animation-delay: $i * 100ms;
+                }
+            }
+        }
+
         > .#{$containerName}__entry{
+
+            @if $withSlideInChildren {
+                position: relative;
+                top:50px;
+                opacity:0;
+                @include animation(slideEntryIn, 300ms);
+            }
+
             margin: 10px 0;
             > .formatedRow{
                 > p{
