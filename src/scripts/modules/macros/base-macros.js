@@ -1,6 +1,6 @@
 import {round} from '../common/utilities';
 export default class BaseMacros{
-    constructor(fats, carbs, proteins){
+    constructor(fats = 0, carbs = 0, proteins = 0){
         this.fats = round(fats);
         this.carbs = round(carbs);
         this.proteins = round(proteins);

@@ -55,19 +55,6 @@
     }
 
     &.whiteRibbonHeader--withArrowsAndText{
-        width: 11.28rem;
-        height: 1.667rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        p{
-            height: 100%;
-            flex-grow:1;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-around;
-        }
         .menu-left,.menu-right{
             width:1.222rem;
             font-size: 0.8889rem;
@@ -81,6 +68,22 @@
                 transform: scale(0.9);
                 opacity: 0.6;
             }
+        }
+    }
+
+    &.whiteRibbonHeader--withArrowsAndText, &.whiteRibbonHeader--withText{
+        width: 11.28rem;
+        height: 1.667rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        p{
+            height: 100%;
+            flex-grow:1;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
         }
     }
 

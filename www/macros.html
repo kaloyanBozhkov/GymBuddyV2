@@ -228,202 +228,198 @@
 <!-- START CALORIC DISTRIBUTION -->
 
 <div id="caloricDistribution" class="card" data-title="Caloric Distribution">
-    <div class="caloricDistribution__mainContainer">
-        <div class="caloricDistribution__mainContainer__header">
-            <!-- WHITE RIBBON -->
-            <div class="whiteRibbonHeader whiteRibbonHeader--withArrowsAndText whiteRibbonHeader--centered">
+    <div class="wrapper">
+        <div class="caloricDistribution__mainContainer active">
+            <div class="caloricDistribution__mainContainer__header">
+                <!-- WHITE RIBBON -->
+                <div class="whiteRibbonHeader whiteRibbonHeader--withArrowsAndText whiteRibbonHeader--centered">
+                        <div class="wrapper">
+                            <div class="menu-left">
+                                <i class="fas fa-angle-left"></i>
+                            </div>
+                            <p class="caloricDistribution__mainContainer__displayWeekLabel"> - </p>
+                            <div class="menu-right">
+                                <i class="fas fa-angle-right"></i>
+                            </div>
+                        </div>
+                        <div class="whiteRibbon__background whiteRibbon__background--left">
+                            <svg width="100%" height="100%" viewBox="-12 -4 32 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <filter id="shadow">
+                                        <feDropShadow dx="0" dy="0" stdDeviation="2"/>
+                                    </filter>
+                                </defs>
+                                <path d="M0 0L13 23L0 46H22V0H0Z" style="fill:white; filter: url(#shadow)"/>
+                            </svg>
+                        </div>
+                        <div class="whiteRibbon__background whiteRibbon__background--right">
+                            <svg width="100%" height="100%" viewBox="-12 -4 32 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <filter id="shadow">
+                                        <feDropShadow dx="0" dy="0" stdDeviation="2"/>
+                                    </filter>
+                                </defs>
+                                <path d="M0 0L13 23L0 46H22V0H0Z" style="fill:white; filter: url(#shadow)"/>
+                            </svg>
+                        </div>
+                </div>
+                <!-- END WHITE RIBBON -->
+                <!-- HANGING SIGN -->
+                <div class="hangingSign hangingSign--withSubtitle">
                     <div class="wrapper">
-                        <div class="menu-left">
-                            <i class="fas fa-angle-left"></i>
-                        </div>
-                        <p class="caloricDistribution__mainContainer__displayWeekLabel" data-start="13/1/19" data-end="19/1/19"> - </p>
-                        <div class="menu-right">
-                            <i class="fas fa-angle-right"></i>
-                        </div>
+                        <p data-title="7 DAYS TOTAL">0</p>
                     </div>
-                    <div class="whiteRibbon__background whiteRibbon__background--left">
-                        <svg width="100%" height="100%" viewBox="-12 -4 32 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <filter id="shadow">
-                                    <feDropShadow dx="0" dy="0" stdDeviation="2"/>
-                                </filter>
-                            </defs>
-                            <path d="M0 0L13 23L0 46H22V0H0Z" style="fill:white; filter: url(#shadow)"/>
-                        </svg>
-                    </div>
-                    <div class="whiteRibbon__background whiteRibbon__background--right">
-                        <svg width="100%" height="100%" viewBox="-12 -4 32 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <filter id="shadow">
-                                    <feDropShadow dx="0" dy="0" stdDeviation="2"/>
-                                </filter>
-                            </defs>
-                            <path d="M0 0L13 23L0 46H22V0H0Z" style="fill:white; filter: url(#shadow)"/>
-                        </svg>
-                    </div>
-            </div>
-            <!-- END WHITE RIBBON -->
-            <!-- HANGING SIGN -->
-            <div class="hangingSign hangingSign--withSubtitle">
-                <div class="wrapper">
-                    <p data-title="WEEKLY TOTAL">0</p>
                 </div>
+                <!-- END HANGING SIGN -->
             </div>
-            <!-- END HANGING SIGN -->
-        </div>
-        <div class="caloricDistribution__mainContainer__mainContainer">
-            <!-- START GRAPH -->
-                <div class="graphContainer">
-                    <div class="graphContainer__totalCalories"> 
-                       <ul>
-                            <li><p>3500</p></li>
-                            <li><p>3000</p></li>
-                            <li><p>2500</p></li>
-                            <li><p>2000</p></li>
-                            <li><p>1500</p></li>
-                            <li><p>1000</p></li>
-                            <li><p>500</p></li>
-                            <li><p>0</p></li>
-                       </ul>
-                    </div>
-
-                    <div class="graphContainer__content">
+            <div class="caloricDistribution__mainContainer__mainContainer">
+                <!-- START GRAPH -->
+                    <div class="graphContainer">
+                        <div class="graphContainer__totalCalories"> 
                         <ul>
-                            <li data-total-calories="0">
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                            </li>
-                            <li data-total-calories="0">
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                            </li>
-                            <li data-total-calories="0">
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                            </li>
-                            <li data-total-calories="0">
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                            </li>
-                            <li data-total-calories="0">
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                            </li>
-                            <li data-total-calories="0">
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                            </li>
-                            <li data-total-calories="0">
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                                <div data-percent="0%" data-grams="0g"></div>
-                            </li>
+                                <li><p>3500</p></li>
+                                <li><p>3000</p></li>
+                                <li><p>2500</p></li>
+                                <li><p>2000</p></li>
+                                <li><p>1500</p></li>
+                                <li><p>1000</p></li>
+                                <li><p>500</p></li>
+                                <li><p>0</p></li>
                         </ul>
-                    </div>
+                        </div>
 
-                    <div class="graphContainer__weekDays">
-                        <ul>
-                            <li><p data-day="Mon" data-date="13"></p></li>
-                            <li><p data-day="Tue" data-date="14"></p></li>
-                            <li><p data-day="Wed" data-date="15"></p></li>
-                            <li><p data-day="Thur" data-date="16"></p></li>
-                            <li><p data-day="Fri" data-date="17"></p></li>
-                            <li><p data-day="Sat" data-date="18"></p></li>
-                            <li><p data-day="Sun" data-date="19"></p></li>
-                        </ul>
+                        <div class="graphContainer__content">
+                            <ul>
+                                <li data-total-calories="0">
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                </li>
+                                <li data-total-calories="0">
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                </li>
+                                <li data-total-calories="0">
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                </li>
+                                <li data-total-calories="0">
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                </li>
+                                <li data-total-calories="0">
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                </li>
+                                <li data-total-calories="0">
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                </li>
+                                <li data-total-calories="0">
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                    <div data-percent="0%" data-grams="0g"></div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="graphContainer__weekDays">
+                            <ul>
+                                <li><p data-day="Mon" data-date="13"></p></li>
+                                <li><p data-day="Tue" data-date="14"></p></li>
+                                <li><p data-day="Wed" data-date="15"></p></li>
+                                <li><p data-day="Thur" data-date="16"></p></li>
+                                <li><p data-day="Fri" data-date="17"></p></li>
+                                <li><p data-day="Sat" data-date="18"></p></li>
+                                <li><p data-day="Sun" data-date="19"></p></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            <!-- END GRAPH -->
-        </div>
-    </div>
-    <div class="caloricDistribution__detailsContainer">
-        <div class="caloricDistribution__detailsContainer__header">
-            <div>
-                <!-- BACK BUTTON -->
-                <div class="menu-back" class="goldenPlateButton">
-                    <i class="fas fa-arrow-left"></i>
-                </div>
-                <!-- END BACK BUTTON -->
+                <!-- END GRAPH -->
             </div>
-            <div>
-                 <!-- WHITE RIBBON -->
-                <div class="whiteRibbonHeader whiteRibbonHeader--withArrowsAndText whiteRibbonHeader--box">
+        </div>
+        <div class="caloricDistribution__detailsContainer">
+            <div class="caloricDistribution__detailsContainer__header">
+                <div>
+                    <!-- BACK BUTTON -->
+                    <div class="menu-back" class="goldenPlateButton">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                    <!-- END BACK BUTTON -->
+                </div>
+                <div>
+                    <!-- WHITE RIBBON -->
+                    <div class="whiteRibbonHeader whiteRibbonHeader--withText whiteRibbonHeader--box">
+                        <div class="wrapper">
+                            <p class="caloricDistribution__detailsContainer__displayDateLabel">Mon, 20 Jun 2016</p>
+                        </div>
+                        <div class="whiteRibbon__background whiteRibbon__background--left">
+                            <svg width="100%" height="100%" viewBox="-12 -4 32 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <filter id="shadow">
+                                        <feDropShadow dx="0" dy="0" stdDeviation="2"/>
+                                    </filter>
+                                </defs>
+                                <path d="M0 0L13 23L0 46H22V0H0Z" style="fill:white; filter: url(#shadow)"/>
+                            </svg>
+                        </div>
+                        <div class="whiteRibbon__background whiteRibbon__background--right">
+                            <svg width="100%" height="100%" viewBox="-12 -4 32 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <filter id="shadow">
+                                        <feDropShadow dx="0" dy="0" stdDeviation="2"/>
+                                    </filter>
+                                </defs>
+                                <path d="M0 0L13 23L0 46H22V0H0Z" style="fill:white; filter: url(#shadow)"/>
+                            </svg>
+                        </div>
+                </div>
+                <!-- END WHITE RIBBON -->
+                <!-- HANGING SIGN -->
+                <div class="hangingSign">
                     <div class="wrapper">
-                        <div class="menu-left">
-                            <i class="fas fa-angle-left"></i>
-                        </div>
-                        <p class="caloricDistribution__detailsContainer__displayDateLabel">Mon, 20 Jun 2016</p>
-                        <div class="menu-right">
-                            <i class="fas fa-angle-right"></i>
-                        </div>
+                        <p><span class="caloricDistribution__detailsContainer__currentCalories">0</span>/<span class="caloricDistribution__detailsContainer__totalCalories">5000</span></p>
                     </div>
-                    <div class="whiteRibbon__background whiteRibbon__background--left">
-                        <svg width="100%" height="100%" viewBox="-12 -4 32 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <filter id="shadow">
-                                    <feDropShadow dx="0" dy="0" stdDeviation="2"/>
-                                </filter>
-                            </defs>
-                            <path d="M0 0L13 23L0 46H22V0H0Z" style="fill:white; filter: url(#shadow)"/>
-                        </svg>
-                    </div>
-                    <div class="whiteRibbon__background whiteRibbon__background--right">
-                        <svg width="100%" height="100%" viewBox="-12 -4 32 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <filter id="shadow">
-                                    <feDropShadow dx="0" dy="0" stdDeviation="2"/>
-                                </filter>
-                            </defs>
-                            <path d="M0 0L13 23L0 46H22V0H0Z" style="fill:white; filter: url(#shadow)"/>
-                        </svg>
-                    </div>
-            </div>
-            <!-- END WHITE RIBBON -->
-            <!-- HANGING SIGN -->
-            <div class="hangingSign">
-                <div class="wrapper">
-                    <p><span class="caloricDistribution__detailsContainer__currentCalories">0</span>/<span class="caloricDistribution__detailsContainer__totalCalories">5000</span></p>
+                </div>
+                <!-- END HANGING SIGN -->
                 </div>
             </div>
-            <!-- END HANGING SIGN -->
+            <!-- CALORIES/MACROS TRACKER CONTAINER -->
+            <div class="caloricDistribution__detailsContainer__mainContainer">
+                <div>
+                    <div class="progressBar" data-title="FATS">
+                        <div id="barFats"><div></div></div>
+                        <i id="warningFats" class="fas fa-exclamation-triangle hidden"></i>
+                    </div>
+                    <div class="displayText" data-title="GRAMS">
+                        <p><span id="currentFats"></span>/<span id="totalFats"></span></p>
+                    </div>
+                </div>
+                <div>
+                    <div class="progressBar" data-title="CARBS">
+                        <div id="barCarbs"><div></div></div>
+                        <i id="warningCarbs" class="fas fa-exclamation-triangle hidden"></i>
+                    </div>
+                    <div class="displayText" data-title="GRAMS">
+                        <p><span id="currentCarbs"></span>/<span id="totalCarbs"></span></p>
+                    </div>
+                </div>
+                <div>
+                    <div class="progressBar" data-title="PROTEINS">
+                        <div id="barProteins"><div></div></div>
+                        <i id="warningProteins" class="fas fa-exclamation-triangle hidden"></i>
+                    </div>
+                    <div class="displayText" data-title="GRAMS">
+                        <p><span id="currentProteins"></span>/<span id="totalProteins"></span></p>
+                    </div>
+                </div>
             </div>
+            <!-- END CALORIES/MACROS TRACKER CONTAINER -->
         </div>
-        <!-- CALORIES/MACROS TRACKER CONTAINER -->
-        <div class="caloricDistribution__detailsContainer__mainContainer">
-            <div>
-                <div class="progressBar" data-title="FATS">
-                    <div id="barFats"><div></div></div>
-                    <i id="warningFats" class="fas fa-exclamation-triangle hidden"></i>
-                </div>
-                <div class="displayText" data-title="GRAMS">
-                    <p><span id="currentFats"></span>/<span id="totalFats"></span></p>
-                </div>
-            </div>
-            <div>
-                <div class="progressBar" data-title="CARBS">
-                    <div id="barCarbs"><div></div></div>
-                    <i id="warningCarbs" class="fas fa-exclamation-triangle hidden"></i>
-                </div>
-                <div class="displayText" data-title="GRAMS">
-                    <p><span id="currentCarbs"></span>/<span id="totalCarbs"></span></p>
-                </div>
-            </div>
-            <div>
-                <div class="progressBar" data-title="PROTEINS">
-                    <div id="barProteins"><div></div></div>
-                    <i id="warningProteins" class="fas fa-exclamation-triangle hidden"></i>
-                </div>
-                <div class="displayText" data-title="GRAMS">
-                    <p><span id="currentProteins"></span>/<span id="totalProteins"></span></p>
-                </div>
-            </div>
-        </div>
-        <!-- END CALORIES/MACROS TRACKER CONTAINER -->
     </div>
     <!-- END CALORIC DISTRIBUTION -->

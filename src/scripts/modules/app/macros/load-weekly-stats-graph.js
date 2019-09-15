@@ -1,91 +1,96 @@
 import global from '../../global-variables';
 import getTime from '../../common/get-current-time';
-import {round} from '../../common/utilities';
-
-export default function(){
-    // console.log("Starting macros graph load..");
-    // var highestCalorieCountOfLast7Days = getHighestTotalMacrosFromLast7Days();
-    // var singleIncrementUnit = Math.round(highestCalorieCountOfLast7Days) / 4;
-    // highestCalorieCountOfLast7Days += singleIncrementUnit;
-    // var graphMaxHeight = $("#statsBox").height() - 30;//30 is to offset to height of last index eg 3500
-    // for (let j = 1; j < 8; j++) {
-    //     let pastDate = getTime(-j);
-    //     let singleDayServingId = pastDate.keyFromDate;
-
-    //     $("#xAxisDays p:nth-of-type(" + (8 - j) + ")").html(pastDate.dayNameShort + "<br/>" + pastDate.day);
-    //     let tmpObj = {
-    //         calsFats: 0,
-    //         calsCarbs: 0,
-    //         calsProteins: 0,
-    //         fats: 0,
-    //         carbs: 0,
-    //         proteins: 0
-    //     };
-    //     if (global.historyServings.hasOwnProperty(singleDayServingId)) {
-    //         tmpObj.calsFats = round(global.historyServings[singleDayServingId].fats * 9);
-    //         tmpObj.calsCarbs = round(global.historyServings[singleDayServingId].carbs * 4);
-    //         tmpObj.calsProteins = round(global.historyServings[singleDayServingId].proteins * 4);
-    //         tmpObj.fats = getHeightForGraph(tmpObj.calsFats, highestCalorieCountOfLast7Days, graphMaxHeight);
-    //         tmpObj.carbs = getHeightForGraph(tmpObj.calsCarbs, highestCalorieCountOfLast7Days, graphMaxHeight);
-    //         tmpObj.proteins = getHeightForGraph(tmpObj.calsProteins, highestCalorieCountOfLast7Days, graphMaxHeight);
-    //     }
-    //     setGraphDivValues((8 - j), tmpObj, graphMaxHeight);
-    // }
-
-    // if (highestCalorieCountOfLast7Days > 0) {
-    //     $("#calorieIndex p").each(function () {
-    //         $(this).html(highestCalorieCountOfLast7Days);
-    //         highestCalorieCountOfLast7Days -= singleIncrementUnit;
-    //     });
-    // } else {
-    //     $("#graphOldValuesDisplayer > div > p").html("No entries within last 7 days.");
-    // }
-    // console.log("Completed loading graph!");
+import BaseMacros from '../../macros/base-macros';
+import {round, calculatePercentage} from '../../common/utilities';
+//parameters are getTime objects
+const getHighestTotalMacrosCaloriesFromAllSingleDayServingsWithinPeriod = (startDate, endDate) => {
+    let maxTotalMacroCalories = 0;
+    while(startDate.date <= endDate.date){
+        if (global.historyServings.hasOwnProperty(startDate.keyFromDate) &&//there was a single day serving for that date
+            global.historyTotalMacros.hasOwnProperty(global.historyServings[startDate.keyFromDate].totalMacrosId)) //its totalMacorsId is found in history total macros
+            maxTotalMacroCalories = (()=>{ //if that total macros's total calories is greater than current max, update it
+                let caloriesForTotalMacros = (BaseMacros.returnTotalCalories(...(()=>{
+                    let {fats, carbs, proteins} = global.historyTotalMacros[global.historyServings[startDate.keyFromDate].totalMacrosId];
+                    return [fats, carbs, proteins];
+                })()));
+                return (caloriesForTotalMacros > maxTotalMacroCalories ? caloriesForTotalMacros : maxTotalMacroCalories);
+            })();
+        startDate = getTime(+1, startDate.date);
+    }
+    return maxTotalMacroCalories;
 }
 
-function setGraphDivValues(count, tmpObj) {
-    $("#myDopeTable > div:nth-of-type(" + count + ")").data("values", tmpObj);
+const setAxisX = (currDate, axisXArr) => {
+    if(axisXArr.length == 0)
+        return;
 
-    //sets graph heights
-    $("#myDopeTable > div:nth-of-type(" + count + ") .fatsTable").css("height", tmpObj.fats + "px");
-    $("#myDopeTable > div:nth-of-type(" + count + ") .carbsTable").css("height", tmpObj.carbs + "px");
-    $("#myDopeTable > div:nth-of-type(" + count + ") .proteinsTable").css("height", tmpObj.proteins + "px");
+    $(axisXArr[0]).attr("data-day", currDate.dayNameShort).attr("data-date",  currDate.day);
 
+    setAxisX(getTime(+1, currDate.date), axisXArr.slice(1));
+}
+const setAxisY = (maxCals, decrementor, axisYArr, isFirstElement = 0) => {//Y axis shows total calories (calculated form total macros). start has 0, end has max calories of total macros of period
+    if(axisYArr.length == 0)
+        return;
 
-    $("#myDopeTable > div:nth-of-type(" + count + ") .fatsTable p:first-of-type").html((tmpObj.fats > 8 ? tmpObj.calsFats : "")); //min height of 8px for each block for calories text to fit in, otherwise hide
-    $("#myDopeTable > div:nth-of-type(" + count + ") .carbsTable p:first-of-type").html((tmpObj.carbs > 8 ? tmpObj.calsCarbs : ""));
-    $("#myDopeTable > div:nth-of-type(" + count + ") .proteinsTable p:first-of-type").html((tmpObj.proteins > 8 ? tmpObj.calsProteins : ""));
+    let tmpStore = round(maxCals - decrementor * isFirstElement);//dont subtract from max if its for first display. Quicker than shorthand if statement.
+    $(axisYArr[0]).html(parseInt(tmpStore));//no need to show dot decimals for this
 
-
-    $("#myDopeTable > div:nth-of-type(" + count + ") .fatsTable p:last-of-type").html((tmpObj.fats > 23 ? parseFloat((tmpObj.calsFats / 9).toFixed(2)) + "g" : ""));//if height greater than 23px then can fit grams under calories
-    $("#myDopeTable > div:nth-of-type(" + count + ") .carbsTable p:last-of-type").html((tmpObj.carbs > 23 ? parseFloat((tmpObj.calsCarbs / 4).toFixed(2)) + "g" : ""));
-    $("#myDopeTable > div:nth-of-type(" + count + ") .proteinsTable p:last-of-type").html((tmpObj.proteins > 23 ? parseFloat((tmpObj.calsProteins / 4).toFixed(2)) + "g" : ""));
+    setAxisY(tmpStore, decrementor, axisYArr.slice(1), 1);
 }
 
-function getHeightForGraph(macroCalories, maxGraphCalories, graphHeightAtMaxGraphCalories) {
-    //passing:
-    //macroCalories, which is fats, proteins of carbs in calories
-    //maxGraphCalories, which is x (3500 on default)
-    //graphHeightAtMaxGraphCalories, which is 200px for 3500 on default
-    return (macroCalories * 100 / maxGraphCalories) / 100 * graphHeightAtMaxGraphCalories;
+const toggleBarDivClasses = (barDiv, grams, percent) => {
+    barDiv = $(barDiv);
+    barDiv.removeClass("onlyPercent noDisplay");
+    if(grams == 0 || percent < 5)
+        barDiv.addClass("noDisplay");
+    else if(percent < 10)
+        barDiv.addClass("onlyPercent");
 }
 
+const setBars = (currDate, barsArr, maxCalories) => {//array of 7x li with 3 divs inside
+    if(barsArr.length == 0)
+    return;
+    let macrosForCurrDay = global.historyServings.hasOwnProperty(currDate.keyFromDate) ? global.historyServings[currDate.keyFromDate] : new BaseMacros();
+    let li = $(barsArr[0]);
+    li.attr("data-total-calories", BaseMacros.returnTotalCalories(...(()=>{
+        let {fats, carbs, proteins} = macrosForCurrDay;
+        return [fats, carbs, proteins];
+    })()));
 
-function getHighestTotalMacrosFromLast7Days() {
-    // var totalMacroIdsToCheck = [];
-    // for (let j = 1; j < 8; j++) {
-    //     let singleDayServingId = getTime(-j).keyFromDate;
+    let bars = li.children("div");
 
-    //     if (global.historyServings.hasOwnProperty(singleDayServingId))
-    //         totalMacroIdsToCheck.push(global.historyServings[singleDayServingId].totalMacrosId);
-    // }
-    // var maxTotalMacros = 0;
-    // for (let j = 0; j < totalMacroIdsToCheck.length; j++)
-    //     if (global.historyTotalMacros.hasOwnProperty(totalMacroIdsToCheck[j])) {
-    //         let totalCals = global.historyTotalMacros[totalMacroIdsToCheck[j]].calculateCalories();
-    //         if (maxTotalMacros < totalCals)
-    //             maxTotalMacros = totalCals;
-    //     }
+    let {fats, carbs, proteins} = macrosForCurrDay;
+    let [fatsCals, carbsCals, proteinsCals] = BaseMacros.returnCaloriesForMacros(fats, carbs, proteins);
+    let fatsPercent = calculatePercentage(fatsCals, maxCalories);
+    let carbsPercent = calculatePercentage(carbsCals, maxCalories);
+    let proteinsPercent = calculatePercentage(proteinsCals, maxCalories);
 
-    // return Math.round(maxTotalMacros);
+    $(bars[0]).attr("data-percent", fatsPercent).attr("data-grams", fats).css("height", `${fatsPercent}%`);
+    $(bars[1]).attr("data-percent", carbsPercent).attr("data-grams", carbs).css("height", `${carbsPercent}%`);
+    $(bars[2]).attr("data-percent", proteinsPercent).attr("data-grams", proteins).css("height", `${proteinsPercent}%`);
+
+    toggleBarDivClasses(bars[0], fats, fatsPercent);
+    toggleBarDivClasses(bars[1], carbs, carbsPercent);
+    toggleBarDivClasses(bars[2], proteins, proteinsPercent);
+
+    setBars(getTime(+1, currDate.date), barsArr.slice(1), maxCalories);
+}
+
+const setDisplayDate = (startDate, endDate) => {
+    let displayDatesHtml = $(".caloricDistribution__mainContainer__displayWeekLabel");
+    displayDatesHtml.attr("data-start", startDate.keyFromDate).attr("data-end", endDate.keyFromDate);
+}
+
+const setWeeklyTotalSign = liArr => {
+    $(".caloricDistribution__mainContainer__header .hangingSign p").html(liArr.reduce((acc, i) => acc + $(i).data("totalCalories"), 0));
+}
+export default (startDate = getTime(-7), endDate = getTime(-1)) => {
+    setDisplayDate(startDate, endDate);
+    let highestCalorieCountOfLast7Days = getHighestTotalMacrosCaloriesFromAllSingleDayServingsWithinPeriod(startDate, endDate);
+    setAxisY(highestCalorieCountOfLast7Days, highestCalorieCountOfLast7Days / 7, Array.from($(".graphContainer__totalCalories li p")));
+    setAxisX(startDate, Array.from($(".graphContainer__weekDays li p")));
+    let liArr = Array.from($(".graphContainer__content li"));
+    setBars(startDate, liArr, highestCalorieCountOfLast7Days);
+    setWeeklyTotalSign(liArr);
+    console.log("Completed loading graph!");
 }

@@ -1,11 +1,34 @@
 @import './common/macros-container';
 #caloricDistribution{
-    .caloricDistribution__mainContainer{
+    > .wrapper{
         padding:15px 5px 5px 5px;
+        display:flex;
+        flex-direction: row;
+        overflow:hidden;
+        > div{
+            flex-shrink:0;
+            width:100%;
+            transition: all 400ms;
+            &:not(.active){
+                opacity:0;
+            }
+            &:first-of-type{
+                &.active{
+                    margin-left:0;
+                }
+                &:not(.active){
+                    margin-left:-100%;
+                }
+            }
+        }
+    }
+
+    .caloricDistribution__mainContainer{
         .caloricDistribution__mainContainer__header{
             .whiteRibbonHeader{
                 margin-bottom: -4px;
                 .caloricDistribution__mainContainer__displayWeekLabel{
+                    font-size: 0.9rem;
                     &::before{
                         content: attr(data-start);
                     }
@@ -32,6 +55,15 @@
                     justify-content: space-evenly;
                     li{
                         flex-grow: 1;
+                        &:hover, &:focus, &:active{
+                            > div{
+                                border-left:1px dashed black;
+                                border-right:1px dashed black;
+                                &:first-of-type{
+                                    border-top:1px dashed black;
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -101,7 +133,10 @@
                         flex-direction: column;
                         justify-content: flex-end;
                         align-items: stretch;
-
+                        &::before{
+                            content: attr(data-total-calories);
+                            font-size: 0.7rem;
+                        }
                         &:not(:last-of-type){
                             margin-right:2px;
                         }
@@ -136,6 +171,10 @@
                                     display: none;
                                 }
                             }
+
+                            &:not(.noDisplay):first-of-type{
+                                border-radius: 3px 3px 0 0;
+                            }
                         }
 
                         > div:first-of-type{
@@ -152,8 +191,15 @@
                     }
                 }
 
+                .graphContainer__weekDays, .graphContainer__content{
+                    ul li{
+                        width: 14.28%;
+                    }
+                }
+
                .graphContainer__weekDays{
                     position: absolute;
+                    padding-left: 4px;
                     height:42px;
                     left:42px;
                     right:0;
@@ -206,7 +252,6 @@
     }
 
     .caloricDistribution__detailsContainer{
-        display: none;
        .caloricDistribution__detailsContainer__header{
             display: flex;
             flex-direction: row;
