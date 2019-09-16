@@ -49,29 +49,37 @@ const toggleBarDivClasses = (barDiv, grams, percent) => {
 
 const setBars = (currDate, barsArr, maxCalories) => {//array of 7x li with 3 divs inside
     if(barsArr.length == 0)
-    return;
+        return;
+
     let macrosForCurrDay = global.historyServings.hasOwnProperty(currDate.keyFromDate) ? global.historyServings[currDate.keyFromDate] : new BaseMacros();
+    
     let li = $(barsArr[0]);
-    li.attr("data-total-calories", BaseMacros.returnTotalCalories(...(()=>{
+    
+    (function setBarTotalCaloriesAttrForDisplayAndAddServingsAndTotalMacrosToDataForLoadDetails(){
+        let totalMacrosForCurrDay =  macrosForCurrDay.hasOwnProperty("totalMacrosId") ? global.historyTotalMacros[macrosForCurrDay.totalMacrosId] : new BaseMacros();
+        li.attr("data-total-calories", BaseMacros.returnTotalCalories(...(()=>{
+            let {fats, carbs, proteins} = macrosForCurrDay;
+            return [fats, carbs, proteins];
+        })())).data("servings", macrosForCurrDay).data("totalMacros", totalMacrosForCurrDay);
+    })();
+
+    (function setFatsCarbsProteinsBarsInsideLi(){
+        let bars = li.children("div");
+
         let {fats, carbs, proteins} = macrosForCurrDay;
-        return [fats, carbs, proteins];
-    })()));
-
-    let bars = li.children("div");
-
-    let {fats, carbs, proteins} = macrosForCurrDay;
-    let [fatsCals, carbsCals, proteinsCals] = BaseMacros.returnCaloriesForMacros(fats, carbs, proteins);
-    let fatsPercent = calculatePercentage(fatsCals, maxCalories);
-    let carbsPercent = calculatePercentage(carbsCals, maxCalories);
-    let proteinsPercent = calculatePercentage(proteinsCals, maxCalories);
-
-    $(bars[0]).attr("data-percent", fatsPercent).attr("data-grams", fats).css("height", `${fatsPercent}%`);
-    $(bars[1]).attr("data-percent", carbsPercent).attr("data-grams", carbs).css("height", `${carbsPercent}%`);
-    $(bars[2]).attr("data-percent", proteinsPercent).attr("data-grams", proteins).css("height", `${proteinsPercent}%`);
-
-    toggleBarDivClasses(bars[0], fats, fatsPercent);
-    toggleBarDivClasses(bars[1], carbs, carbsPercent);
-    toggleBarDivClasses(bars[2], proteins, proteinsPercent);
+        let [fatsCals, carbsCals, proteinsCals] = BaseMacros.returnCaloriesForMacros(fats, carbs, proteins);
+        let fatsPercent = calculatePercentage(fatsCals, maxCalories);
+        let carbsPercent = calculatePercentage(carbsCals, maxCalories);
+        let proteinsPercent = calculatePercentage(proteinsCals, maxCalories);
+    
+        $(bars[0]).attr("data-percent", fatsPercent).attr("data-grams", fats).css("height", `${fatsPercent}%`);
+        $(bars[1]).attr("data-percent", carbsPercent).attr("data-grams", carbs).css("height", `${carbsPercent}%`);
+        $(bars[2]).attr("data-percent", proteinsPercent).attr("data-grams", proteins).css("height", `${proteinsPercent}%`);
+    
+        toggleBarDivClasses(bars[0], fats, fatsPercent);
+        toggleBarDivClasses(bars[1], carbs, carbsPercent);
+        toggleBarDivClasses(bars[2], proteins, proteinsPercent);
+    })();
 
     setBars(getTime(+1, currDate.date), barsArr.slice(1), maxCalories);
 }

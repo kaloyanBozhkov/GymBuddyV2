@@ -5,6 +5,16 @@ import errorMsg from '../../common/error';
 import alertMsg from '../../common/alert-msg';
 import updateBarWidths from '../update-bar-widths';
 import closeAlert from '../../common/close-alert';
+
+const setPercentCarbs = carbs =>  $(".setPercentagesSection__totalMacros .carbs").html(carbs);
+const setPercentFats = fats =>  $(".setPercentagesSection__totalMacros .fats").html(fats);
+const setPercentProteins = proteins =>  $(".setPercentagesSection__totalMacros .proteins").html(proteins);
+const setPercentSection = (fats, carbs, proteins) => {
+    setPercentProteins(proteins);
+    setPercentCarbs(carbs);
+    setPercentFats(fats);
+}
+
 export default () => {
     //Set New Goal For Calories
     $(document).on("focusout", "#percentProteins, #percentCarbs, #percentFats, #totalCaloriesForPercents", function(){
@@ -15,37 +25,29 @@ export default () => {
                 let percent = $(self).val().replace(/\%/g, "");
                 switch(thisId){
                     case "percentProteins":
-                        (function setTotalMacrosWidgetsDisplayValueForProteinsOnUpdateOfProteinsPercentagesInputForSetMacrosPercentages(){
-                            $(".setPercentagesSection__totalMacros .proteins").html(Macros.returnGrams(percent,totalCalories, 4));
-                        })();
+                        //set Total Macros Widgets Display Value For Proteins On Update Of Proteins Percentages Input For Set Macros Percentages
+                        setPercentProteins(Macros.returnGrams(percent,totalCalories, 4));
                         break;
                     case "percentCarbs":
-                        (function setTotalMacrosWidgetsDisplayValueForCarbsOnUpdateOfCarbsPercentagesInputForSetMacrosPercentages(){
-                            $(".setPercentagesSection__totalMacros .carbs").html(Macros.returnGrams(percent,totalCalories, 4));
-                        })();
+                        //set Total Macros Widgets Display Value For Carbs On Update Of Carbs Percentages Input For Set Macros Percentages
+                        setPercentCarbs(Macros.returnGrams(percent,totalCalories, 4));
                     break;
                     case "percentFats":
-                        (function setTotalMacrosWidgetsDisplayValueForFatsOnUpdateOfCarbsFatsInputForSetMacrosPercentages(){
-                            $(".setPercentagesSection__totalMacros .fats").html(Macros.returnGrams(percent,totalCalories, 9));
-                        })();
+                        //set TotalMacros Widgets Display Value For Fats On Update Of Fats Input For Set Macros Percentages
+                        setPercentFats(Macros.returnGrams(percent,totalCalories, 9));
                     break;
                     case "totalCaloriesForPercents":
                        (function setTotalMacrosWidgetsDisplayValuesWhenTotalCaloriesIsUpdatedForSetMacrosPercentages(){
                             let pProt = $("#percentProteins").val().trim().replace(/\%/g, "");
                             let pCarbs = $("#percentCarbs").val().trim().replace(/\%/g, "");
                             let pFats = $("#percentFats").val().trim().replace(/\%/g, "");
-                            $(".setPercentagesSection__totalMacros .proteins").html(Macros.returnGrams(pProt,totalCalories, 4));
-                            $(".setPercentagesSection__totalMacros .carbs").html(Macros.returnGrams(pCarbs,totalCalories, 4));
-                            $(".setPercentagesSection__totalMacros .fats").html(Macros.returnGrams(pFats,totalCalories, 9));
+                            setPercentSection(Macros.returnGrams(pFats,totalCalories, 9),Macros.returnGrams(pCarbs,totalCalories, 4),Macros.returnGrams(pProt,totalCalories, 4));
                        })();
                     break;
                 }
             }else{
-                (function setTotalMacrosWidgetToDisplayZeroWhenTotalCaloriesIsZeroForSetMacrosPercentages(){
-                    $(".setPercentagesSection__totalMacros .proteins").html(0);
-                    $(".setPercentagesSection__totalMacros .carbs").html(0);
-                    $(".setPercentagesSection__totalMacros .fats").html(0);
-                })();
+                //set TotalMacros Widget To Display Zero When Total Calories Is Zero For Set Macros Percentages
+                setPercentSection(0,0,0);
             }
         })(this);
     });
