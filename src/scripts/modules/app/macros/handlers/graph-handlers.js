@@ -2,7 +2,7 @@ import BaseMacros from '../../../macros/base-macros';
 import getTime from '../../../common/get-current-time';
 import updateBarWidths from '../../macros/update-bar-widths';
 import loadDailyServings from '../../macros/load-daily-servings';
-const entriesForDayToggler = (toggle = true) => {
+const entriesForDayContainerToggler = (toggle = true) => {
     let container = $(".caloricDistribution__detailsContainer__container");
     if(toggle)
         container.toggleClass("active");
@@ -17,7 +17,7 @@ const toggleCaloricDistributionScreen = showGraphDetails => {
         $(".caloricDistribution__mainContainer").removeClass("active");
         $(".caloricDistribution__detailsContainer").addClass("active");
     }else{
-        entriesForDayToggler(false);
+        entriesForDayContainerToggler(false);
         $(".caloricDistribution__mainContainer").addClass("active");
         $(".caloricDistribution__detailsContainer").removeClass("active");
     }
@@ -47,6 +47,7 @@ export default () => {
     $(document).on("click", ".caloricDistribution__detailsContainer__header .menu-back", () => toggleCaloricDistributionScreen(false));
 
     $(document).on('click', '#showGraphEntriesForDay', function(){
+        entriesForDayContainerToggler();
         loadDailyServings(".caloricDistribution__detailsContainer", $(this).data("singleDayServing"));
     });
 }
