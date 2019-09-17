@@ -90,7 +90,7 @@ const setDisplayDate = (startDate, endDate) => {
 }
 
 const setWeeklyTotalSign = liArr => {
-    $(".caloricDistribution__mainContainer__header .hangingSign p").html(liArr.reduce((acc, i) => acc + $(i).data("totalCalories"), 0));
+    $(".caloricDistribution__mainContainer__header .hangingSign p").html(liArr.reduce((acc, i) => acc + +$(i).attr("data-total-calories"), 0));
 }
 export default (startDate = getTime(-7), endDate = getTime(-1)) => {
     setDisplayDate(startDate, endDate);
