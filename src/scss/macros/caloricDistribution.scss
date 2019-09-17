@@ -157,6 +157,11 @@
                             font-size:14px;    
                             line-height: 12px;
                             box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
+
+                            &::before, &::after{
+                                font-size: 0.55rem;
+                            }
+
                             &::before{
                                 content: attr(data-percent)'%';
                                 font-weight:900;
@@ -293,17 +298,22 @@
             }
        }
        @include macrosContainerStyling("caloricDistribution__detailsContainer");
-       @include entriesContainer("caloricDistribution__detailsContainer");
        > .wrapper{
         flex-grow: 1;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
+        @include entriesContainer("caloricDistribution__detailsContainer", true);
         .caloricDistribution__detailsContainer__container{
             position:relative;
             transition: all 400ms;
             max-height:500px;
             overflow:hidden;
+            
+            .caloricDistribution__detailsContainer__entry{
+                z-index: 1;
+                margin: 10px;
+            }
 
             > p{
                 transition: all 400ms;
@@ -314,6 +324,11 @@
                 @include fancyHrLine();
             }
             &:not(.active){
+                .caloricDistribution__detailsContainer__entry{
+                    opacity:1;
+                    top:0;
+                    animation-name:none;
+                }
                 max-height:0px;
                 > p{
                     opacity:0;

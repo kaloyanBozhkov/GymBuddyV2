@@ -168,7 +168,20 @@
                     }
                 }
             }
-    
+            
+            .formatedRow {
+                svg{
+                   transition: all 400ms;
+                }
+            }
+            
+            &.active{
+                .formatedRow {
+                    svg{
+                        transform: rotate(180deg);
+                    }
+                }
+            }
             &:not(.active){
                 > .#{$containerName}__entry__details{
                     max-height:0;

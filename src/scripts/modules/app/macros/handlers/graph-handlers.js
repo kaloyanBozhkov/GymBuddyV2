@@ -41,13 +41,14 @@ export default () => {
         setCalories(BaseMacros.returnTotalCalories(fats, carbs, proteins), BaseMacros.returnTotalCalories(totalMacros.fats, totalMacros.carbs, totalMacros.proteins));
         updateBarWidths(".caloricDistribution__detailsContainer__mainContainer", {fats, carbs, proteins}, totalMacros);
         $('#showGraphEntriesForDay').data('singleDayServing', singleDayServing);
+        loadDailyServings(".caloricDistribution__detailsContainer", $(this).data("singleDayServing"));
         toggleCaloricDistributionScreen(true);
     });
 
     $(document).on("click", ".caloricDistribution__detailsContainer__header .menu-back", () => toggleCaloricDistributionScreen(false));
 
-    $(document).on('click', '#showGraphEntriesForDay', function(){
-        entriesForDayContainerToggler();
-        loadDailyServings(".caloricDistribution__detailsContainer", $(this).data("singleDayServing"));
-    });
+    $(document).on('click', '#showGraphEntriesForDay', entriesForDayContainerToggler);
+
+   //Handler for entry click toggle inner container's active is on DailyEntries
+   //Handler for save button click on active entry is on DailyEntries
 }

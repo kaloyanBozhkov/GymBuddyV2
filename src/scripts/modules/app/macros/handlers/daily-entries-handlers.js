@@ -10,8 +10,8 @@ import closeAlert from '../../common/close-alert';
 import BaseMacros from '../../../macros/base-macros';
 
 export default () => {
-    //Handler is same for DailyEntries and PastEntries
-    $(document).on("click", ".dailyEntries__entry, .pastEntries__entry", function () {
+    //Handler is same for DailyEntries and PastEntries and Caloric Distribution Details
+    $(document).on("click", ".dailyEntries__entry, .pastEntries__entry, .caloricDistribution__detailsContainer__entry", function () {
         $(this).toggleClass("active");
     });
     //Handler is same for DailyEntries and PastEntries
