@@ -86,7 +86,7 @@ const setBars = (currDate, barsArr, maxCalories) => {//array of 7x li with 3 div
 
 const setDisplayDate = (startDate, endDate) => {
     let displayDatesHtml = $(".caloricDistribution__mainContainer__displayWeekLabel");
-    displayDatesHtml.attr("data-start", startDate.keyFromDate).attr("data-end", endDate.keyFromDate);
+    displayDatesHtml.attr("data-start", startDate.displayKeyFromDate).attr("data-end", endDate.displayKeyFromDate).data("startDate", startDate).data("endDate", endDate);
 }
 
 const setWeeklyTotalSign = liArr => {

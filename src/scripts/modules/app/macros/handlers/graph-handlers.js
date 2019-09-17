@@ -2,6 +2,8 @@ import BaseMacros from '../../../macros/base-macros';
 import getTime from '../../../common/get-current-time';
 import updateBarWidths from '../../macros/update-bar-widths';
 import loadDailyServings from '../../macros/load-daily-servings';
+import loadWeeklyStatsGraph from '../../macros/load-weekly-stats-graph';
+
 const entriesForDayContainerToggler = (toggle = true) => {
     let container = $(".caloricDistribution__detailsContainer__container");
     if(toggle)
@@ -29,6 +31,12 @@ const setCalories = (curr, tot) => {
     $(".caloricDistribution__detailsContainer__totalCalories").html(tot);
 }
 
+const changeDatesForGraph = add => {
+    let startDate = $(".caloricDistribution__mainContainer__displayWeekLabel").data("startDate").date;
+    let endDate = $(".caloricDistribution__mainContainer__displayWeekLabel").data("endDate").date;
+    
+    loadWeeklyStatsGraph(getTime(add ? 7 : -7, startDate),getTime(add ? 7 : -7, endDate));
+}
 export default () => {
     $(document).on("click", ".graphContainer__content li:not([data-total-calories='0']) > div", function(){
         let li = $(this).parent();
@@ -51,4 +59,8 @@ export default () => {
 
    //Handler for entry click toggle inner container's active is on DailyEntries
    //Handler for save button click on active entry is on DailyEntries
+
+    $(document).on('click', '.caloricDistribution__mainContainer__header .menu-left', changeDatesForGraph);
+
+    $(document).on('click', '.caloricDistribution__mainContainer__header .menu-right', () => changeDatesForGraph(false));
 }

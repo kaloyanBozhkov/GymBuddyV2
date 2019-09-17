@@ -28,6 +28,7 @@ export default {
     locale: "en-EN",
     load,
     save, 
-    holdTimer: null
+    holdTimer: null,
+    dateFormat: "dd/mm/yyyy"
 }
 
