@@ -27,7 +27,7 @@ export default class BaseMacros{
     }
 
     static returnGrams(percentage, total, caloriePerGram){
-        return (round((total * percentage / 100 / caloriePerGram) * 100) / 100);
+        return round(total * percentage / 100 / caloriePerGram);
     }
 
     static returnMacrosParsedAndRounded(...fcp){//returns fats, carbs proteins 

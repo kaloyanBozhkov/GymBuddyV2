@@ -5,4 +5,13 @@ export default class FavoriteItem extends BaseMacros{
         this.title = title;
         this.grams = grams;
     }
+
+    toJSON(){
+        let baseMacroProperties = BaseMacros.prototype.toJSON.call(this);
+        return { 
+            ...baseMacroProperties,
+            title: this.title,
+            grams: this.grams
+        }
+    }
 }

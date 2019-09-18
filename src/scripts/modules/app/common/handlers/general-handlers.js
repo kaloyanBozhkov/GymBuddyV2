@@ -1,12 +1,15 @@
 //for any input with title-like requirements
 import { camelCaseInput, round } from '../../../common/utilities';
+
+const replaceInvalidNumericCharacters = str => str.replace(",", ".").replace(/[^0-9.]/g, "");
+
 export default () => {
     $(document).on("input", ".camelCaseInput", function () {
         $(this).val(camelCaseInput($(this).val()));
     });
 
-    $(document).on('input focusout', '.validateNumeric--integer', function(){
-        $(this).val(parseInt($(this).val()));
+    $(document).on('input', '.validateNumeric--integer', function(){
+        $(this).val(parseInt(+$(this).val()));
     });
 
     $(document).on('input focusout', '.validateNumeric--grams', function(){
@@ -15,20 +18,20 @@ export default () => {
     });
 
     $(document).on('input', '.validateNumeric--percentage', function(){
-        if($(this).val() > 100)
-            $(this).val(100);
+        let val = replaceInvalidNumericCharacters($(this).val());
+        $(this).val(val > 100 ? 100 : val);
     });
 
     $(document).on('focusout', '.validateNumeric--percentage', function(){
-        $(this).val(`${+parseInt($(this).val().replace("%",""))}%`);
+        $(this).val(`${parseInt(+$(this).val().replace("%",""))}%`);
     });
 
-    $(document).on('focusin mouseenter click', '.validateNumeric--percentage', function(){
+    $(document).on('focusin click', '.validateNumeric--percentage', function(){
         $(this).val(+$(this).val().replace(/\%/g, ""));
     });
 
     $(document).on("input", ".validateNumeric", function () {
-        let val = $(this).val().replace(",", ".").trim().match(/^\d*\.?\d*$/);
+        let val = replaceInvalidNumericCharacters($(this).val());
         $(this).val(val == "." ? "0." : val > 9999 ? 9999 : val);
     });
 
@@ -38,7 +41,7 @@ export default () => {
 
     $(document).on("focusin click", ".validateNumeric", function(){
         let val = $(this).val();
-        $(this).val(val === "0" || val === "" ? "" : +val);
+        $(this).val(val === "0" || val === "" ? "" : val);
     });
 
 }

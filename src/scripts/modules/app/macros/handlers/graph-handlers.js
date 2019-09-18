@@ -60,7 +60,7 @@ export default () => {
    //Handler for entry click toggle inner container's active is on DailyEntries
    //Handler for save button click on active entry is on DailyEntries
 
-    $(document).on('click', '.caloricDistribution__mainContainer__header .menu-left', changeDatesForGraph);
+    $(document).on('click', '.caloricDistribution__mainContainer__header .menu-left',  () => changeDatesForGraph(false));
 
-    $(document).on('click', '.caloricDistribution__mainContainer__header .menu-right', () => changeDatesForGraph(false));
+    $(document).on('click', '.caloricDistribution__mainContainer__header .menu-right', () => changeDatesForGraph(true));
 }

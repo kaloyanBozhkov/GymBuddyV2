@@ -60,9 +60,9 @@ const loadSingleDayServing = () => {
 }
 const loadfavoriteServings = () => global.favoriteServings = doesNotExist(localStorage.getItem("favoriteServings")) ? [] : JSON.parse(localStorage.getItem("favoriteServings"));
 
-const loadHistoryTotalMacros = () => global.historyTotalMacros = doesNotExist(localStorage.getItem("historyTotalMacros")) ? undefined :  JSON.parse(localStorage.getItem("historyTotalMacros"));
+const loadHistoryTotalMacros = () => global.historyTotalMacros = doesNotExist(localStorage.getItem("historyTotalMacros")) ? {} :  JSON.parse(localStorage.getItem("historyTotalMacros"));
 
-const loadHistoryServings = () => global.historyServings = doesNotExist(localStorage.getItem("historyServings")) ? undefined : JSON.parse(localStorage.getItem("historyServings"));
+const loadHistoryServings = () => global.historyServings = doesNotExist(localStorage.getItem("historyServings")) ? {} : JSON.parse(localStorage.getItem("historyServings"));
 
 const loadEverything = function(funcsToRun = Object.keys(this)){
     if(funcsToRun.length == 0)

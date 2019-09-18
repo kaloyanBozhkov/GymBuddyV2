@@ -22,7 +22,7 @@ export default class SingleDayServing extends DateMacros{
     }
 
     //when saving, save only important information! JSON stringify will call this first ;)
-    toJson(){
+    toJSON(){
         let dateMacroProperties = DateMacros.prototype.toJSON.call(this);
         return { 
             ...dateMacroProperties,
