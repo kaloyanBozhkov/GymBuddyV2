@@ -11,11 +11,12 @@ export default class DateMacros extends BaseMacros{
         this.keyFromDate = timeObj.keyFromDate;
         //could have looped throuhg all timeObj keys and set this[property] = to values though, there are useless properties storage-wise
     }
+
     //when saving, save only important information!
-    returnDateMacrosObjectForSave(){
-        let baseMacrosObj = this.returnBaseMacrosObjectForSave();
+    toJSON(){
+        let baseMacroProperties = BaseMacros.prototype.toJSON.call(this);
         return { 
-            ...baseMacrosObj,
+            ...baseMacroProperties,
             time:this.literal
         }
     }

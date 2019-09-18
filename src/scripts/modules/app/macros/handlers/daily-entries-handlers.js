@@ -44,15 +44,9 @@ export default () => {
     
     $(document).on("click", "#removeEntryFromServings", function () {
         let indexToRemove = $("#alertBg").data("index");
-        let itemToRemove = global.singleDayServing.servings[indexToRemove];
-        let [fats, carbs, proteins] = BaseMacros.returnTotalMacros(itemToRemove.fats, itemToRemove.carbs, itemToRemove.proteins, itemToRemove.servingQuantity);
-        global.currentMacros.proteins -= proteins;
-        global.currentMacros.carbs -= carbs;
-        global.currentMacros.fats -= fats;
-        global.singleDayServing.proteins -= proteins;
-        global.singleDayServing.carbs -= carbs;
-        global.singleDayServing.fats -= fats;
-        global.singleDayServing.servings = global.singleDayServing.servings.filter(x => x != itemToRemove);
+        let {fats, carbs, proteins, servingQuantity} = global.singleDayServing.servings[indexToRemove];
+        global.currentMacros.subtractMacros(...BaseMacros.returnTotalMacros(fats, carbs, proteins, servingQuantity));
+        global.singleDayServing.removeServing(global.singleDayServing.servings[indexToRemove]);//make sure object reference is same so equality works!
         global.historyServings[global.singleDayServing.keyFromDate].servings = global.singleDayServing.servings;
         save.currentMacros();
         save.singleDayServing();

@@ -6,11 +6,23 @@ export default class BaseMacros{
         this.proteins = round(proteins);
     }
 
-    returnBaseMacrosObjectForSave(){
-        return {
-            fats:this.fats,
-            carbs:this.carbs,
-            proteins:this.proteins,
+    addMacros(f,c,p){
+        this.fats = round(f + this.fats);//avoid binary floating point issues eg 0.1 + 0.2 === 0.3 //false
+        this.carbs = round(c + this.carbs);
+        this.proteins = round(p + this.proteins);
+    }
+
+    subtractMacros(f,c,p){
+        this.fats = round(this.fats - f);//avoid binary floating point issues eg 0.3 - 0.1 === 0.2 //false
+        this.carbs = round(this.carbs - c);
+        this.proteins = round(this.proteins - p);
+    }
+
+    toJSON(){
+        return{
+            fats: this.fats,
+            carbs: this.carbs,
+            proteins: this.proteins,
         }
     }
 
@@ -26,8 +38,8 @@ export default class BaseMacros{
         return [fats * 9, carbs * 4, proteins * 4];
     }
 
-    static returnTotalCalories(fats, carbs, proteins){
-        return round(this.returnCaloriesForMacros(fats,carbs,proteins).reduce((totalCalories, macroCalories)=> (totalCalories + macroCalories), 0));
+    static returnTotalCalories(fats, carbs, proteins){//calories always round, no need to show half calories! 
+        return Math.round(this.returnCaloriesForMacros(fats,carbs,proteins).reduce((totalCalories, macroCalories)=> (totalCalories + macroCalories), 0));
     }
 
     static returnTotalMacros(fats, carbs, proteins, quantity){

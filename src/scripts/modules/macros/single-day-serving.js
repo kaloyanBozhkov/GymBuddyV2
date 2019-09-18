@@ -13,17 +13,19 @@ export default class SingleDayServing extends DateMacros{
 
     addServing(serving){
         this.servings.push(serving);
-        let [f,c,p] = DateMacros.returnTotalMacros(serving.fats, serving.carbs, serving.proteins, serving.servingQuantity);
-        this.fats += f;
-        this.carbs += c;
-        this.proteins += p;
+        this.addMacros(...DateMacros.returnTotalMacros(serving.fats, serving.carbs, serving.proteins, serving.servingQuantity))
     }
 
-    //when saving, save only important information!
-    returnSingleDayServingObjectForSave(){
-        let dateMacrosObjForSave = this.returnDateMacrosObjectForSave();
+    removeServing(servingToRemove){//make sure object reference is same so equality works!
+        this.servings = this.servings.filter(x => x != servingToRemove);
+        this.subtractMacros(...DateMacros.returnTotalMacros(servingToRemove.fats, servingToRemove.carbs, servingToRemove.proteins, servingToRemove.servingQuantity));
+    }
+
+    //when saving, save only important information! JSON stringify will call this first ;)
+    toJson(){
+        let dateMacroProperties = DateMacros.prototype.toJSON.call(this);
         return { 
-            ...dateMacrosObjForSave,
+            ...dateMacroProperties,
             totalMacrosId:this.totalMacrosId,
             servings:this.servings.reduce((acc, s)=> [...acc, returnImportantPropertiesFromServingsObject(s)], [])
         }

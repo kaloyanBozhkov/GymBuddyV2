@@ -67,7 +67,7 @@ export default () => {
         if(!$(this).hasClass("active")){
             (function resetFieldValuesOnSwapTab(){
                 $("#displayMessage input:not(.validateNumeric--percentages)").val(0);
-                $("#percentFats, #percentProtein").val("25%");
+                $("#percentFats, #percentProteins").val("25%");
                 $("#percentCarbs").val("50%");
                 $(".errorMsg.active").removeClass("active");
                 $(".setPercentagesSection__totalMacros .fats, .setPercentagesSection__totalMacros .carbs, .setPercentagesSection__totalMacros .proteins").html(0);
@@ -86,12 +86,7 @@ export default () => {
         let set = false;
         if($("#setGrams").hasClass("active")){
             (function setMacrosWithGramsGiven(self){
-                let fats,carbs,protein;
-                (function setFatsCarbsProteinFromFieldsOnSetMacrosGramsAlert(){
-                    fats = $("#gramsFats").val().trim();
-                    carbs =  $("#gramsCarbs").val().trim();
-                    protein = $("#gramsProtein").val().trim();
-                })();
+                let [fats,carbs,protein] = Array.from($("#gramsFats, #gramsCarbs, #gramsProtein")).reduce((arr, e) => [...arr, $(e).val()], []);
                 if (fats > 0 && carbs > 0 && protein > 0) {
                     global.totalMacros = new Macros(fats, carbs, protein);
                     set = true;
@@ -103,14 +98,8 @@ export default () => {
             })(this);
         }else{
             (function setMacrosWithPercentagesGiven(self){
-                let fats,carbs,protein,calories;
-                (function formatAndSetVarsFatsCarbsProteinCaloriesFromFieldsOnSetMacrosPercentagesAlert(){
-                    fats = parseFloat($("#percentFats").val().replace("%",""));
-                    carbs = parseFloat($("#percentCarbs").val().replace("%",""));
-                    protein = parseFloat($("#percentProteins").val().replace("%",""));
-                    calories = parseFloat($("#totalCaloriesForPercents").val());
-                })();
-                if (fats > 0 && carbs > 0 && protein > 0 && fats+carbs+protein == 100 && calories > 0) {
+                let [calories,fats,carbs,protein] = Array.from($("#totalCaloriesForPercents, #percentFats, #percentCarbs, #percentProteins")).reduce((arr, e) => [...arr, +$(e).val().replace("%", "")], []);
+                if (fats > 0 && carbs > 0 && protein > 0 && fats+carbs+protein === 100 && calories > 0) {
                     let carbsGrams = Macros.returnGrams(carbs, calories, 4);
                     let fatsGrams = Macros.returnGrams(fats, calories, 9);
                     let proteinGrams =  Macros.returnGrams(protein, calories, 4);

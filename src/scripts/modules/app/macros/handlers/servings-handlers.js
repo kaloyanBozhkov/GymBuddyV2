@@ -51,19 +51,12 @@ export default () => {
             name = name.length > 0 ? name : "Unnamed Entry";
         })();
         if (quantity > 0) {
-            (function addCaloriesToCurrentMacros(){
-                    let [f,c,p] = SingleServing.returnCaloricStats(fats,carbs,proteins,quantity, true);
-                    global.currentMacros.fats +=f;
-                    global.currentMacros.carbs +=c;
-                    global.currentMacros.proteins +=p;
-                    save.currentMacros();
-            })();
-            (function createSingleDayServingFromNewlyAddedServingAndSaveItAlsoAddItToHistoryServingsAndSave(){
-                    global.singleDayServing.addServing(new SingleServing(fats, carbs, proteins, getCurrentTime().literal, name, servingSize, quantity));
-                    save.singleDayServing();
-                    global.historyServings[getCurrentTime().keyFromDate] = global.singleDayServing.returnSingleDayServingObjectForSave();
-                    save.historyServings();
-            })();
+            global.currentMacros.addMacros(...SingleServing.returnTotalMacros(fats,carbs,proteins,quantity))
+            global.singleDayServing.addServing(new SingleServing(fats, carbs, proteins, getCurrentTime().literal, name, servingSize, quantity));
+            global.historyServings[getCurrentTime().keyFromDate] = global.singleDayServing.toJSON();
+            save.currentMacros();
+            save.singleDayServing();
+            save.historyServings();
             (function updateTodaysCaloriesBarsAndTodaysEntriesItems(){
                     updateBarWidths("#caloriesCounter", global.currentMacros, global.totalMacros);
                     loadDailyServings(".dailyEntries");
