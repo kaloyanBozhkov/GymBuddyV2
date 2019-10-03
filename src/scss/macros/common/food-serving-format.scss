@@ -1,0 +1,57 @@
+@mixin foodServingFormat(){
+        display:flex;
+        flex-direction: row;
+        justify-content: space-around;
+        height:10rem;
+
+        > div:first-of-type{
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        > div.verticalSeparator{
+            width:2px;
+            background-color: $gold;
+            border-radius:5px;
+
+        }
+
+        > div:last-of-type{
+            align-items: center;
+            justify-content: space-evenly;
+            display: flex;
+            flex-direction: column;
+            padding-top: 0.6111rem;
+        }
+
+        .displayText{
+            width:4.722rem;
+            &[data-title="CARBS"]{
+                margin: 1rem 0px;
+            }
+            &[data-title="SERVINGS"]{
+                &::before{
+                    background-color: $niceBlue;
+                }
+                input{
+                    color:$niceBlue;
+                }
+            }
+            &[data-title="SERVING SIZE"]{
+                &::before{
+                    background-color: lighten($niceBlue, 15%);
+                }
+                input{
+                    color:lighten($niceBlue, 15%);
+                }
+            }
+            > input{
+                font-size:1.444rem;
+                line-height: 1.667rem;
+                height:1.667rem;
+            }
+        }
+}

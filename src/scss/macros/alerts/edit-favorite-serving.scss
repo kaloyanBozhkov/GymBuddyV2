@@ -1,0 +1,8 @@
+@import '../../variables';
+@import '../common/food-serving-format';
+#favoriteEdit{
+    > .favoriteEdit__container{
+        @include foodServingFormat();
+        margin: 10px 0;
+    }
+}
