@@ -111,43 +111,33 @@ export default () => {
     });
 
     $(document).on("click", "#cancelRemoveFromFavorites", previousAlertToShow.deleteFavorite);
-
-
-
     
     //set the on hold events for the edit functionality
     holdToEdit(".favoriteEntry", editFavoriteFood);
 
-
-
-    $(document).on("click", "#saveFavoriteFoodChanges", () => {
-        var title = $("#itemName").val().trim();
-        var grams = $("#gramsCount > input").val().trim();
-        var fats = $("#fatsCount > input").val().trim();
-        var proteins = $("#proteinsCount > input").val().trim();
-        var carbs = $("#carbsCount > input").val().trim();
-        var favoriteFoodObj = $("#alertBg").data("favoriteFoodObj");
-        if (title.length > 0 && grams.length > 0 && fats.length > 0 && proteins.length > 0 && carbs.length > 0) {
-            global.favoriteServings[favoriteFoodObj.key] = new FavoriteItem(fats, carbs, proteins, title, grams);
-            save.favoriteServings();
-            previousAlertToShow.deleteFavorite();
-        } else {
-            errorMsg("You must fill in all the fields before proceeding.");
-        }
-    });
-    
-    $(document).on("click", "#cancelFavoriteFoodChanges", () => {
+    $(document).on("click", "#saveFavoriteFoodChanges", function() {
+        let favoriteServing = {
+            title:$("#favoriteFoodName").val() || "Unnamed Entry",
+            grams:$("#favoriteFoodGrams > input").val(),
+            fats:$("#favorieFoodFats > input").val(),
+            proteins:$("#favoriteFoodProtein > input").val(),
+            carbs:$("#favoriteFoodCarbs > input").val(),
+            key: $(this).data("key")
+        };
+        //flexing the spread operator, IIFE and destructuring incoming func arguments... instead of just favoriteServing.fats.... and so on :D
+        global.favoriteServings[favoriteServing.key] = new FavoriteItem(...(({fats, carbs, proteins, title, grams})=>[fats,carbs,proteins,title,grams])(favoriteServing));
+        save.favoriteServings();
         previousAlertToShow.deleteFavorite();
     });
-
+    
+    $(document).on("click", "#cancelFavoriteFoodChanges", previousAlertToShow.deleteFavorite);
 
     //hold functions
-    function editFavoriteFood(elem) {
-        var favoriteFoodObj = $(elem).data("values");
-        var favoriteDiv = "<div>" + global.msgBox["addFavorites"].replace("VALUETITLE", favoriteFoodObj.title).replace("VALUEGRAMS", favoriteFoodObj.grams).replace("VALUEFATS", favoriteFoodObj.fats).replace("VALUECARBS", favoriteFoodObj.carbs).replace("VALUEPROTEINS", favoriteFoodObj.proteins) + "<div>";
-        favoriteDiv = $.parseHTML(favoriteDiv);
-        favoriteDiv = $(favoriteDiv).find("div.width-full.inputStyling.tableStyling").html();
-        alertMsg("multiPurposeAlert", true, ["TITLEAREA", "TITLEHERE", "PLACEHOLDERTITLE", "VALUETITLE", "SECONDHERE", "PLACEHOLDERNOTES", "VALUENOTES", "ERRORMSG", "SAVECHANGESBUTTON", "YESBTN", "CANCELCHANGESBUTTON", "NOBTN", "CLASS1", "CLASS2", "<!--ADDITIONAL HTML-->", "TABLEMULTIPURPOSE"], ["Edit Favorite Food", "", "", "", "", "", "", "You must fill in all the fields before proceeding.", "saveFavoriteFoodChanges", "Save", "cancelFavoriteFoodChanges", "Cancel", "", "", favoriteDiv, "hidden"], [{ attrName: "favoriteFoodObj", attrValue: favoriteFoodObj }]);
+    function editFavoriteFood(elem) {//func declaration hoisted to top
+        const {title, carbs, fats, proteins, grams, key} = $(elem).data("values");
+        alertMsg("editFavoriteServing", true, 
+        ['FAVORITEFOODNAME', 'GRAMS', 'GRAMSFATS', 'GRAMSCARBS', 'GRAMSPROTEIN', 'KEY'], 
+        [title, grams, fats, carbs, proteins, key]);
     }
 }
 

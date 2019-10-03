@@ -54,7 +54,7 @@ $btnActiveWhite: #fdfdfd;
 }
 
 @mixin boxShadow($p1: 0px, $p2: 0px, $p3: 10px, $amount: 0.2, $withTransition: true) {
-    transition: all 0.5s;
+    transition: 0.5s;
     box-shadow: $p1 $p2 $p3 rgba(0, 0, 0, $amount);
     -webkit-box-shadow: $p1 $p2 $p3 rgba(0, 0, 0, $amount);
 
@@ -72,7 +72,7 @@ $btnActiveWhite: #fdfdfd;
 }
 
 @mixin insetBoxShadow($amount, $withTransition: true, $blur: 3px) {
-    transition: all 0.5s;
+    transition: 0.5s;
     box-shadow: inset 0px 0px $blur rgba(0, 0, 0, $amount);
     -webkit-box-shadow: inset 0px 0px $blur rgba(0, 0, 0, $amount);
 

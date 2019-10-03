@@ -10,7 +10,7 @@
     > .pastEntries__container{
         position:relative;
         overflow: hidden;
-        transition: all 400ms;
+        transition: 400ms;
         
         @include insetBoxShadow(0.3, true, 4px);
 

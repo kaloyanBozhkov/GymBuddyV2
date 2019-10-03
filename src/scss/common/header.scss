@@ -2,11 +2,11 @@
 
 @keyframes topIn {
     from {
-        top: -60px;
+        transform:translateY(-60px);
     }
 
     to {
-        top: 0;
+        transform:translateY(0);
     }
 }
 
@@ -17,7 +17,7 @@
     right:0;
     white-space: nowrap;
     height: 60px;
-    top: -60px;
+    transform:translateY(-60px);
     @include animation(topIn, 500ms);
     text-align:center;
 
@@ -39,7 +39,7 @@
         justify-content: center;
         align-content: center;
         background-color:$gold;
-        transition: all 500ms;
+        transition: 500ms;
         height:100%;
         @include boxShadow(0, 0, 2px, 0.45, false);
         > h1{
@@ -60,7 +60,7 @@
             position:absolute;
             top: 0;
             color:$jet;
-            transition: all 0.5s;
+            transition: 0.5s;
             width: 55%;
             height: 100%;
             transform: skew(30deg);

@@ -2,11 +2,11 @@
 
 @keyframes slideDownHangingSign{
     0%{
-        top:-1.667rem;
+        transform:translateY(-1.667rem);
     }
 
     100%{
-        top:0.6667rem;
+        transform:translateY(0.6667rem);
     }
 }
 
@@ -34,7 +34,7 @@
         position: relative;
         width:8.889rem;
         margin:0 auto;
-        top:-1.667rem;
+        transform:translateY(-1.667rem);
         @include animation(slideDownHangingSign, 1s, forwards);
         animation-delay: 1s;
         &::before, &::after{

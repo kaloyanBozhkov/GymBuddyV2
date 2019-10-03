@@ -1,4 +1,5 @@
 @import './common/total-macros-display';
+@import './common/food-serving-format';
 
 #foodTracker{
     margin-left:35px;//space for whiteRibbonHeader's sides
@@ -12,13 +13,13 @@
     }
 
     > .hangingSign{
-        transition: all 300ms;    
+        transition: 300ms;    
         top: -4px;
         position: relative;
         > .wrapper{
             animation-name: none;
-            transition: all 300ms;
-            top:0.6667rem;
+            transition: 300ms;
+            transform: translateY(0.6667rem);
         }
     }
 
@@ -27,68 +28,13 @@
             height:0;
             margin-bottom:15px;
             > .wrapper{
-                top:-1.667rem;
+                transform: translateY(-1.667rem);
             }
         }
     }
 
     > .foodTracker__container{
-        display:flex;
-        flex-direction: row;
-        justify-content: space-around;
-        height:10rem;
-
-        > div:first-of-type{
-            align-items: center;
-            justify-content: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-        }
-
-        > div.verticalSeparator{
-            width:2px;
-            background-color: $gold;
-            border-radius:5px;
-
-        }
-
-        > div:last-of-type{
-            align-items: center;
-            justify-content: space-evenly;
-            display: flex;
-            flex-direction: column;
-            padding-top: 0.6111rem;
-        }
-
-        .displayText{
-            width:4.722rem;
-            &#singleFoodCarbs{
-                margin: 1rem 0px;
-            }
-            &#singleFoodQuantity{
-                &::before{
-                    background-color: $niceBlue;
-                }
-                input{
-                    color:$niceBlue;
-                }
-            }
-            &#singleFoodServingSize{
-                &::before{
-                    background-color: lighten($niceBlue, 15%);
-                }
-                input{
-                    color:lighten($niceBlue, 15%);
-                }
-            }
-            > input{
-                font-size:1.444rem;
-                line-height: 1.667rem;
-                height:1.667rem;
-            }
-        }
-        
+        @include foodServingFormat();  
     }
     @include totalMacrosDisplay(foodTracker);
 }

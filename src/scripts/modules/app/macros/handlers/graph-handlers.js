@@ -16,12 +16,11 @@ const entriesForDayContainerToggler = (toggle = true) => {
 
 const toggleCaloricDistributionScreen = showGraphDetails => {
     if(showGraphDetails){
-        $(".caloricDistribution__mainContainer").removeClass("active");
-        $(".caloricDistribution__detailsContainer").addClass("active");
+        $("#caloricDistribution").addClass("detailsActive");
     }else{
         entriesForDayContainerToggler(false);
-        $(".caloricDistribution__mainContainer").addClass("active");
-        $(".caloricDistribution__detailsContainer").removeClass("active");
+        $("#caloricDistribution").removeClass("detailsActive");
+        updateBarWidths(".caloricDistribution__detailsContainer__mainContainer", {fats:0, carbs:0, proteins:0}, 0);//reset values so animation of bars plays when opening same weke day details
     }
 }
 
@@ -48,8 +47,7 @@ export default () => {
         setDate(time.displayDate);
         setCalories(BaseMacros.returnTotalCalories(fats, carbs, proteins), BaseMacros.returnTotalCalories(totalMacros.fats, totalMacros.carbs, totalMacros.proteins));
         updateBarWidths(".caloricDistribution__detailsContainer__mainContainer", {fats, carbs, proteins}, totalMacros);
-        $('#showGraphEntriesForDay').data('singleDayServing', singleDayServing);
-        loadDailyServings(".caloricDistribution__detailsContainer", $(this).data("singleDayServing"));
+        loadDailyServings(".caloricDistribution__detailsContainer", singleDayServing);
         toggleCaloricDistributionScreen(true);
     });
 
