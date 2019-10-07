@@ -4,8 +4,7 @@ import updateBarWidths from '../macros/update-bar-widths';
 import loadDailyServings from '../macros/load-daily-servings';
 import getPastHistorySerings from '../macros/get-past-history-servings';
 import loadWeeklyStatsGraph from '../macros/load-weekly-stats-graph';
-import checkHistoryWorkouts from '../workouts/check-history-workouts';
-import loadWorkoutsForToday from '../workouts/load-workouts-for-today';
+import loadWorkoutsForDay from '../workouts/load-workouts-for-day';
 
 export default ()=>{
     (function loadHTMLBasedOnCurrentlyOpenedPage(){
@@ -26,8 +25,7 @@ export default ()=>{
             loadWeeklyStatsGraph();
             console.log("Finished loadWeeklyStatsGraph");
         } else if(global.lastPageOpened == "workouts"){//workouts
-            checkHistoryWorkouts(d);
-            loadWorkoutsForToday();
+            loadWorkoutsForDay();
         } else if(global.lastPageOpened == "landingPage"){//landingPage
             console.log("You are on landing page");
         }

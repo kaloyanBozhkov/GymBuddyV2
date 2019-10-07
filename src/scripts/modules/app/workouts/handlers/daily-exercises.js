@@ -5,7 +5,7 @@ import save from '../../../common/save';
 import addNewExercise from '../add-new-exercise';
 import deleteExerciseCategory from '../delete-exercise-category';
 import SingleExercise from '../../../workouts/single-exercise';
-import loadWorkoutsForToday from '../load-workouts-for-today';
+import loadWorkoutsForToday from '../load-workouts-for-day';
 import closeAlert from '../../common/close-alert';
 import alertMsgToAppend from '../../common/alert-msg';
 import createCategoryRows from '../create-category-rows';

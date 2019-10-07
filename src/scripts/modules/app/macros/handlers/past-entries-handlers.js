@@ -24,24 +24,22 @@ export default () => {
     $(document).on("click", "#menuHistoryServings .menu-left", () => {
         let date = getCurrentTime(-1, $("#dayEntriesShownFor").data("date"));
         $("#dayEntriesShownFor").html(date.displayDate).data("date", date.literal);
-        if ($("#menuHistoryServings .menu-right").hasClass("hidden")) {
+        if ($("#menuHistoryServings .menu-right").hasClass("invisible")) {
             let currentDate = getCurrentTime(-1); //yesterday date not current
             if (date.date < currentDate.date)
-                $("#menuHistoryServings .menu-right").removeClass("hidden");
+                $("#menuHistoryServings .menu-right").removeClass("invisible");
         }
         updatePastEntriesBarsAndEntries(date);
     });
 
-    $(document).on("click", "#menuHistoryServings .menu-right", function () {
-        if (!$(this).hasClass("hidden")) {
+    $(document).on("click", "#menuHistoryServings .menu-right:not(.invisible)", function () {
             let date = getCurrentTime(+1, $("#dayEntriesShownFor").data("date"));
             $("#dayEntriesShownFor").html(date.displayDate).data("date", date.literal);
             let currentDate = getCurrentTime(-1); //yesterday date not current
             if (date.date >= currentDate.date)
-                $(this).addClass("hidden");
+                $(this).addClass("invisible");
 
             updatePastEntriesBarsAndEntries(date);
-        }
     });
 
     $(document).on('click', '#showPastEntriesForDay', entriesForDayToggler);

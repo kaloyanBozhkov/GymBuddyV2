@@ -1,0 +1,8 @@
+#exercisesMsg{
+    padding: 10px;
+    &::before{
+        display: block;
+        content:'No exercises added for ' attr(data-when) ' yet.';
+        text-align: center;
+    }
+}

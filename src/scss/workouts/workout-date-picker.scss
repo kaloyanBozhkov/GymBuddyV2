@@ -1,0 +1,14 @@
+#workoutsDatePicker{
+    margin-left: 35px;
+    margin-right: 35px;
+    .menu-left, .menu-right{
+        width:2rem;
+        &.active, &:hover{
+            transform: none;
+            background-color:#eee;
+        }
+    }
+    .menu-left, .menu-right, p{
+        font-size:1.2rem;
+    }
+}

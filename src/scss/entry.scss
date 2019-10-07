@@ -9,6 +9,7 @@
 @import './common/formated-golden-row';
 @import './common/display-text';
 @import './common/card';
+@import './common/add-button';
 @import './common/error/error';
 @import './common/alerts/alert';
 @import './macros/caloricDistribution';
@@ -20,3 +21,5 @@
 @import './macros/alerts/save-serving-to-favorite';
 @import './macros/alerts/edit-favorite-serving';
 @import './macros/alerts/import-favorite-serving';
+@import './workouts/workout-date-picker';
+@import './workouts/workouts-for-today';

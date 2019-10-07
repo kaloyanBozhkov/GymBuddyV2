@@ -72,8 +72,12 @@
     }
 
     &.whiteRibbonHeader--withArrowsAndText, &.whiteRibbonHeader--withText{
-        width: 11.28rem;
-        height: 1.667rem;
+        &:not(.whiteRibbonHeader--autoWidth){
+            width: 11.28rem;
+        }
+        &:not(.whiteRibbonHeader--autoHeight){
+            height: 1.667rem;
+        }
         display: flex;
         flex-direction: row;
         justify-content: space-between;

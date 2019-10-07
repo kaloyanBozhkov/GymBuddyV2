@@ -1,24 +1,72 @@
-<div id="pushContent" class="workout position-absolute both-full">
-
-    <div id="addWorkoutBtn" class="text-center position-relative">
-        <div></div>
-    </div>
-    <div><p id="exercisesMsg" class="w-100 text-center hidden">No exercises for today yet <br />Add some!</p></div>
-    <div id="workoutsToday" class="margin-top-15">
-       <!-- Workouts for the day -->
-    </div>
-    <div id="separator"></div>
-    <div class="box-shadow silver-bg jet-fg coolBorder generalSheetFormating margin-top-10">
-        <!-- Start old workout section -->
-        <div id="menuHistoryWorkouts" class="position-relative w-100 text-center">
-            <p class="inline-block margin-0 font-size-22 nowrap"><span id="dayWorkoutsShownFor"></span></p>
-            <div id="menu-left" class="position-absolute">
-                <span class="glyphicon glyphicon glyphicon-menu-left"></span>
+<!-- Start Add Button -->
+<div id="addWorkoutBtn" class="addButton">
+    <!-- Start plus SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58" fill="none">
+        <g filter="url(#filter0_d)">
+            <path d="M21 21V4H37V21H54V37H37V54H21V37H4V21H21Z" fill="white"/>
+        </g>
+        <defs>
+            <filter id="filter0_d" x="0" y="0" width="58" height="58" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                <feOffset/>
+                <feGaussianBlur stdDeviation="2"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+            </filter>
+        </defs>
+    </svg>
+    <!-- End plus SVG -->
+</div>
+<!-- End Add Button -->
+<!-- Start workouts for day -->
+<div id="workoutsForToday">
+    <div id="exercisesMsg" class="card card--noHeader hidden" data-when="today"></div>
+</div>
+<!-- End workouts for day -->
+<!-- Start past workouts -->
+<div id="pastWorkouts" class="card" data-title="Past Workouts">
+     <!-- WHITE RIBBON -->
+     <div id="menuHistoryServings" class="whiteRibbonHeader whiteRibbonHeader--withArrowsAndText whiteRibbonHeader--centered">
+            <div class="wrapper">
+                <div class="menu-left">
+                    <i class="fas fa-angle-left"></i>
+                </div>
+                <p id="dayWorkoutsShownFor"></p>
+                <div class="menu-right invisible"><!-- invisible by default, since start date is yesterday -->
+                    <i class="fas fa-angle-right"></i>
+                </div>
             </div>
-            <div id="menu-right" class="position-absolute hidden">
-                <span class="glyphicon glyphicon glyphicon-menu-right"></span>
+            <div class="whiteRibbon__background whiteRibbon__background--left">
+                <svg width="100%" height="100%" viewBox="-12 -4 32 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="shadow">
+                            <feDropShadow dx="0" dy="0" stdDeviation="2"/>
+                        </filter>
+                    </defs>
+                    <path d="M0 0L13 23L0 46H22V0H0Z" style="fill:white; filter: url(#shadow)"/>
+                </svg>
+            </div>
+            <div class="whiteRibbon__background whiteRibbon__background--right">
+                <svg width="100%" height="100%" viewBox="-12 -4 32 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="shadow">
+                            <feDropShadow dx="0" dy="0" stdDeviation="2"/>
+                        </filter>
+                    </defs>
+                    <path d="M0 0L13 23L0 46H22V0H0Z" style="fill:white; filter: url(#shadow)"/>
+                </svg>
             </div>
         </div>
-        <p id="noWorkoutsForDate" class="margin-0 text-center">No workouts on this date.</p>
-    </div>
+        <!-- END WHITE RIBBON -->
+        <!-- HANGING SIGN -->
+        <div class="hangingSign">
+            <div class="wrapper">
+                <p><span id="totalWorkload">0</span></p>
+            </div>
+        </div>
+        <!-- END HANGING SIGN -->
+
 </div>
+<!-- End past workouts-->
