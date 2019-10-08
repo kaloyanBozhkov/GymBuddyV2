@@ -13,14 +13,14 @@ export default {
     favoriteServings: undefined,
     historyWorkouts: {}, 
     exercises: undefined, 
-    dailyExercises: undefined, 
-    exerciseCategories: undefined,
+    dailyWorkout: undefined, 
     alerts: [
         'addFavorites', 
         'importFavoriteServing',
         'editFavoriteServing', 
         'confirmOperation',
-        'setGoals'
+        'setGoals',
+        'addExercise'
     ],
     msgBox: {},
     pageNames: ['workouts', 'macros', 'landingPage'],

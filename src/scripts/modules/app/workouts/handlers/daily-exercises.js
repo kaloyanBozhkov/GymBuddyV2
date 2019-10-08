@@ -42,10 +42,6 @@ export default () => {
             $(".errorMsg").slideDown(300);
         }
     });
-        
-    $(document).on("click", "#addWorkoutBtn", function () {
-        addNewExercise();
-    });
 
     $(document).on("click", ".workoutEntry > div", function () {
         var exercise = new SingleExercise($(this).parent().data("values").exerciseID);

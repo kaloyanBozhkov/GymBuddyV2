@@ -64,6 +64,8 @@ const loadHistoryTotalMacros = () => global.historyTotalMacros = doesNotExist(lo
 
 const loadHistoryServings = () => global.historyServings = doesNotExist(localStorage.getItem("historyServings")) ? {} : JSON.parse(localStorage.getItem("historyServings"));
 
+const loadExercises = () => global.exercises = doesNotExist(localStorage.getItem("exercises")) ? [] : JSON.parse(localStorage.getItem("exercises"));
+
 const loadEverything = function(funcsToRun = Object.keys(this)){
     if(funcsToRun.length == 0)
         return

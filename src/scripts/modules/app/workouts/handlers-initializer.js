@@ -1,8 +1,6 @@
-import dailyExercises from './handlers/daily-exercises';
-import historyWorkouts from './handlers/history-workouts';
+import dailyExercisesHandlers from './handlers/daily-exercises';
 
 export default () => {
-    dailyExercises();
-    historyWorkouts();
-    console.log("Handlers for workouts section loaded!");
+    dailyExercisesHandlers();
+    console.log("Handlers for workouts section initialized!");
 }
