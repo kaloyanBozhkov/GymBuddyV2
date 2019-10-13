@@ -29,6 +29,10 @@ export default {
     historyServings(){
         if(global.historyServings)
             localStorage.setItem("historyServings", JSON.stringify(global.historyServings));
+    },
+    exercises(){
+        if(global.exercises)
+            localStorage.setItem("exercises", JSON.stringify(global.exercises));
     }
 };
 

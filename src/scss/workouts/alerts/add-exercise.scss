@@ -1,0 +1,65 @@
+@import '../../common/mixins/search-through-list';
+@import '../../variables';
+@include searchThroughList('exerciseSelect', 'wrapper > .exerciseEntry');
+#exerciseSelect{
+    > div {
+        margin:10px 0;
+    }
+    .exerciseCategory{
+        margin-top:5px;
+        margin-bottom:5px;
+        &:not(.active){
+            > div:first-of-type  {
+                > div{
+                    transform:rotate(180deg);
+                    padding:0 10px;
+                }
+            }
+            > div:last-of-type{
+                max-height:0;
+                .exerciseEntry{
+                    transform:translateY(100px);
+                    opacity:0;
+                }
+            }
+        }
+        > div:first-of-type  {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            color: $jet;
+            text-align: center;
+            background-color: white;
+            padding: 0 5px;
+            border-radius: 50px;
+            @include boxShadow(0, 0, 4px);
+            > p{
+                padding:0 10px;
+            }
+            > div{
+                padding:0 10px;
+                transform: rotate(0deg);
+                transition: 400ms;
+            }
+        }
+        > div:last-of-type {
+            max-height:1000px;
+            transition: max-height 400ms;                
+            transition-delay: 200ms;
+            overflow: hidden;
+            .exerciseEntry{
+                margin-top:10px;
+                transition: 250ms;
+                transform: translateY(0);
+                opacity:1;
+                @for $i from 0 through 30{
+                    &:not(.hidden):nth-child(#{$i}){
+                        transition-delay: $i * 100ms;
+                    }
+                }
+            }
+            
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import dailyExercisesHandlers from './handlers/daily-exercises';
+import dailyExercisesHandlers from './handlers/daily-exercises-handlers';
 
 export default () => {
     dailyExercisesHandlers();

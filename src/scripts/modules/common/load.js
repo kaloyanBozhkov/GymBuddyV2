@@ -4,6 +4,7 @@ import SingleDayServing from '../macros/single-day-serving';
 import save from './save';
 import getCurrentTime from '../common/get-current-time';
 import { doesNotExist } from '../common/utilities';
+import setDefaultExercises from '../app/workouts/set-default-exercises';
 import loadContent from '../app/common/load-content';
 //pre loads all possible message boxes, so that in real time there is no delay when reading from disk
 const preloadAlerts = () => global.alerts.map(alert => $.get(`alerts/${alert}.html`, data => global.msgBox[alert] = data ));
@@ -64,7 +65,12 @@ const loadHistoryTotalMacros = () => global.historyTotalMacros = doesNotExist(lo
 
 const loadHistoryServings = () => global.historyServings = doesNotExist(localStorage.getItem("historyServings")) ? {} : JSON.parse(localStorage.getItem("historyServings"));
 
-const loadExercises = () => global.exercises = doesNotExist(localStorage.getItem("exercises")) ? [] : JSON.parse(localStorage.getItem("exercises"));
+const loadExercises = () => {
+    if(!doesNotExist(localStorage.getItem("exercises")))
+        global.exercises = JSON.parse(localStorage.getItem("exercises"));
+    else
+        setDefaultExercises();
+}
 
 const loadEverything = function(funcsToRun = Object.keys(this)){
     if(funcsToRun.length == 0)
@@ -86,5 +92,6 @@ export default {
     loadHistoryServings,
     loadSingleDayServing,
     loadfavoriteServings,
+    loadExercises,
     loadLastPageOpened
 };

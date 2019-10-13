@@ -1,5 +1,14 @@
 import {camelCaseInput} from '../../common/utilities';
-export default function (optionElementClass, optionContainer){
+
+const checkAndToggleVisibility = function(searchValue){
+    let {values, id} = $(this).data();
+    if (id == searchValue || values.hasOwnProperty('title') && ~values.title.toLowerCase().indexOf(searchValue.toLowerCase()))
+        $(this).removeClass('hidden');
+    else
+        $(this).addClass('hidden');
+}
+
+export default function (optionElementClass, optionContainer, withCategorySearch = false){
     let searchValue;
     (function setSearchToCamelCase(searchBar){
         searchValue = camelCaseInput(searchBar.val());//using JS intead of CSS cause JS is cooler <3
@@ -7,28 +16,44 @@ export default function (optionElementClass, optionContainer){
     })($(this));
     (function showHideElementsSerchedThrough(){
         if (searchValue.trim().length == 0) {
-            $(optionElementClass + ".hidden").removeClass("hidden");
+            let entryOrCategoryDiv = $(optionElementClass);
+            entryOrCategoryDiv.removeClass('hidden');
+            if(withCategorySearch){
+                entryOrCategoryDiv.removeClass('active');
+                entryOrCategoryDiv.children('.wrapper').children().removeClass('hidden');
+            }
         } else {
-            $(optionElementClass).each(function () {
-                let vals = $(this).data("values");
-                let key = $(this).data("id");
-                if (key == searchValue || vals.hasOwnProperty("title") && ~vals.title.toLowerCase().indexOf(searchValue.toLowerCase()))
-                    $(this).removeClass("hidden");
-                else
-                    $(this).addClass("hidden");
+            let exerciseCategories = $(optionElementClass);
+            exerciseCategories.each(function(){
+                if(withCategorySearch){
+                    let {categoryTitle, exerciseSearch} = $(this).data();
+                    $(this).addClass('hidden').removeClass('active');
+                    $(this).children('.wrapper').children().addClass('hidden');
+                    if(~categoryTitle.toLowerCase().indexOf(searchValue.toLowerCase())){
+                        $(this).removeClass('hidden').addClass('active');
+                        $(this).children('.wrapper').children().removeClass('hidden');
+                    }else if(~exerciseSearch.toLowerCase().indexOf(searchValue.toLowerCase())){
+                        $(this).removeClass('hidden').addClass('active');
+                        $(this).children('.wrapper').children().each(function(){
+                            checkAndToggleVisibility.call(this, searchValue);
+                        });
+                    }
+                }else{
+                    checkAndToggleVisibility.call(this, searchValue);
+                }
             });
         }
     })();
     (function showHideNothingToDisplayNoEntriesFoundMessages(){
         if ($(optionElementClass).length == 0){
-            $(optionContainer).removeClass("noSearchResult");
-            $(optionContainer).addClass("noFavorites");
-        }else if($(optionElementClass + ":not(.hidden)").length == 0){
-            $(optionContainer).removeClass("noFavorites");
-            $(optionContainer).addClass("noSearchResult");
+            $(optionContainer).removeClass('noSearchResult');
+            $(optionContainer).addClass('nothingSaved');
+        }else if($(optionElementClass + ':not(.hidden)').length == 0){
+            $(optionContainer).removeClass('nothingSaved');
+            $(optionContainer).addClass('noSearchResult');
         }else{
-            $(optionContainer).removeClass("noFavorites");
-            $(optionContainer).removeClass("noSearchResult");
+            $(optionContainer).removeClass('nothingSaved');
+            $(optionContainer).removeClass('noSearchResult');
         }
     })();
 }

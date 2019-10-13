@@ -78,7 +78,7 @@ export default () => {
     $(document).on("click", "#loadServing", loadFavoriteServing);
     
     $(document).on("input", "#favoriteName", function(){
-        searchThroughList.call(this, ".favoriteEntry","#favoriteSelect");
+        searchThroughList.call(this, ".favoriteEntry","#favoriteSelect > div");
     });
     
     $(document).on("click", ".favoriteEntry > div:not(.deleteFavorite)", function () {
