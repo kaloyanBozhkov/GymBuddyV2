@@ -1,11 +1,11 @@
 export default class Record{
-    constructor(weight, reps, date, singleExerciseIndex, setId){
+    constructor(weight, reps, date, exerciseId, setId){
         this.reps = reps;
         this.weight = weight;
         this.where = {
-            exerciseIndex: singleExerciseIndex,
-            setId: setId,
-            date: date
+            exerciseId,
+            setId,
+            date
         };
     }
 }

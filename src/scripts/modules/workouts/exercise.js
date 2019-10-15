@@ -1,12 +1,11 @@
-import {setRecords, checkForRecord} from '../app/workouts/crud-records-library';
 export default class Exercise{
-    constructor(id, title, description, categoryKey){
+    constructor(id, title, description, categoryId){
         this.title = title;
         this.exerciseId = id;
-        this.categoryKey = categoryKey;
+        this.categoryId = categoryId;
         this.description = description; 
-        this.record = []; //array of Records 
-        this.checkForRecord = checkForRecord;
-        this.setRecords = setRecords;
+        // this.record = []; //array of Records 
+        // this.checkForRecord = checkForRecord;
+        // this.setRecords = setRecords;
     }
 }

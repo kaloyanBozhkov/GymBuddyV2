@@ -6,6 +6,8 @@ import getCurrentTime from '../common/get-current-time';
 import { doesNotExist } from '../common/utilities';
 import setDefaultExercises from '../app/workouts/set-default-exercises';
 import loadContent from '../app/common/load-content';
+import SingleExercise from '../workouts/single-exercise';
+import DailyWorkout from '../workouts/daily-workout';
 //pre loads all possible message boxes, so that in real time there is no delay when reading from disk
 const preloadAlerts = () => global.alerts.map(alert => $.get(`alerts/${alert}.html`, data => global.msgBox[alert] = data ));
 const preloadPages = () =>  global.pageNames.map(page =>  $.get(`${page}.html`, data => global.pages[page] = data));
@@ -71,6 +73,22 @@ const loadExercises = () => {
     else
         setDefaultExercises();
 }
+const loadDailyWorkout = () => {
+    let newWorkoutForToday = false;
+    if (!doesNotExist(localStorage.getItem("dailyWorkout"))){
+        let {date, exercises} = JSON.parse(localStorage.getItem("dailyWorkout"));
+        let exercisesWithMethods = exercises.reduce((workouts, {exerciseId, sets, date}) => [new SingleExercise(exerciseId, sets, date), ...workouts], []);
+        global.dailyWorkout = new DailyWorkout(getCurrentTime(date), exercisesWithMethods);
+        newWorkoutForToday = getCurrentTime().keyFromDate != global.dailyWorkout.date.keyFromDate;//check if loaded daily macros are not for today
+    }else{
+        newWorkoutForToday = true;
+    }
+
+    if(newWorkoutForToday){
+        global.dailyWorkout = new DailyWorkout();
+    }
+    
+}
 
 const loadEverything = function(funcsToRun = Object.keys(this)){
     if(funcsToRun.length == 0)
@@ -93,5 +111,6 @@ export default {
     loadSingleDayServing,
     loadfavoriteServings,
     loadExercises,
+    loadDailyWorkout,
     loadLastPageOpened
 };
