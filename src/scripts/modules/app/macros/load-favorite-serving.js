@@ -6,5 +6,5 @@ export default () => {
     <div class='deleteFavorite' data-index='${key}'><span class="fa fa-trash-alt"></span></div>
     </div>`, '');
     let class1 = global.favoriteServings.length == 0 ? "nothingSaved" : "";
-    alertMsg("importFavoriteServing", true, ["CLASS1", "OPTIONS"], [class1, favoriteItemElements]);
+    alertMsg("importFavoriteServing", true, ["CLASS1", "OPTIONS"], [class1, favoriteItemElements],undefined,true);
 }

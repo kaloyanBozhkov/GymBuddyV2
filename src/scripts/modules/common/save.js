@@ -34,9 +34,9 @@ export default {
         if(global.exercises)
             localStorage.setItem("exercises", JSON.stringify(global.exercises));
     },
-    dailyWorkout(){
-        if(global.dailyWorkout)
-            localStorage.setItem("dailyWorkout", JSON.stringify(global.dailyWorkout));
+    historyWorkouts(){
+        if(global.historyWorkouts)
+            localStorage.setItem("historyWorkouts", JSON.stringify(global.historyWorkouts));
     }
 };
 

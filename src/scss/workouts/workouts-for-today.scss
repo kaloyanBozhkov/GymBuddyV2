@@ -1,8 +1,43 @@
-#exercisesMsg{
-    padding: 10px;
-    &::before{
-        display: block;
-        content:'No exercises added for ' attr(data-when) ' yet.';
-        text-align: center;
+#addWorkoutBtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#workoutsForToday{
+    .workoutsForToday__noExercisesMsg{
+        padding: 10px;
+        &::before{
+            display: block;
+            content:'No exercises added for ' attr(data-when) ' yet.';
+            text-align: center;
+        }
+    }
+
+    .exercise{
+        .exercise__noSetsMsg{
+            text-align: center;
+            padding: 20px;
+        }
+        .exercise__controls{
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items:center;
+            margin-bottom:10px;
+            > div{
+                flex: 1;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+
+                .addButton{
+                    svg{
+                        transform:rotate(45deg);
+                    }
+                    font-size: 1.3rem;
+                }
+            }
+        }
     }
 }

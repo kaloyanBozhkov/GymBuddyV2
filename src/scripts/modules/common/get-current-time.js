@@ -1,7 +1,7 @@
 import global from '../global-variables';
 export default function(differentDate = 0, differentStartDate = null){
-        var time = {};
-        var date = differentStartDate ? new Date(differentStartDate) : new Date();
+        let time = {};
+        const date = differentStartDate ? new Date(differentStartDate) : new Date();
         if(differentDate) date.setDate(date.getDate() + differentDate);
         time.day = date.getDate();
         time.month = date.getMonth() + 1;

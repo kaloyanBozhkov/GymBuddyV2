@@ -3,15 +3,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    > svg{
-        transition: 200ms;
-    }
-    &.active{
-        >svg{
-            transform: scale(0.8);
+    transition: 200ms;
+    &.active{  
+        transform: scale(0.8);
+        &.addButton--golden{
+            @include boxShadow(0,0,1px,0.45);
         }
+    }
+    &.addButton--golden{
+        color:white;
+        background-color:$gold;
+        border: 2px solid white;
+        border-radius:5px;
+        width: 1.666rem;
+        height: 1.666rem;
+        @include boxShadow(0,2px,4px,0.45);
     }
 }

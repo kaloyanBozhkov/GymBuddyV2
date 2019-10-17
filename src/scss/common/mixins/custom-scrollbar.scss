@@ -1,0 +1,17 @@
+@mixin customScrollbar($width: 5px, $trackColor: $transparent, $thumbColor: $gold, $hoverThumbColor: darken($gold, 10%)){
+    &::-webkit-scrollbar {
+        width: $width;
+    }
+      
+    &::-webkit-scrollbar-track {
+        background: $trackColor; 
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: $thumbColor; 
+        border-radius:$width;
+        &:hover {
+            background: $hoverThumbColor 
+        }
+    }
+}

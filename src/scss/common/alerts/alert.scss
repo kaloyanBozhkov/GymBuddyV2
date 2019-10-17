@@ -34,7 +34,11 @@
         }
 
         margin: 10px;
-        background-color: $alertBackground;
+
+        &:not(.displayMessage--noBackgroundColor){
+            background-color: $alertBackground;
+        }
+
         .displayMessage__content > p{
             padding: 15px;
             > span{

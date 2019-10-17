@@ -8,7 +8,7 @@ export default () => {
         $(this).addClass("active");
     });
     
-    $(document).on('mouseleave touchend', "#btnMacros, #btnWorkouts, .menu-left, .menu-right:not(.invisible), .addButton", function () {
+    $(document).on('mouseleave touchend touchmove', "#btnMacros, #btnWorkouts, .menu-left, .menu-right:not(.invisible), .addButton", function () {
         $(this).removeClass("active");
     });
     

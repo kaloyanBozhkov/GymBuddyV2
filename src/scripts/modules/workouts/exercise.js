@@ -4,8 +4,5 @@ export default class Exercise{
         this.exerciseId = id;
         this.categoryId = categoryId;
         this.description = description; 
-        // this.record = []; //array of Records 
-        // this.checkForRecord = checkForRecord;
-        // this.setRecords = setRecords;
     }
 }

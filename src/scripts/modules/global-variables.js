@@ -11,9 +11,8 @@ export default {
     singleDayServing: undefined, 
     historyTotalMacros: {}, 
     favoriteServings: undefined,
-    historyWorkouts: {}, 
-    exercises: undefined, 
-    dailyWorkout: undefined, 
+    historyWorkouts: undefined, 
+    exercises: undefined,  
     alerts: [
         'addFavorites', 
         'importFavoriteServing',

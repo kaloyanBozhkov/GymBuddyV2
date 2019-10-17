@@ -9,5 +9,5 @@ export default () => {
         <div class='deleteExercise' data-index='${exerciseId}' data-category-key='${categoryId}'><span class="fa fa-trash-alt"></span></div>
         </div>`, "") + '</div></div>')(exerciseEntry), '');
         let class1 = global.exercises.length == 0 ? "nothingSaved" : "";
-        alertMsg("addExercise", true, ["CLASS1", "OPTIONS"], [class1, exerciseElements]);
+        alertMsg("addExercise", true, ["CLASS1", "OPTIONS"], [class1, exerciseElements],undefined,true);
 }

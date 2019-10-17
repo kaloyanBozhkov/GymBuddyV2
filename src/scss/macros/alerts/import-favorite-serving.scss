@@ -1,2 +1,11 @@
 @import '../../common/mixins/search-through-list';
 @include searchThroughList(favoriteSelect, favoriteEntry);
+#favoriteSelect{
+    padding: 0 10px;
+    > div {
+        background-color:$alertBackground;
+        .favoriteEntry{
+            margin: 5px -5px;
+        }
+    }
+}

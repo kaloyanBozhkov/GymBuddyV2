@@ -1,13 +1,12 @@
 @import '../../common/mixins/search-through-list';
-@import '../../variables';
 @include searchThroughList('exerciseSelect', 'wrapper > .exerciseEntry');
 #exerciseSelect{
+    padding: 0 10px;
     > div {
-        margin:10px 0;
+        background-color:$alertBackground;
     }
     .exerciseCategory{
-        margin-top:5px;
-        margin-bottom:5px;
+        margin: 5px -5px;
         &:not(.active){
             > div:first-of-type  {
                 > div{
