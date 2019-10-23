@@ -4,11 +4,11 @@ import save from '../../../common/save';
 import load from '../../../common/load';
 //To fix stickyhover on mobile devices
 export default () => {
-    $(document).on('mouseenter touchstart', "#btnMacros, #btnWorkouts, .menu-left, .menu-right:not(.invisible), .addButton", function () {
+    $(document).on('mouseenter touchstart', "#btnMacros, #btnWorkouts, .menu-left, .menu-right:not(.invisible), .addButton, .roundedButton, .formatedRow", function () {
         $(this).addClass("active");
     });
     
-    $(document).on('mouseleave touchend touchmove', "#btnMacros, #btnWorkouts, .menu-left, .menu-right:not(.invisible), .addButton", function () {
+    $(document).on('mouseleave touchend touchmove', "#btnMacros, #btnWorkouts, .menu-left, .menu-right:not(.invisible), .addButton, .roundedButton, .formatedRow", function () {
         $(this).removeClass("active");
     });
     

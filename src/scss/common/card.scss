@@ -21,6 +21,9 @@
             margin-bottom:20px;
         }
     }
+    &.selected{
+        filter: brightness(0.85);
+    }
     @include boxShadow(0, 0, 4px, 0.4);
     margin: 0 12px;
     background-color: rgba(255,255,255,0.55);

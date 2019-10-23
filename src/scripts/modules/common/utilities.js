@@ -34,8 +34,8 @@ export function mixinCopyObj(obj) {
     return newObj;
 }
 
-export function round(n) { //round to one decimal place
-    return (Math.round(n * 10) / 10);
+export function round(n) { //round to two decimal places
+    return (Math.round(n * 100) / 100);
 }
 
 export function isEmpty(obj) {

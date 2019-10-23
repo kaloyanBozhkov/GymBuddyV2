@@ -11,7 +11,6 @@ import closeAlert from '../../common/close-alert';
 import holdToEdit from '../../common/hold-to-edit';
 import loadFavoriteServing from '../load-favorite-serving';
 import getCurrentTime from '../../../common/get-current-time';
-import hoverHandler from '../../common/hover-handler';
 
 const previousAlertToShow = {
     deleteFavorite: loadFavoriteServing
@@ -115,7 +114,6 @@ export default () => {
     
     //set the on hold events for the edit functionality
     holdToEdit(".favoriteEntry", editFavoriteFood);
-    hoverHandler(".favoriteEntry");
 
     $(document).on("click", "#saveFavoriteFoodChanges", function() {
         let favoriteServing = {

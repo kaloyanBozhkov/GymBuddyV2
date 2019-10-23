@@ -5,9 +5,7 @@
     > p{
         padding-left: 2px;
     }
-    &:not(.formatedRow--withoutMargin){
-        margin:5px -5px;
-    }
+
     background-color:white;
     display: flex;
     flex-direction: row;

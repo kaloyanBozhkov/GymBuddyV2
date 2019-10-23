@@ -19,7 +19,8 @@ export default {
         'editFavoriteServing', 
         'confirmOperation',
         'setGoals',
-        'addExercise'
+        'addExercise',
+        'addSet'
     ],
     msgBox: {},
     pageNames: ['workouts', 'macros', 'landingPage'],

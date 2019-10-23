@@ -8,7 +8,7 @@ export default () => {
         $(this).val(camelCaseInput($(this).val()));
     });
 
-    $(document).on('input', '.validateNumeric--integer', function(){
+    $(document).on('input focusout', '.validateNumeric--integer', function(){
         $(this).val(parseInt(+$(this).val()));
     });
 
@@ -32,7 +32,7 @@ export default () => {
 
     $(document).on("input", ".validateNumeric", function () {
         let val = replaceInvalidNumericCharacters($(this).val());
-        $(this).val(val == "." ? "0." : val > 9999 ? 9999 : val);
+        $(this).val(val == "." ? "0." : val.match(/.{0,}\..{0,}\.$/g) ? val.substr(0, val.length - 1) : val > 9999 ? 9999 : val);
     });
 
     $(document).on("focusout", ".validateNumeric", function(){

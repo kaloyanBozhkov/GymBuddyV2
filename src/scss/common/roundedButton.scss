@@ -1,0 +1,23 @@
+@mixin roundedButton(){
+    width:2rem;
+    height:2rem; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $gold;
+    background-color:white;
+    border:2px solid $gold;
+    box-sizing: border-box;
+    border-radius:2.77rem;
+    flex-shrink:0;
+    margin:0 15px;
+    cursor:pointer;
+    opacity:0.7;
+    transition: 300ms;
+    transform-origin: center;
+    &.active{//hover
+        opacity:1;
+        transform:scale(0.85);
+    }
+}

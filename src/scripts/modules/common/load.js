@@ -75,8 +75,6 @@ const loadExercises = () => {
 
 const loadHistoryWorkouts = () => global.historyWorkouts = new HistoryWorkouts(doesNotExist(localStorage.getItem("historyWorkouts")) ? undefined : JSON.parse(localStorage.getItem("historyWorkouts")));
 
-
-
 const loadEverything = function(funcsToRun = Object.keys(this)){
     if(funcsToRun.length == 0)
         return

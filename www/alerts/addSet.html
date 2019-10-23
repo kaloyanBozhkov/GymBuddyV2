@@ -1,0 +1,38 @@
+<div class="displayMessage__header">
+    <div id="cancelAddSet">
+        <i class="fas fa-arrow-left"></i>  
+    </div>
+    <h3>Add Set</h3>
+    <div id="confirmAddSet" data-exercise="DETAILS">
+        <i class="fas fa-check"></i>
+    </div>
+</div>
+<div id="addSet" class="displayMessage__content">
+    <div class="addSet__weights">
+        <div class="decrement roundedButton">
+            <i class="fas fa-minus"></i>
+        </div>
+        <div class="displayText" data-what="weight" data-title="WEIGHT (KG)">
+            <input type="number" class="validateNumeric" value="0" min="0"/>
+        </div>
+        <div class="increment roundedButton">
+            <i class="fas fa-plus"></i>
+        </div>
+    </div>
+    <div class="addSet__weights">
+        <div class="decrement roundedButton">
+            <i class="fas fa-minus"></i>
+        </div>
+        <div class="displayText" data-what="reps" data-title="REPS">
+            <input type="number" class="validateNumeric validateNumeric--integer" value="0" min="0"/>
+        </div>
+        <div class="increment roundedButton">
+            <i class="fas fa-plus"></i>
+        </div>
+    </div>
+    <div class="addSet__notes">
+            <div class="displayText" data-title="NOTES">
+                <textarea></textarea>
+            </div>
+    </div>
+</div>

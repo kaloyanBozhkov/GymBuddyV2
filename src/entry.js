@@ -1,6 +1,6 @@
 //font icons and styles
 import {dom, library} from '@fortawesome/fontawesome-svg-core';
-import {faAngleLeft, faAngleRight, faAngleUp, faHeart, faTrashAlt, faExclamationTriangle, faBook, faArrowLeft, faCheck, faTimes, faCommentDots, faTrophy} from '@fortawesome/free-solid-svg-icons';
+import {faAngleLeft, faAngleRight, faAngleUp, faHeart, faTrashAlt, faExclamationTriangle, faBook, faArrowLeft, faCheck, faPlus, faMinus, faCommentDots, faTrophy} from '@fortawesome/free-solid-svg-icons';
 library.add(
     faAngleLeft, 
     faAngleRight, 
@@ -11,7 +11,8 @@ library.add(
     faBook,
     faArrowLeft,
     faCheck,
-    faTimes,
+    faPlus,
+    faMinus,
     faCommentDots,
     faTrophy);
 dom.watch();

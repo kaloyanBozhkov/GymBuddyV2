@@ -39,18 +39,18 @@
   <div id="saveToFavoritesContent" class="displayMessage__content">
         <div data-title="Step 1: Set serving size (grams/milligrams)">
             <div id="gramsCount" class="displayText" data-title="SERVING SIZE">
-                <input type="text" class="validateNumeric" value="VALUEGRAMS" />
+                <input type="number" class="validateNumeric" value="VALUEGRAMS" />
             </div>
         </div>
         <div class="saveToFavoritesContent__macros" data-title="Step 2: Set macros (grams per serving)" >
             <div id="fatsCount" class="displayText" data-title="FATS">
-                <input type="text" class="validateNumeric" value="VALUEFATS" />
+                <input type="number" min="0" class="validateNumeric" value="VALUEFATS" />
             </div>
             <div id="carbsCount" class="displayText" data-title="CARBS">
-                <input type="text" class="validateNumeric" value="VALUECARBS" />
+                <input type="number" min="0"  class="validateNumeric" value="VALUECARBS" />
             </div>
             <div id="proteinsCount" class="displayText" data-title="PROTEIN">
-                <input type="text" max="0" class="validateNumeric" value="VALUEPROTEINS"/>
+                <input type="number" min="0" class="validateNumeric" value="VALUEPROTEINS"/>
             </div>
         </div>
   </div>

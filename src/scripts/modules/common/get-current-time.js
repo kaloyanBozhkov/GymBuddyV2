@@ -1,7 +1,14 @@
 import global from '../global-variables';
+const formatDateReturnMMddYYYY = strDate => {
+        if(global.dateFormat != "mm/dd/yyyy"){
+                let [day, month, year] = strDate.split("/");
+                return [month, day, year].join("/");
+        }
+        return strDate;
+}
 export default function(differentDate = 0, differentStartDate = null){
         let time = {};
-        const date = differentStartDate ? new Date(differentStartDate) : new Date();
+        const date = differentStartDate ? new Date(formatDateReturnMMddYYYY(differentStartDate)) : new Date();
         if(differentDate) date.setDate(date.getDate() + differentDate);
         time.day = date.getDate();
         time.month = date.getMonth() + 1;

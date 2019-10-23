@@ -44,9 +44,20 @@ p {
     user-select: none;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
 
 //font awesome styles
 .fa-exclamation-triangle {
     color: darken($warning, 5%);
     font-size: 0.6667rem;
 }
+
+

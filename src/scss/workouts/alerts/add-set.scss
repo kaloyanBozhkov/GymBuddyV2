@@ -1,0 +1,62 @@
+@import '../../common/roundedButton';
+#addSet{
+    background-color:$alertBackground;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+
+    > div{
+
+        &:first-of-type, &:last-of-type{
+            margin:10px;
+        }
+
+        &:first-of-type{
+            margin-top:15px;
+        }
+
+        &:not(:first-of-type):not(:last-of-type){
+            margin:5px 10px;
+        }
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .addSet__weights, .addSet__reps{
+        > div{
+            &.decrement, &.increment{
+                @include boxShadow(0,4px,4px, 0.2);
+                @include roundedButton();
+            }
+            &:not(.increment):not(.decrement){
+                border-radius: 10px 10px 5px 5px;
+                max-width: 8.33rem;
+                @include boxShadow(0,2px,4px, 0.2);
+            }
+            &:hover{
+                @include boxShadow(0,0,4px, 0.2);
+            }
+        }
+    }
+
+    .addSet__notes{
+        > div {
+            flex:1;
+            @include boxShadow(0,2px,4px, 0.3);
+            &:hover{
+                @include boxShadow(0,0,4px, 0.3);
+            }
+            border-radius: 10px 10px 0px 0px;
+            textarea{
+                border:none;
+                outline:none;
+                resize:vertical;
+                max-height:300px;
+                padding:2px 4px;
+            }
+        }
+    }
+}

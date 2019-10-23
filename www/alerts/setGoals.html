@@ -17,13 +17,13 @@
         <div class="wrapper" data-title="Step 2: Set desired grams for macros">
             <div>
                 <div class="displayText" data-title="FATS">
-                    <input id="gramsFats" type="text" value="0" class="validateNumeric validateNumeric--integer validateNumeric--grams" />
+                    <input id="gramsFats" type="number" min="0" value="0" class="validateNumeric validateNumeric--integer validateNumeric--grams" />
                 </div>
                 <div class="displayText" data-title="CARBS">
-                    <input id="gramsCarbs" type="text" value="0" class="validateNumeric validateNumeric--integer validateNumeric--grams" />
+                    <input id="gramsCarbs" type="number" min="0" value="0" class="validateNumeric validateNumeric--integer validateNumeric--grams" />
                 </div>
                 <div class="displayText" data-title="PROTEIN">
-                    <input id="gramsProtein" type="text" value="0" class="validateNumeric validateNumeric--integer validateNumeric--grams" />
+                    <input id="gramsProtein" type="number" min="0" value="0" class="validateNumeric validateNumeric--integer validateNumeric--grams" />
                 </div>
             </div>
         </div>
@@ -60,19 +60,19 @@
     <div id="setPercentagesSection" data-title="Step 2: Set percentages for macros:">
         <div class="wrapper" data-title="Step 2: Set total calories">
             <div class="displayText" data-title="TOTAL CALORIES">
-                <input id="totalCaloriesForPercents" type="text" value="0" class="validateNumeric validateNumeric--integer" />
+                <input id="totalCaloriesForPercents" type="number" min="0" value="0" class="validateNumeric validateNumeric--integer" />
             </div>
         </div>
         <div class="wrapper" data-title="Step 3: Set percentages for macros">
             <div>
                 <div class="displayText" data-title="FATS">
-                    <input id="percentFats" type="text" value="25%" class="validateNumeric--percentage" />
+                    <input id="percentFats" type="text" min="0" value="25%" class="validateNumeric--percentage" />
                 </div>
                 <div class="displayText" data-title="CARBS">
-                    <input id="percentCarbs"  type="text" value="50%" class="validateNumeric--percentage" />
+                    <input id="percentCarbs"  type="text" min="0" value="50%" class="validateNumeric--percentage" />
                 </div>
                 <div class="displayText" data-title="PROTEIN">
-                    <input id="percentProteins" type="text" value="25%" class="validateNumeric--percentage" />
+                    <input id="percentProteins" type="text" min="0" value="25%" class="validateNumeric--percentage" />
                 </div>
             </div>
         </div>

@@ -52,8 +52,15 @@
                 transition: 250ms;
                 transform: translateY(0);
                 opacity:1;
+                &.active{
+                    margin-left:5px;
+                    margin-right:5px;
+                }
+                &:last-of-type{
+                    margin-bottom:5px;
+                }
                 @for $i from 0 through 30{
-                    &:not(.hidden):nth-child(#{$i}){
+                    &:not(.active):not(.waitingToFinishAnimation):not(.hidden):nth-child(#{$i}){
                         transition-delay: $i * 100ms;
                     }
                 }

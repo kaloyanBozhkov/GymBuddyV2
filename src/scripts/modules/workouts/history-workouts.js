@@ -11,8 +11,10 @@ export default class HistoryWorkouts {
         this[workoutDate] = [...this[workoutDate], singleExercise];
     }
 
-    getWorkout(date = getTime().keyFromDate){
-        return this[date].length == 0 ? null : this[date];
+    getWorkout(dateToGet = getTime().keyFromDate){
+        return this[dateToGet].length == 0 ? null : this[dateToGet].reduce((acc, i) => [...acc, (({categoryId, exerciseId, sets, date}) => { 
+            return new SingleExercise(categoryId, exerciseId, sets, date);//add all methods of single exercise class to the current obj since its coming from JSON 
+         })(i)], []);
     }
 
     setWorkouts(historyWorkouts){
